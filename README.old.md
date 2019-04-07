@@ -1,2 +1,0 @@
-# CYAN
-CYAN PROJECT
