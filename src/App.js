@@ -1,15 +1,9 @@
 import React, { Component } from "react";
-import CreateFLower from "./CreateFlowerPage/CreateFlower";
-import Aux from "./hoc/Aux/Aux";
+import CreateFLower from "./pages/create-flower-page/create-flower.component";
 import "./App.scss";
-import details from "./test.js";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const routes = [
-  {
-    path: "/flower-details",
-    component: details
-  },
   {
     path: "/create-flower",
     component: CreateFLower
@@ -20,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Aux>
+        <React.Fragment>
           {routes.map(route => (
             <Route
               key={route.path}
@@ -28,7 +22,7 @@ class App extends Component {
               component={route.component}
             />
           ))}
-        </Aux>
+        </React.Fragment>
       </Router>
     );
   }

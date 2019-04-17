@@ -1,7 +1,7 @@
 import React from "react";
 import { Field } from "redux-form";
 
-const airTemp = props => {
+const ambientLight = props => {
   return (
     <Field
       step={100}
@@ -16,4 +16,4 @@ const airTemp = props => {
   );
 };
 
-export default airTemp;
+export default ambientLight;

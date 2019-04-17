@@ -1,7 +1,7 @@
 import React from "react";
 import { Field } from "redux-form";
 
-const nameField = props => {
+const flowerName = props => {
   return (
     <Field
       id="name"
@@ -12,4 +12,4 @@ const nameField = props => {
   );
 };
 
-export default nameField;
+export default flowerName;
