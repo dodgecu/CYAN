@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FlowerThumbnail from "./components/flower-thumbnail/flower-thumbnail";
+import FlowerThumbnail from "./pages/flower-thumbnail/flower-thumbnail";
 
 class App extends Component {
   render() {
