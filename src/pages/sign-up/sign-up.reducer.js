@@ -1,7 +1,7 @@
 import {
   REGISTRATION_FAIL,
   REGISTRATION_SUCCESS
-} from "../sign-up/signUp.action-types";
+} from "../sign-up/sign-up.action-types";
 
 const initialState = {
   token: localStorage.getItem("token"),

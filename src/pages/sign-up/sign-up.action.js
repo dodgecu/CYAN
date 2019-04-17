@@ -1,6 +1,9 @@
 import axios from "axios";
 
-import { REGISTRATION_FAIL, REGISTRATION_SUCCESS } from "./signUp.action-types";
+import {
+  REGISTRATION_FAIL,
+  REGISTRATION_SUCCESS
+} from "./sign-up.action-types";
 
 export const register = ({ name, email, password }) => dispatch => {
   const url = "http://localhost:5000/api/users";

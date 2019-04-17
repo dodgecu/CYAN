@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADING } from "./logIn.action-types";
+import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADING } from "./log-in.action-types";
 
 const initialState = {
   token: localStorage.getItem("token"),

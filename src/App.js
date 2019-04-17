@@ -1,23 +1,23 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 
-import { TestPage } from "./pages/test-page";
-import { LogIn } from "./pages/log-in";
-import { SignUp } from "./pages/sign-up";
-
+import Routes from "./constants/routes/routes";
 import ProtectedRoute from "./protected.route";
 
-import "./App.css";
-
+import "./App.scss";
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <h1>app component is work</h1>
-        <Route exact path="/" component={LogIn} />
-        <ProtectedRoute exact path="/testpage" component={TestPage} />
-        <Route exact path="/signup" component={SignUp} />
-      </div>
+      <>
+        {Routes.map(route => (
+          <Route
+            key={route.path}
+            path={route.path}
+            component={route.component}
+          />
+        ))}
+        <ProtectedRoute exact path="/testpage" />
+      </>
     );
   }
 }

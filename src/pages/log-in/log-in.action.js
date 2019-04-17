@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { LOGIN_SUCCESS, LOGIN_FAIL } from "./logIn.action-types";
+import { LOGIN_SUCCESS, LOGIN_FAIL } from "./log-in.action-types";
 
 export const logIn = ({ email, password }) => dispatch => {
   const url = "http://localhost:5000/api/auth";

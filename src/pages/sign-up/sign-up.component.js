@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 
-import { register } from "./signUp.action";
-import { required, email, maxLength15 } from "../../common/formValidation";
+import { register } from "./sign-up.action";
+import { required, email, maxLength15 } from "../../common/form-validation";
 
 class SignUp extends Component {
   constructor(props) {
