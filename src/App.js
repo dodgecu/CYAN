@@ -1,21 +1,15 @@
 import React, { Component } from "react";
-import CreateFLower from "./pages/create-flower-page/create-flower.component";
 import "./App.scss";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-const routes = [
-  {
-    path: "/create-flower",
-    component: CreateFLower
-  }
-];
+import Routes from "./constants/routes/routes";
 
 class App extends Component {
   render() {
     return (
       <Router>
         <React.Fragment>
-          {routes.map(route => (
+          {Routes.map(route => (
             <Route
               key={route.path}
               path={route.path}
