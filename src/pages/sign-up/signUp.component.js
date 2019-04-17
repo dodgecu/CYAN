@@ -1,19 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 
 import { register } from "./signUp.action";
+import { required, email, maxLength15 } from "../../common/formValidation";
 
-const required = value =>
-  value || typeof value === "number" ? undefined : "Required";
-const maxLength = max => value =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength15 = maxLength(15);
-const email = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? "Invalid email address"
-    : undefined;
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -28,12 +19,12 @@ class SignUp extends Component {
   }
 
   onSubmit({ name, email, password }) {
-    debugger;
     this.props.register({ name, email, password });
   }
 
   render() {
     const renderField = ({
+      // need create common input for all
       input,
       label,
       type,
@@ -89,8 +80,8 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = state => ({
-  isRegistered: state.auth.isRegistered,
-  message: state.auth.message
+  isRegistered: state.signup.isRegistered,
+  message: state.signup.message
 });
 
 SignUp = reduxForm({

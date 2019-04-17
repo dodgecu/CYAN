@@ -7,13 +7,17 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import store from "./store";
+/* import store from "./store"; */
+import configureStore, { history } from "./store";
+import { ConnectedRouter } from "connected-react-router";
+
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <App />
-    </BrowserRouter>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
 );

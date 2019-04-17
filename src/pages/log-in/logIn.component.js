@@ -1,17 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 
 import { logIn } from "./logIn.action";
-
-const required = value =>
-  value || typeof value === "number" ? undefined : "Required";
-const email = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? "Invalid email address"
-    : undefined;
+import { required, email } from "../../common/formValidation";
 
 class LogIn extends Component {
   constructor(props) {
@@ -26,7 +19,6 @@ class LogIn extends Component {
   }
 
   onSubmit({ email, password }) {
-    debugger;
     this.props.logIn({ email, password });
   }
 
@@ -38,6 +30,7 @@ class LogIn extends Component {
 
   render() {
     const renderField = ({
+      // need create common input for all
       input,
       label,
       type,
@@ -90,8 +83,8 @@ class LogIn extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  message: state.auth.message
+  isAuthenticated: state.login.isAuthenticated,
+  message: state.login.message
 });
 
 LogIn = reduxForm({
