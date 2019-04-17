@@ -5,21 +5,18 @@ import { createBrowserHistory } from "history";
 
 import rootReducer from "./rootReducer";
 
-const initialState = {};
 export const history = createBrowserHistory();
 
-const middleware = [thunk];
-export default function configureStore(initialState) {
-  const store = createStore(
-    rootReducer(history),
-    initialState,
-    compose(
-      applyMiddleware(...middleware),
-      routerMiddleware(history),
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
-  );
+const initialState = {};
+const middleware = [thunk, routerMiddleware(history)];
 
-  return store;
-}
+const store = createStore(
+  rootReducer(history),
+  initialState,
+  compose(
+    applyMiddleware(...middleware),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);
+
+export default store;
