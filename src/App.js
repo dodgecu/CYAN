@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <React.Fragment>
+        <>
           {Routes.map(route => (
             <Route
               key={route.path}
@@ -16,7 +16,7 @@ class App extends Component {
               component={route.component}
             />
           ))}
-        </React.Fragment>
+        </>
       </Router>
     );
   }
