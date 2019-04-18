@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 
 // import FlowerCard from './flower-card/FlowerCard.component';
 
@@ -23,8 +24,8 @@ class Dashboard extends React.Component {
       sortBy: "name",
       isAscendingSort: true,
       activeSort: {
-        name: false,
-        type: false
+        id: 1,
+        name: false
       }
     };
 
@@ -58,7 +59,17 @@ class Dashboard extends React.Component {
   }
 
   renderThumbnails(data) {
-    // return data.map((item, index) => <FlowerCard key={index} flower={item} />);
+    return data.map((item, index) => (
+      <FlowerThumbnail
+        key={index}
+        name={item.name}
+        temperature={item.temperature}
+        humidity={item.humidity}
+        light={item.light}
+        air={item.air}
+        id={item.id}
+      />
+    ));
   }
 
   renderFallbackMessage() {
@@ -94,7 +105,7 @@ class Dashboard extends React.Component {
           </select>
 
           <button className="dashboard__sort-button" onClick={this.onSort}>
-            <img src={isAscendingSort ? ArrowUp : ArrowDown} />
+            {/* <img src={isAscendingSort ? ArrowUp : ArrowDown} /> */}
           </button>
         </div>
 
@@ -110,14 +121,70 @@ class Dashboard extends React.Component {
 
 Dashboard.defaultProps = {
   flowers: [
-    { name: "Vasok", type: "Cactus" },
-    { name: "Veronica", type: "Aloe vera" },
-    { name: "Stepan", type: "Ficus" },
-    { name: "Oksana Mykolaivna", type: "Petunia" },
-    { name: "Yuriy Vasylovych", type: "Cactus" },
-    { name: "Ficus Sergey", type: "Ficus" },
-    { name: "Allo Ya Vera", type: "Aloe vera" },
-    { name: "Lyudka", type: "Petunia" }
+    {
+      id: 1,
+      name: "Vasok",
+      temperature: "60",
+      humidity: "30",
+      light: "12",
+      air: "37"
+    },
+    {
+      id: 2,
+      name: "Veronica",
+      temperature: "60",
+      humidity: "30",
+      light: "12",
+      air: "37"
+    },
+    {
+      id: 3,
+      name: "Stepan",
+      temperature: "60",
+      humidity: "30",
+      light: "12",
+      air: "37"
+    },
+    {
+      id: 4,
+      name: "Oksana Mykolaivna",
+      temperature: "60",
+      humidity: "30",
+      light: "12",
+      air: "37"
+    },
+    {
+      id: 5,
+      name: "Yuriy Vasylovych",
+      temperature: "60",
+      humidity: "30",
+      light: "12",
+      air: "37"
+    },
+    {
+      id: 6,
+      name: "Ficus Sergey",
+      temperature: "60",
+      humidity: "30",
+      light: "12",
+      air: "37"
+    },
+    {
+      id: 7,
+      name: "Allo Ya Vera",
+      temperature: "60",
+      humidity: "30",
+      light: "12",
+      air: "37"
+    },
+    {
+      id: 8,
+      name: "Lyudka",
+      temperature: "60",
+      humidity: "30",
+      light: "12",
+      air: "37"
+    }
   ]
 };
 
