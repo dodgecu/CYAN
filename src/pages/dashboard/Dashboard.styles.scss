@@ -11,7 +11,7 @@
     justify-content: space-between;
   }
 
-  select {
+  &__select {
     outline: none;
     border: none;
     background: #f1f1f1;
@@ -42,27 +42,13 @@
     outline: none;
     position: relative;
 
-    img {
+    .icon {
       width: 100%;
       max-width: 12px;
     }
 
     &:hover {
       background: darken(#f1f1f1, 5%);
-    }
-  }
-
-  ul {
-    list-style: none;
-  }
-
-  a {
-    cursor: pointer;
-    font-size: 0.9em;
-
-    img {
-      width: 100%;
-      max-width: 9px;
     }
   }
 }

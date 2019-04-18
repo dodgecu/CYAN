@@ -1,19 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
-
-// import FlowerCard from './flower-card/FlowerCard.component';
 
 import "./Dashboard.styles.scss";
 
-// import FicusImage from './images/ficus.png';
-// import CactusImage from './images/cactus.png';
-// import AloeImage from './images/aloe.png';
-// import PetuniaImage from './images/petunia.png';
+import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 
-// import ArrowUp from './images/arrow-up.svg';
-// import ArrowDown from './images/arrow-down.svg';
+import ArrowUp from "../../assets/arrow-up.svg";
+import ArrowDown from "../../assets/arrow-down.svg";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -22,11 +15,7 @@ class Dashboard extends React.Component {
       filter: "",
       flowers: this.props.flowers,
       sortBy: "name",
-      isAscendingSort: true,
-      activeSort: {
-        id: 1,
-        name: false
-      }
+      isAscendingSort: true
     };
 
     this.onFilter = this.onFilter.bind(this);
@@ -99,17 +88,21 @@ class Dashboard extends React.Component {
         <div className="dashboard__sorting">
           <span>Sort by</span>
 
-          <select value={this.state.value} onChange={this.onSelect}>
+          <select
+            className="dashboard__sorting__select"
+            value={this.state.value}
+            onChange={this.onSelect}
+          >
             <option value="name">name</option>
             <option value="type">type</option>
           </select>
 
           <button className="dashboard__sort-button" onClick={this.onSort}>
-            {/* <img src={isAscendingSort ? ArrowUp : ArrowDown} /> */}
+            <img className="icon" src={isAscendingSort ? ArrowUp : ArrowDown} />
           </button>
         </div>
 
-        <a href="/create">Create flower</a>
+        <Link to="/create">Create flower</Link>
 
         {data.length
           ? this.renderThumbnails(data)
@@ -123,67 +116,11 @@ Dashboard.defaultProps = {
   flowers: [
     {
       id: 1,
-      name: "Vasok",
-      temperature: "60",
-      humidity: "30",
-      light: "12",
-      air: "37"
-    },
-    {
-      id: 2,
-      name: "Veronica",
-      temperature: "60",
-      humidity: "30",
-      light: "12",
-      air: "37"
-    },
-    {
-      id: 3,
-      name: "Stepan",
-      temperature: "60",
-      humidity: "30",
-      light: "12",
-      air: "37"
-    },
-    {
-      id: 4,
-      name: "Oksana Mykolaivna",
-      temperature: "60",
-      humidity: "30",
-      light: "12",
-      air: "37"
-    },
-    {
-      id: 5,
-      name: "Yuriy Vasylovych",
-      temperature: "60",
-      humidity: "30",
-      light: "12",
-      air: "37"
-    },
-    {
-      id: 6,
-      name: "Ficus Sergey",
-      temperature: "60",
-      humidity: "30",
-      light: "12",
-      air: "37"
-    },
-    {
-      id: 7,
-      name: "Allo Ya Vera",
-      temperature: "60",
-      humidity: "30",
-      light: "12",
-      air: "37"
-    },
-    {
-      id: 8,
-      name: "Lyudka",
-      temperature: "60",
-      humidity: "30",
-      light: "12",
-      air: "37"
+      name: "Flower name",
+      temperature: "0",
+      humidity: "0",
+      light: "0",
+      air: "0"
     }
   ]
 };
