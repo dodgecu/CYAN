@@ -1,16 +1,23 @@
 import React, { Component } from "react";
-import FlowerThumbnail from "./pages/flower-thumbnail/flower-thumbnail";
+import "./App.scss";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import Routes from "./constants/routes/routes";
 
 class App extends Component {
   render() {
     return (
-      <FlowerThumbnail
-        id="1"
-        name="Bill"
-        temperature="99"
-        humidity="23"
-        love="50"
-      />
+      <Router>
+        <>
+          {Routes.map(route => (
+            <Route
+              key={route.path}
+              path={route.path}
+              component={route.component}
+            />
+          ))}
+        </>
+      </Router>
     );
   }
 }
