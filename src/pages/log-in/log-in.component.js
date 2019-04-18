@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
+import { push } from "connected-react-router";
 
 import { logIn } from "./log-in.action";
 import { required, email } from "../../common/form-validation";
@@ -22,11 +22,11 @@ class LogIn extends Component {
     this.props.logIn({ email, password });
   }
 
-  componentDidUpdate() {
+  /*   componentDidUpdate() {
     if (this.props.isAuthenticated) {
-      this.props.history.push("/testpage");
+      this.props.push("/testpage");
     }
-  }
+  } */
 
   render() {
     const renderField = ({
@@ -47,7 +47,7 @@ class LogIn extends Component {
       </div>
     );
 
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit, submitting, valid } = this.props;
 
     return (
       <>
@@ -72,11 +72,17 @@ class LogIn extends Component {
           {this.props.message === "User does't exist" ? (
             <div>{this.props.message}</div>
           ) : null}
-          <button type="submit" disabled={submitting}>
+          <button type="submit" disabled={!valid || submitting}>
             Log in
           </button>
         </form>
-        <Link to="/sign-up">Sign Up</Link>
+        <div
+          onClick={() => {
+            this.props.push("/sign-up");
+          }}
+        >
+          Sign Up
+        </div>
       </>
     );
   }
@@ -93,5 +99,5 @@ LogIn = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { logIn }
+  { logIn, push }
 )(LogIn);

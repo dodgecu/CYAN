@@ -41,7 +41,7 @@ class SignUp extends Component {
       </div>
     );
 
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit, submitting, valid } = this.props;
 
     return (
       <>
@@ -70,7 +70,7 @@ class SignUp extends Component {
           {this.props.message === "User already exists" ? (
             <div>{this.props.message}</div>
           ) : null}
-          <button type="submit" disabled={submitting}>
+          <button type="submit" disabled={!valid || submitting}>
             Sign up
           </button>
         </form>
