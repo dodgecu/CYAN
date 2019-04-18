@@ -1,32 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import "./index.css";
+import { Provider } from "react-redux";
+import { ConnectedRouter } from "connected-react-router";
+import * as serviceWorker from "./serviceWorker";
+
+import store, { history } from "./store";
 import App from "./App";
 
-import { createStore, combineReducers } from "redux";
-import reducer from "./store/reducer";
-import { Provider } from "react-redux";
-import { reducer as formReducer } from "redux-form";
+import "./index.css";
 
-const plantReducers = {
-  main: reducer,
-  form: formReducer
-};
-
-const reducers = combineReducers(plantReducers);
-
-const store = createStore(reducers);
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <App />
-    </BrowserRouter>
+    </ConnectedRouter>
   </Provider>
 );
 
-ReactDOM.render(
-  app,
+ReactDOM.render(app, document.getElementById("root"));
 
-  document.getElementById("root")
-);
+serviceWorker.unregister();
