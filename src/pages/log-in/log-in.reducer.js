@@ -24,7 +24,6 @@ export default function(state = initialState, action) {
         isLoading: false
       };
     case LOGIN_FAIL:
-      debugger;
       return {
         ...state,
         user: null,
