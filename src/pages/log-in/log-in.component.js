@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 
-import { logIn } from "./logIn.action";
-import { required, email } from "../../common/formValidation";
+import { logIn } from "./log-in.action";
+import { required, email } from "../../common/form-validation";
 
 class LogIn extends Component {
   constructor(props) {
@@ -76,7 +76,7 @@ class LogIn extends Component {
             Log in
           </button>
         </form>
-        <Link to="/signup">Sign Up</Link>
+        <Link to="/sign-up">Sign Up</Link>
       </>
     );
   }
