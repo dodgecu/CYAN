@@ -1,23 +1,34 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-
-import Routes from "./constants/routes/routes";
+import { Provider } from "react-redux";
+import { ConnectedRouter } from "connected-react-router";
 import ProtectedRoute from "./protected.route";
 
+import routes from "./constants/routes";
+import store, { history } from "./store";
+
+//COMPONENTS
+import CreateFlower from "./pages/create-flower-page/create-flower.component";
+import LogIn from "./pages/log-in/log-in.component";
+import SignUp from "./pages/sign-up/sign-up.component";
+
+//STYLES
 import "./App.scss";
+
 class App extends Component {
   render() {
     return (
-      <>
-        {Routes.map(route => (
-          <Route
-            key={route.path}
-            path={route.path}
-            component={route.component}
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <Route exact path={routes.logIn} component={LogIn} />
+          <Route exact path={routes.signUp} component={SignUp} />
+          <ProtectedRoute
+            exact
+            path={routes.createFlower}
+            component={CreateFlower}
           />
-        ))}
-        <ProtectedRoute exact path="/testpage" />
-      </>
+        </ConnectedRouter>
+      </Provider>
     );
   }
 }
