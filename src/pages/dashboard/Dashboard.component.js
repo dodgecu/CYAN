@@ -90,7 +90,7 @@ class Dashboard extends React.Component {
 
           <select
             className="dashboard__sorting__select"
-            value={this.state.value}
+            value={this.state.sortBy}
             onChange={this.onSelect}
           >
             <option value="name">name</option>
