@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
+import { push } from "connected-react-router";
 
-import { logIn } from "./logIn.action";
-import { required, email } from "../../common/formValidation";
+import { logIn } from "./log-in.action";
+import { required, email } from "../../common/form-validation";
+import { Button, TYPES } from "../../common/components/button/button.component";
+
+import routes from "../../constants/routes";
+
+import "./log-in.styles.scss";
 
 class LogIn extends Component {
   constructor(props) {
@@ -24,7 +29,7 @@ class LogIn extends Component {
 
   componentDidUpdate() {
     if (this.props.isAuthenticated) {
-      this.props.history.push("/testpage");
+      this.props.push(routes.createFlower);
     }
   }
 
@@ -47,10 +52,18 @@ class LogIn extends Component {
       </div>
     );
 
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit, submitting, valid } = this.props;
 
     return (
-      <>
+      <div className="log-in">
+        <div className="log-in__img-container">
+          <img
+            className="log-in-img"
+            src="../../../assets/img/arrow-left.svg"
+            alt="arrow-left"
+          />
+        </div>
+        <h2 className="log-in__title">Log In</h2>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <Field
             name="email"
@@ -72,12 +85,15 @@ class LogIn extends Component {
           {this.props.message === "User does't exist" ? (
             <div>{this.props.message}</div>
           ) : null}
-          <button type="submit" disabled={submitting}>
-            Log in
-          </button>
+
+          <Button
+            title="Log In"
+            type="submit"
+            buttonType={TYPES.PRIMARY}
+            disabled={!valid || submitting}
+          />
         </form>
-        <Link to="/signup">Sign Up</Link>
-      </>
+      </div>
     );
   }
 }
@@ -93,5 +109,5 @@ LogIn = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { logIn }
+  { logIn, push }
 )(LogIn);
