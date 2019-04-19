@@ -5,6 +5,11 @@ import { push } from "connected-react-router";
 
 import { logIn } from "./log-in.action";
 import { required, email } from "../../common/form-validation";
+import { Button, TYPES } from "../../common/components/button/button.component";
+
+import routes from "../../constants/routes";
+
+import "./log-in.styles.scss";
 
 class LogIn extends Component {
   constructor(props) {
@@ -22,11 +27,11 @@ class LogIn extends Component {
     this.props.logIn({ email, password });
   }
 
-  /*   componentDidUpdate() {
+  componentDidUpdate() {
     if (this.props.isAuthenticated) {
-      this.props.push("/testpage");
+      this.props.push(routes.createFlower);
     }
-  } */
+  }
 
   render() {
     const renderField = ({
@@ -50,7 +55,15 @@ class LogIn extends Component {
     const { handleSubmit, submitting, valid } = this.props;
 
     return (
-      <>
+      <div className="log-in">
+        <div className="log-in__img-container">
+          <img
+            className="log-in-img"
+            src="../../../assets/img/arrow-left.svg"
+            alt="arrow-left"
+          />
+        </div>
+        <h2 className="log-in__title">Log In</h2>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <Field
             name="email"
@@ -72,18 +85,15 @@ class LogIn extends Component {
           {this.props.message === "User does't exist" ? (
             <div>{this.props.message}</div>
           ) : null}
-          <button type="submit" disabled={!valid || submitting}>
-            Log in
-          </button>
+
+          <Button
+            title="Log In"
+            type="submit"
+            buttonType={TYPES.PRIMARY}
+            disabled={!valid || submitting}
+          />
         </form>
-        <div
-          onClick={() => {
-            this.props.push("/sign-up");
-          }}
-        >
-          Sign Up
-        </div>
-      </>
+      </div>
     );
   }
 }
