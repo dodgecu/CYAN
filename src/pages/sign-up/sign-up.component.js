@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import { push } from "connected-react-router";
 
 import { register } from "./sign-up.action";
 import { required, email, maxLength15 } from "../../common/form-validation";
+
+import { Button, TYPES } from "../../common/components/button/button.component";
+import Input from "./../../common/components/input/input.component";
+
+import routes from "../../constants/routes";
 
 class SignUp extends Component {
   constructor(props) {
@@ -22,59 +28,59 @@ class SignUp extends Component {
     this.props.register({ name, email, password });
   }
 
-  render() {
-    const renderField = ({
-      // need create common input for all
-      input,
-      label,
-      type,
-      meta: { touched, error, warning }
-    }) => (
-      <div>
-        <label>{label}</label>
-        <div>
-          <input {...input} placeholder={label} type={type} />
-          {touched &&
-            ((error && <span>{error}</span>) ||
-              (warning && <span>{warning}</span>))}
-        </div>
-      </div>
-    );
+  componentDidUpdate() {
+    if (this.props.isRegistered) {
+      this.props.push(routes.logIn);
+    }
+  }
 
+  render() {
     const { handleSubmit, submitting, valid } = this.props;
 
     return (
-      <>
+      <div className="authorization authorization--sign-up">
+        <i
+          className="material-icons arrow-back"
+          onClick={() => {
+            this.props.push("/");
+          }}
+        >
+          arrow_back
+        </i>
+        <h2 className="authorization__title">Sign Up</h2>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <Field
             name="name"
             type="text"
-            component={renderField}
+            component={Input}
             label="User Name"
             validate={[required, maxLength15]}
           />
           <Field
             name="email"
             type="email"
-            component={renderField}
+            component={Input}
             label="Email"
-            validate={email}
+            validate={[email, required]}
           />
           <Field
             name="password"
             type="password"
-            component={renderField}
+            component={Input}
             label="Password"
             validate={required}
           />
           {this.props.message === "User already exists" ? (
             <div>{this.props.message}</div>
           ) : null}
-          <button type="submit" disabled={!valid || submitting}>
-            Sign up
-          </button>
+          <Button
+            title="Sign Up"
+            type="submit"
+            buttonType={TYPES.PRIMARY}
+            disabled={!valid || submitting}
+          />
         </form>
-      </>
+      </div>
     );
   }
 }
@@ -90,5 +96,5 @@ SignUp = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { register }
+  { register, push }
 )(SignUp);

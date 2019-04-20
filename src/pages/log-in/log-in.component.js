@@ -5,7 +5,9 @@ import { push } from "connected-react-router";
 
 import { logIn } from "./log-in.action";
 import { required, email } from "../../common/form-validation";
+
 import { Button, TYPES } from "../../common/components/button/button.component";
+import Input from "./../../common/components/input/input.component";
 
 import routes from "../../constants/routes";
 
@@ -34,48 +36,31 @@ class LogIn extends Component {
   }
 
   render() {
-    const renderField = ({
-      // need create common input for all
-      input,
-      label,
-      type,
-      meta: { touched, error, warning }
-    }) => (
-      <div>
-        <label>{label}</label>
-        <div>
-          <input {...input} placeholder={label} type={type} />
-          {touched &&
-            ((error && <span>{error}</span>) ||
-              (warning && <span>{warning}</span>))}
-        </div>
-      </div>
-    );
-
     const { handleSubmit, submitting, valid } = this.props;
 
     return (
-      <div className="log-in">
-        <div className="log-in__img-container">
-          <img
-            className="log-in-img"
-            src="../../../assets/img/arrow-left.svg"
-            alt="arrow-left"
-          />
-        </div>
-        <h2 className="log-in__title">Log In</h2>
+      <div className="authorization authorization--log-in">
+        <i
+          className="material-icons arrow-back"
+          onClick={() => {
+            this.props.push("/");
+          }}
+        >
+          arrow_back
+        </i>
+        <h2 className="authorization__title">Log In</h2>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <Field
             name="email"
             type="email"
-            component={renderField}
+            component={Input}
             label="Email"
-            validate={email}
+            validate={[email, required]}
           />
           <Field
             name="password"
             type="password"
-            component={renderField}
+            component={Input}
             label="Password"
             validate={required}
           />
