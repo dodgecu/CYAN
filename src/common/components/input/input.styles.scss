@@ -1,0 +1,37 @@
+@import '../../../styles/abstracts/variables';
+
+.form-control {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.form-control__input {
+  width: 100%;
+  padding: 15px 20px;
+  background: linear-gradient(90deg, $primary -3.17%, $focus 100%) left bottom #fff no-repeat;
+  background-size:100% 2px;
+  font-size: 1rem;
+  color: #858585;
+}
+
+.form-control__input::placeholder {
+  color: #858585;
+}
+
+.form-control__label {
+  font-size: 1.5rem;
+}
+
+.form-control__error {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: $danger;
+  text-align: center;
+}
+
+.form-control__input--error {
+  background: linear-gradient(90deg, $danger -3.17%, $danger 100%) left bottom #fff no-repeat;
+  background-size:100% 2px;
+}
