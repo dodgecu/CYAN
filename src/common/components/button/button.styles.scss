@@ -1,3 +1,5 @@
+@import '../../../styles/abstracts/variables';
+
 .btn {
   width: 100%;
   text-align: center;
@@ -9,8 +11,12 @@
 }
 
 .btn--primary {
-  background: linear-gradient(90deg, #46A25F -3.17%, #15D94A 100%);
+  background: linear-gradient(90deg, $primary -3.17%, $focus 100%);
   color: #fff;
+}
+
+.btn--primary:disabled {
+  background: lighten($primary, 20%);
 }
 
 .btn--secondary {
@@ -32,7 +38,7 @@
     z-index: -1;
     margin: -2px;
     border-radius: 5px;
-    background: linear-gradient(90deg, #46A25F -3.17%, #15D94A 100%);
+    background: linear-gradient(90deg, $primary -3.17%, $focus 100%);
   }
 }
 
