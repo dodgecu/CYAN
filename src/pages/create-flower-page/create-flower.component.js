@@ -6,7 +6,6 @@ import "./create-flower.scss";
 
 class CreateFlower extends Component {
   submitHandler = flowerData => {
-    console.log(flowerData);
     this.props.history.push(`/`);
   };
   render() {
