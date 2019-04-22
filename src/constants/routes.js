@@ -2,7 +2,8 @@ const routes = {
   createFlower: "/create-flower",
   logIn: "/log-in",
   signUp: "/sign-up",
-  dashboard: "/dashboard"
+  dashboard: "/dashboard",
+  home: "/"
 };
 
 export default routes;
