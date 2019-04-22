@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./Dashboard.styles.scss";
+import "./dashboard.styles.scss";
 
 import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 

@@ -11,6 +11,7 @@ import store, { history } from "./store";
 import CreateFlower from "./pages/create-flower-page/create-flower.component";
 import LogIn from "./pages/log-in/log-in.component";
 import SignUp from "./pages/sign-up/sign-up.component";
+import Dashboard from "./pages/dashboard/dashboard.component";
 import Home from "./pages/home/home.component";
 
 //STYLES
@@ -24,6 +25,7 @@ class App extends Component {
           <Route exact path={routes.home} component={Home} />
           <Route exact path={routes.logIn} component={LogIn} />
           <Route exact path={routes.signUp} component={SignUp} />
+          <ProtectedRoute exact path={routes.dashboard} component={Dashboard} />
           <ProtectedRoute
             exact
             path={routes.createFlower}
