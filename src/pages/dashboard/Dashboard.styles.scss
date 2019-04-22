@@ -1,0 +1,54 @@
+.dashboard {
+  max-width: 375px;
+  padding: 25px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  &__sorting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__select {
+    outline: none;
+    border: none;
+    background: #f1f1f1;
+    padding: 10px 15px;
+    border-radius: 5px;
+    flex-grow: 1;
+    margin: 0 10px;
+  }
+
+  &__search-field {
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    background: #f1f1f1;
+    position: relative;
+    border-radius: 5px;
+  }
+
+  &__sort-button {
+    border: none;
+    border-radius: 5px;
+    padding: 11px 16px;
+    margin: 10px 0;
+    align-self: flex-start;
+    background: #f1f1f1;
+    color: #ffffff;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+
+    .icon {
+      width: 100%;
+      max-width: 12px;
+    }
+
+    &:hover {
+      background: darken(#f1f1f1, 5%);
+    }
+  }
+}
