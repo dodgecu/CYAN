@@ -16,9 +16,10 @@ class flowerType extends Component {
   render() {
     return (
       <Field
+        label="Flower Type"
         id="flower-select"
         name="flowerSelect"
-        label="Flower Type"
+        className="form__controls--select"
         component={this.props.validForm}
       >
         {flowers.map(flower => {

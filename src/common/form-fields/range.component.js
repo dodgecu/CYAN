@@ -1,17 +1,32 @@
 import React from "react";
 
 import Range from "react-input-range";
+
 import "react-input-range/lib/css/index.css";
+import "./range.styles.scss";
 
 import inputsRenderer from "./inputs-renderer.component";
 
 const range = inputsRenderer(
-  (input, label, id, name, unit, maxValue, minValue, step) => {
+  (
+    input,
+    touched,
+    error,
+    label,
+    id,
+    name,
+    className,
+    unit,
+    maxValue,
+    minValue,
+    step
+  ) => {
     const val = input.value === "" ? (input.value = 0) : input.value;
     return (
       <div id={id} className="form__controls">
         <Range
           name={name}
+          className={className}
           label={label}
           value={val}
           formatLabel={value => `${value} ${unit.unit}`}
