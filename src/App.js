@@ -11,6 +11,7 @@ import store, { history } from "./store";
 import CreateFlower from "./pages/create-flower-page/create-flower.component";
 import LogIn from "./pages/log-in/log-in.component";
 import SignUp from "./pages/sign-up/sign-up.component";
+import Home from "./pages/home/home.component";
 
 //STYLES
 import "./App.scss";
@@ -20,6 +21,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>
+          <Route exact path={routes.home} component={Home} />
           <Route exact path={routes.logIn} component={LogIn} />
           <Route exact path={routes.signUp} component={SignUp} />
           <ProtectedRoute
