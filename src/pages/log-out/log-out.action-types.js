@@ -1,0 +1,2 @@
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const USER_LOADING = "USER_LOADING";

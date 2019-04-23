@@ -1,0 +1,2 @@
+export const DELETE_FAIL = "DELETE_FAIL";
+export const DELETE_SUCCESS = "DELETE_SUCCESS";
