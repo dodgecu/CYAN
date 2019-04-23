@@ -13,6 +13,12 @@ input {
   outline: none;
 }
 
+body {
+  border: 5px solid $primary;
+  border-top: 6rem solid $primary;
+  background-color: $body-bg;
+}
+
 .arrow-back {
   font-size: 2.5rem;
   cursor: pointer;
