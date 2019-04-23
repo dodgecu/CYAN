@@ -2,20 +2,24 @@ import React from "react";
 
 import inputsRenderer from "./inputs-renderer.component";
 
-const select = inputsRenderer((input, label, id, name, { children }) => {
-  return (
-    <div className="form__controls">
-      <select
-        className="form__controls--select "
-        id={id}
-        {...input}
-        name={name}
-        label={label}
-      >
-        {children}
-      </select>
-    </div>
-  );
-});
+import "./select.styles.scss";
+
+const select = inputsRenderer(
+  (input, touched, error, label, id, name, className, { children }) => {
+    return (
+      <div className="form__controls">
+        <select
+          {...input}
+          label={label}
+          id={id}
+          name={name}
+          className={className}
+        >
+          {children}
+        </select>
+      </div>
+    );
+  }
+);
 
 export default select;

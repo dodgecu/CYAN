@@ -1,0 +1,25 @@
+@import '../../styles/abstracts/variables';
+
+.input-range {
+  padding: 2rem 0;
+
+  &__label {
+    word-wrap: unset;
+    &--min,
+    &--max {
+      bottom: 5px;
+    }
+  }
+  &__slider {
+    height: 15px;
+    width: 15px;
+    margin-top: -10px;
+    background-color: $primary;
+    border: 1px solid $primary;
+  }
+  &__track {
+    &--active {
+      background: $primary;
+    }
+  }
+}
