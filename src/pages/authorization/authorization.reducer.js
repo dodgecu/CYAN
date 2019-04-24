@@ -3,8 +3,11 @@ import {
   REGISTRATION_SUCCESS,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOADING,
-  LOGOUT_SUCCESS
+  DELETE_SUCCESS,
+  DELETE_FAIL,
+  UPDATE_SUCCESS,
+  UPDATE_FAIL,
+  LOADING
 } from "./authorization.action-types";
 
 const initialState = {
@@ -49,7 +52,35 @@ export default function(state = initialState, action) {
         user: null,
         isAuthenticated: false,
         isLoading: false,
-        message: action.payload.data.message
+        message: action.payload.message
+      };
+    case DELETE_SUCCESS:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        message: action.payload.message,
+        token: null,
+        isDeleted: true,
+        isLoading: false
+      };
+    case DELETE_FAIL:
+      return {
+        ...state,
+        message: action.payload.message,
+        isDeleted: false
+      };
+    case UPDATE_SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+        isLoading: false
+      };
+    case UPDATE_FAIL:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        message: action.payload.message,
+        isLoading: false
       };
     default:
       return state;

@@ -5,6 +5,10 @@ import {
   REGISTRATION_SUCCESS,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  DELETE_SUCCESS,
+  DELETE_FAIL,
+  UPDATE_SUCCESS,
+  UPDATE_FAIL,
   LOADING
 } from "./authorization.action-types";
 
@@ -45,6 +49,7 @@ export const logIn = ({ email, password }) => dispatch => {
 };
 
 export const deleteUser = () => dispatch => {
+  dispatch({ type: LOADING });
   const url = "http://localhost:5000/api/auth/user";
 
   const config = {
@@ -58,4 +63,23 @@ export const deleteUser = () => dispatch => {
     .delete(url, config)
     .then(res => dispatch({ type: DELETE_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: DELETE_FAIL, payload: err.response }));
+};
+
+export const updateUser = property => dispatch => {
+  dispatch({ type: LOADING });
+  const url = `http://localhost:5000/api/auth/user/${property}`;
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": localStorage.getItem("token")
+    }
+  };
+
+  const body = JSON.stringify(property);
+
+  axios
+    .put(url, body, config)
+    .then(res => dispatch({ type: UPDATE_SUCCESS, payload: res.data }))
+    .catch(err => dispatch({ type: UPDATE_FAIL, payload: err.response }));
 };
