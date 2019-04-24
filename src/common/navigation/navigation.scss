@@ -1,0 +1,83 @@
+@import '../../styles/abstracts/variables';
+
+.burger {
+  height: 30px;
+  display: inline-block;
+  margin: 15px;
+  position: absolute;
+  cursor: pointer;
+  &__icon {
+    position: relative;
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $primary;
+      display: inline-block;
+    }
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      transition: all 0.2s;
+    }
+    &::before {
+      top: -0.8rem;
+    }
+    &::after {
+      top: 0.8rem;
+    }
+  }
+}
+.burger--active {
+  .burger__icon {
+    background-color: transparent;
+  }
+  .burger__icon:before {
+    transform: rotate(135deg);
+    top: 0;
+  }
+  .burger__icon::after {
+    transform: rotate(-135deg);
+    top: 0;
+  }
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 10;
+  background-color: rgba($primary, 0.9);
+  height: 100%;
+  width: 0;
+  overflow-x: hidden;
+  transition: 0.4s;
+  &--active {
+    width: 200px;
+  }
+  &__links {
+    display: flex;
+    flex-direction: column;
+    order: 2;
+    padding: 20px;
+    list-style: none;
+    &--link {
+      color: $white;
+      text-decoration: none;
+      font-size: 20px;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+  }
+  &--close {
+    margin-left: auto;
+    padding: 10px;
+    font-size: 25px;
+    font-weight: 900;
+    cursor: pointer;
+    color: $white;
+  }
+}

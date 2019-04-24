@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import FlowerForm from "./create-flower-form/create-flower-form.component";
-
 import flowers from "../../constants/flowers";
 
 import "./create-flower.scss";
@@ -16,7 +15,11 @@ class CreateFlower extends Component {
     const general = { ...flowerData, img_path: imgpth };
   };
   render() {
-    return <FlowerForm onSubmit={this.submitHandler} />;
+    return (
+      <div>
+        <FlowerForm onSubmit={this.submitHandler} />
+      </div>
+    );
   }
 }
 
