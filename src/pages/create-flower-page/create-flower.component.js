@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import FlowerForm from "./create-flower-form/create-flower-form.component";
 import flowers from "../../constants/flowers";
+import Header from "../../common/header/header.component";
 
 import "./create-flower.scss";
 
@@ -16,9 +17,10 @@ class CreateFlower extends Component {
   };
   render() {
     return (
-      <div>
+      <>
+        <Header title="Create Flower" />
         <FlowerForm onSubmit={this.submitHandler} />
-      </div>
+      </>
     );
   }
 }

@@ -6,18 +6,6 @@ body {
   background-color: $bg-color;
 }
 
-.header {
-  height: 100px;
-  background-image: linear-gradient(to right, $primary-color, $secondary-color);
-  display: flex;
-  justify-content: center;
-
-  .header__text {
-    text-align: center;
-    color: #fff;
-  }
-}
-
 .ranges {
   display: flex;
   flex-direction: column;
