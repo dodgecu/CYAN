@@ -17,17 +17,6 @@ import routes from "../../../constants/routes";
 import "./log-in.styles.scss";
 
 class LogIn extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: "",
-      password: ""
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
   onSubmit({ email, password }) {
     this.props.logIn({ email, password });
   }
@@ -52,7 +41,7 @@ class LogIn extends Component {
           arrow_back
         </i>
         <h2 className="authorization__title">Log In</h2>
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             name="email"
             type="email"

@@ -15,18 +15,6 @@ import Input from "../../../common/components/input/input.component";
 import routes from "../../../constants/routes";
 
 class SignUp extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: "",
-      email: "",
-      password: ""
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
   onSubmit({ name, email, password }) {
     this.props.register({ name, email, password });
   }
@@ -51,7 +39,7 @@ class SignUp extends Component {
           arrow_back
         </i>
         <h2 className="authorization__title">Sign Up</h2>
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             name="name"
             type="text"
