@@ -14,9 +14,6 @@ class CreateFlower extends Component {
 
     const [imgpth] = flowerImage;
     const general = { ...flowerData, img_path: imgpth };
-    console.log(general);
-
-    //this.props.history.push(`/`);
   };
   render() {
     return <FlowerForm onSubmit={this.submitHandler} />;

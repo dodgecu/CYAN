@@ -28,7 +28,11 @@ class App extends Component {
           <Route exact path={routes.signUp} component={SignUp} />
           <Route exact path={routes.flowerDetails} component={FlowerDetails} />
           <ProtectedRoute exact path={routes.dashboard} component={Dashboard} />
-          <Route exact path={routes.createFlower} component={CreateFlower} />
+          <ProtectedRoute
+            exact
+            path={routes.createFlower}
+            component={CreateFlower}
+          />
         </ConnectedRouter>
       </Provider>
     );
