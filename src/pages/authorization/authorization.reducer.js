@@ -52,7 +52,7 @@ export default function(state = initialState, action) {
         user: null,
         isAuthenticated: false,
         isLoading: false,
-        message: action.payload.message
+        message: action.payload.data.message
       };
     case DELETE_SUCCESS:
       localStorage.removeItem("token");
@@ -70,12 +70,14 @@ export default function(state = initialState, action) {
         isDeleted: false
       };
     case UPDATE_SUCCESS:
+      debugger;
       return {
         ...state,
         user: action.payload,
         isLoading: false
       };
     case UPDATE_FAIL:
+      debugger;
       localStorage.removeItem("token");
       return {
         ...state,
