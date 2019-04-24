@@ -3,21 +3,23 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
 
-import { logIn } from "./log-in.action";
-import { required, email } from "../../common/form-validation";
+import { register } from "../authorization.action";
+import { required, email, maxLength15 } from "../../../common/form-validation";
 
-import { Button, TYPES } from "../../common/components/button/button.component";
-import Input from "./../../common/components/input/input.component";
+import {
+  Button,
+  TYPES
+} from "../../../common/components/button/button.component";
+import Input from "../../../common/components/input/input.component";
 
-import routes from "../../constants/routes";
+import routes from "../../../constants/routes";
 
-import "./log-in.styles.scss";
-
-class LogIn extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      name: "",
       email: "",
       password: ""
     };
@@ -25,13 +27,13 @@ class LogIn extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit({ email, password }) {
-    this.props.logIn({ email, password });
+  onSubmit({ name, email, password }) {
+    this.props.register({ name, email, password });
   }
 
   componentDidUpdate() {
-    if (this.props.isAuthenticated) {
-      this.props.push(routes.createFlower);
+    if (this.props.isRegistered) {
+      this.props.push(routes.logIn);
     }
   }
 
@@ -39,7 +41,7 @@ class LogIn extends Component {
     const { handleSubmit, submitting, valid } = this.props;
 
     return (
-      <div className="authorization authorization--log-in">
+      <div className="authorization authorization--sign-up">
         <i
           className="material-icons arrow-back"
           onClick={() => {
@@ -48,8 +50,15 @@ class LogIn extends Component {
         >
           arrow_back
         </i>
-        <h2 className="authorization__title">Log In</h2>
+        <h2 className="authorization__title">Sign Up</h2>
         <form onSubmit={handleSubmit(this.onSubmit)}>
+          <Field
+            name="name"
+            type="text"
+            component={Input}
+            label="User Name"
+            validate={[required, maxLength15]}
+          />
           <Field
             name="email"
             type="email"
@@ -64,15 +73,11 @@ class LogIn extends Component {
             label="Password"
             validate={required}
           />
-          {this.props.message === "Wrong password" ? (
+          {this.props.message === "User already exists" ? (
             <div>{this.props.message}</div>
           ) : null}
-          {this.props.message === "User does't exist" ? (
-            <div>{this.props.message}</div>
-          ) : null}
-
           <Button
-            title="Log In"
+            title="Sign Up"
             type="submit"
             buttonType={TYPES.PRIMARY}
             disabled={!valid || submitting}
@@ -84,15 +89,15 @@ class LogIn extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.login.isAuthenticated,
-  message: state.login.message
+  isRegistered: state.authReducer.isRegistered,
+  message: state.authReducer.message
 });
 
-LogIn = reduxForm({
-  form: "logIn"
-})(LogIn);
+SignUp = reduxForm({
+  form: "signUp"
+})(SignUp);
 
 export default connect(
   mapStateToProps,
-  { logIn, push }
-)(LogIn);
+  { register, push }
+)(SignUp);

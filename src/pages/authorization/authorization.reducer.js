@@ -1,16 +1,36 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADING } from "./log-in.action-types";
+import {
+  REGISTRATION_FAIL,
+  REGISTRATION_SUCCESS,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOADING,
+  LOGOUT_SUCCESS
+} from "./authorization.action-types";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  isAuthenticated: false,
-  isLoading: false,
   user: null,
-  message: null
+  isAuthenticated: false,
+  isRegistered: false,
+  message: null,
+  isLoading: false
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case USER_LOADING:
+    case REGISTRATION_SUCCESS:
+      return {
+        ...state,
+        isRegistered: true,
+        isLoading: false
+      };
+    case REGISTRATION_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.payload.data.message
+      };
+    case LOADING:
       return {
         ...state,
         isLoading: true
