@@ -9,7 +9,6 @@ import store, { history } from "./store";
 
 //COMPONENTS
 import CreateFlower from "./pages/create-flower-page/create-flower.component";
-import Settings from "./pages/settings/settings.component";
 import FlowerDetails from "./pages/flower-details/flower-details.component";
 import LogIn from "./pages/authorization/log-in/log-in.component";
 import SignUp from "./pages/authorization/sign-up/sign-up.component";
@@ -18,6 +17,7 @@ import Home from "./pages/home/home.component";
 
 //STYLES
 import "./App.scss";
+import { UserProfile } from "./pages/authorization/user-profile";
 
 class App extends Component {
   render() {
@@ -27,7 +27,7 @@ class App extends Component {
           <Route exact path={routes.home} component={Home} />
           <Route exact path={routes.logIn} component={LogIn} />
           <Route exact path={routes.signUp} component={SignUp} />
-          <Route exact path={routes.settings} component={Settings} />
+          <Route exact path={routes.userProfile} component={UserProfile} />
           <ProtectedRoute
             exact
             path={routes.flowerDetails}

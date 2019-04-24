@@ -15,7 +15,6 @@ import Input from "../../../common/components/input/input.component";
 import routes from "../../../constants/routes";
 
 import "./log-in.styles.scss";
-import { LogOut } from "../log-out";
 
 class LogIn extends Component {
   onSubmit({ email, password }) {
@@ -71,7 +70,6 @@ class LogIn extends Component {
             disabled={!valid || submitting}
           />
         </form>
-        <LogOut />
       </div>
     );
   }

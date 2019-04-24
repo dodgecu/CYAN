@@ -3,7 +3,7 @@ const routes = {
   flowerDetails: "/flower-details",
   logIn: "/log-in",
   signUp: "/sign-up",
-  settings: "/settings",
+  userProfile: "/userProfile",
   dashboard: "/dashboard",
   home: "/"
 };
