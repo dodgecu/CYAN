@@ -14,9 +14,8 @@ input {
 }
 
 body {
-  border: 5px solid $primary;
-  border-top: 6rem solid $primary;
   background-color: $body-bg;
+  margin: 0;
 }
 
 .arrow-back {

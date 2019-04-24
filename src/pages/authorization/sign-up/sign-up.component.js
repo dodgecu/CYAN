@@ -3,34 +3,25 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
 
-import { register } from "./sign-up.action";
-import { required, email, maxLength15 } from "../../common/form-validation";
+import { register } from "../authorization.action";
+import { required, email, maxLength15 } from "../../../common/form-validation";
 
-import { Button, TYPES } from "../../common/components/button/button.component";
-import Input from "./../../common/components/input/input.component";
+import {
+  Button,
+  TYPES
+} from "../../../common/components/button/button.component";
+import Input from "../../../common/components/input/input.component";
 
-import routes from "../../constants/routes";
+import routes from "../../../constants/routes";
 
 class SignUp extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: "",
-      email: "",
-      password: ""
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
   onSubmit({ name, email, password }) {
     this.props.register({ name, email, password });
   }
 
   componentDidUpdate() {
     if (this.props.isRegistered) {
-      this.props.push(routes.logIn);
+      this.props.push(routes.home);
     }
   }
 
@@ -48,7 +39,7 @@ class SignUp extends Component {
           arrow_back
         </i>
         <h2 className="authorization__title">Sign Up</h2>
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             name="name"
             type="text"
@@ -86,8 +77,8 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = state => ({
-  isRegistered: state.signup.isRegistered,
-  message: state.signup.message
+  isRegistered: state.authReducer.isRegistered,
+  message: state.authReducer.message
 });
 
 SignUp = reduxForm({

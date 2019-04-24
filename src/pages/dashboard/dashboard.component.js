@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./dashboard.styles.scss";
 
 import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
+import Header from "../../common/header/header.component";
 
 import ArrowUp from "../../assets/arrow-up.svg";
 import ArrowDown from "../../assets/arrow-down.svg";
@@ -76,38 +77,44 @@ class Dashboard extends React.Component {
     );
 
     return (
-      <section className="dashboard">
-        <input
-          className="dashboard__search-field"
-          type="text"
-          placeholder="Search by name"
-          value={filter}
-          onChange={this.onFilter}
-        />
+      <>
+        <Header title="Dashboard" />
+        <section className="dashboard">
+          <input
+            className="dashboard__search-field"
+            type="text"
+            placeholder="Search by name"
+            value={filter}
+            onChange={this.onFilter}
+          />
 
-        <div className="dashboard__sorting">
-          <span>Sort by</span>
+          <div className="dashboard__sorting">
+            <span>Sort by</span>
 
-          <select
-            className="dashboard__sorting__select"
-            value={this.state.sortBy}
-            onChange={this.onSelect}
-          >
-            <option value="name">name</option>
-            <option value="type">type</option>
-          </select>
+            <select
+              className="dashboard__sorting__select"
+              value={this.state.sortBy}
+              onChange={this.onSelect}
+            >
+              <option value="name">name</option>
+              <option value="type">type</option>
+            </select>
 
-          <button className="dashboard__sort-button" onClick={this.onSort}>
-            <img className="icon" src={isAscendingSort ? ArrowUp : ArrowDown} />
-          </button>
-        </div>
+            <button className="dashboard__sort-button" onClick={this.onSort}>
+              <img
+                className="icon"
+                src={isAscendingSort ? ArrowUp : ArrowDown}
+              />
+            </button>
+          </div>
 
-        <Link to="/create">Create flower</Link>
+          <Link to="/create">Create flower</Link>
 
-        {data.length
-          ? this.renderThumbnails(data)
-          : this.renderFallbackMessage()}
-      </section>
+          {data.length
+            ? this.renderThumbnails(data)
+            : this.renderFallbackMessage()}
+        </section>
+      </>
     );
   }
 }
