@@ -10,8 +10,8 @@ import store, { history } from "./store";
 //COMPONENTS
 import CreateFlower from "./pages/create-flower-page/create-flower.component";
 import FlowerDetails from "./pages/flower-details/flower-details.component";
-import LogIn from "./pages/log-in/log-in.component";
-import SignUp from "./pages/sign-up/sign-up.component";
+import LogIn from "./pages/authorization/log-in/log-in.component";
+import SignUp from "./pages/authorization/sign-up/sign-up.component";
 import Dashboard from "./pages/dashboard/dashboard.component";
 import Home from "./pages/home/home.component";
 

@@ -4,10 +4,11 @@ import { routerMiddleware } from "connected-react-router";
 import { createBrowserHistory } from "history";
 
 import rootReducer from "./rootReducer";
+import { saveState, loadState } from "./localStorage";
 
 export const history = createBrowserHistory();
 
-const initialState = {};
+const initialState = loadState();
 const middleware = [thunk, routerMiddleware(history)];
 
 const store = createStore(
@@ -18,5 +19,9 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 export default store;
