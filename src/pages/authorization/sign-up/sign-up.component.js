@@ -21,7 +21,7 @@ class SignUp extends Component {
 
   componentDidUpdate() {
     if (this.props.isRegistered) {
-      this.props.push(routes.logIn);
+      this.props.push(routes.home);
     }
   }
 

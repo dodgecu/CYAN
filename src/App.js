@@ -14,7 +14,6 @@ import LogIn from "./pages/authorization/log-in/log-in.component";
 import SignUp from "./pages/authorization/sign-up/sign-up.component";
 import Dashboard from "./pages/dashboard/dashboard.component";
 import Home from "./pages/home/home.component";
-import Test from "./pages/authorization/test-update-delete/test.component";
 
 //STYLES
 import "./App.scss";
@@ -28,7 +27,6 @@ class App extends Component {
           <Route exact path={routes.logIn} component={LogIn} />
           <Route exact path={routes.signUp} component={SignUp} />
           <Route exact path={routes.flowerDetails} component={FlowerDetails} />
-          <Route exact path="/test" component={Test} />
           <ProtectedRoute exact path={routes.dashboard} component={Dashboard} />
           <ProtectedRoute
             exact

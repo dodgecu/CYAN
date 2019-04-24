@@ -21,7 +21,9 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-  saveState(store.getState());
+  saveState({
+    authReducer: store.getState().authReducer
+  });
 });
 
 export default store;

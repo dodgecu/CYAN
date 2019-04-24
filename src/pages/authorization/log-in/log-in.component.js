@@ -23,8 +23,7 @@ class LogIn extends Component {
 
   componentDidUpdate() {
     if (this.props.isAuthenticated) {
-      // this.props.push(routes.createFlower);
-      this.props.push("/test");
+      this.props.push(routes.dashboard);
     }
   }
 

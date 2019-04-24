@@ -66,7 +66,6 @@ export const deleteUser = () => dispatch => {
 };
 
 export const updateUser = property => dispatch => {
-  debugger;
   dispatch({ type: LOADING });
   const url = `http://localhost:5000/api/auth/user/${Object.keys(property)}`;
 

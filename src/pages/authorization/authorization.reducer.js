@@ -59,6 +59,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         message: action.payload.message,
+        user: null,
         token: null,
         isDeleted: true,
         isLoading: false
@@ -70,14 +71,12 @@ export default function(state = initialState, action) {
         isDeleted: false
       };
     case UPDATE_SUCCESS:
-      debugger;
       return {
         ...state,
         user: action.payload,
         isLoading: false
       };
     case UPDATE_FAIL:
-      debugger;
       localStorage.removeItem("token");
       return {
         ...state,
