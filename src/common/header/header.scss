@@ -1,0 +1,14 @@
+@import '../../styles/abstracts/variables';
+
+.header {
+  min-height: 100px;
+  background-image: linear-gradient(to right, $primary, $focus);
+  display: flex;
+  &__title {
+    order: 2;
+    width: 100%;
+    text-align: center;
+    align-self: center;
+    color: $white;
+  }
+}

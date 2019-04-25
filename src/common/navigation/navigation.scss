@@ -3,7 +3,8 @@
 .burger {
   height: 30px;
   display: inline-block;
-  margin: 15px;
+  align-self: center;
+  margin: 0 15px;
   position: absolute;
   cursor: pointer;
   &__icon {
@@ -13,7 +14,7 @@
     &::after {
       width: 3rem;
       height: 2px;
-      background-color: $primary;
+      background-color: $white;
       display: inline-block;
     }
     &::before,
@@ -49,14 +50,18 @@
   display: flex;
   flex-direction: column;
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 10;
   background-color: rgba($primary, 0.9);
   height: 100%;
   width: 0;
   overflow-x: hidden;
-  transition: 0.4s;
+  font-size: 0;
+  transition: all 0.4s;
   &--active {
-    width: 200px;
+    width: 250px;
+    font-size: 25px;
   }
   &__links {
     display: flex;
@@ -67,7 +72,6 @@
     &--link {
       color: $white;
       text-decoration: none;
-      font-size: 20px;
       margin: 10px 0;
       cursor: pointer;
     }
