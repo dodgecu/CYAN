@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import FlowerForm from "./create-flower-form/create-flower-form.component";
 import flowers from "../../constants/flowers";
-import Sidebar from "../../common/navigation/navigation.component";
 
 import "./create-flower.scss";
 
