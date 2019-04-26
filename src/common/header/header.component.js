@@ -7,11 +7,13 @@ const Header = props => {
   const links = [
     {
       title: "Dashboard",
-      path: "/dashboard"
+      path: "/dashboard",
+      id: "dashboard"
     },
     {
       title: "Create Flower",
-      path: "/create-flower"
+      path: "/create-flower",
+      id: "create-flower"
     }
   ];
   return (

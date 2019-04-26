@@ -35,6 +35,7 @@ class Sidebar extends Component {
           {this.props.links.map(link => {
             return (
               <li
+                key={link.id}
                 className="navigation__links--link"
                 onClick={this.navigate.bind(this, link.path)}
               >
