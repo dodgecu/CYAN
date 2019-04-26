@@ -14,6 +14,11 @@ const Header = props => {
       title: "Create Flower",
       path: "/create-flower",
       id: "create-flower"
+    },
+    {
+      title: "Flower Details",
+      path: "/flower-details",
+      id: "flower-details"
     }
   ];
   return (

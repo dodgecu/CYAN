@@ -26,11 +26,7 @@ class App extends Component {
           <Route exact path={routes.home} component={Home} />
           <Route exact path={routes.logIn} component={LogIn} />
           <Route exact path={routes.signUp} component={SignUp} />
-          <ProtectedRoute
-            exact
-            path={routes.flowerDetails}
-            component={FlowerDetails}
-          />
+          <Route exact path={routes.flowerDetails} component={FlowerDetails} />
           <ProtectedRoute exact path={routes.dashboard} component={Dashboard} />
           <ProtectedRoute
             exact
