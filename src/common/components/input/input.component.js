@@ -11,14 +11,20 @@ const inputClassApply = (touched, error) => {
   return inputClass;
 };
 
-const Input = ({ input, label, type, meta: { touched, error } }) => (
+const Input = ({
+  placeholder,
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => (
   <div className="form-control">
     <label className="form-control__label">{label}</label>
     <div>
       <input
         className={inputClassApply(touched, error)}
         {...input}
-        placeholder={label}
+        placeholder={placeholder}
         type={type}
       />
       {touched &&
