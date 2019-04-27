@@ -6,7 +6,9 @@ import Header from "../../../common/header/header.component";
 
 import routes from "../../../constants/routes";
 
-function SignUpSuccess() {
+import "./sign-up-success.styles.scss";
+
+function SignUpSuccess(props) {
   return (
     <>
       <Header />
@@ -18,9 +20,9 @@ function SignUpSuccess() {
             login in the app.
           </div>
           <div
-            className="link sign-up-success--link"
+            className="sign-up-success--link"
             onClick={() => {
-              this.props.push(routes.logIn);
+              props.push(routes.logIn);
             }}
           >
             Go to login page
