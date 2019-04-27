@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import ProtectedRoute from "./protected.route";
@@ -14,6 +14,7 @@ import LogIn from "./pages/authorization/log-in/log-in.component";
 import SignUp from "./pages/authorization/sign-up/sign-up.component";
 import Dashboard from "./pages/dashboard/dashboard.component";
 import Home from "./pages/home/home.component";
+import NotFound from "./pages/not-found/not-found.component";
 
 //STYLES
 import "./App.scss";
@@ -24,21 +25,28 @@ class App extends Component {
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <Route exact path={routes.home} component={Home} />
-          <Route exact path={routes.logIn} component={LogIn} />
-          <Route exact path={routes.signUp} component={SignUp} />
-          <Route exact path={routes.userProfile} component={UserProfile} />
-          <ProtectedRoute
-            exact
-            path={routes.flowerDetails}
-            component={FlowerDetails}
-          />
-          <ProtectedRoute exact path={routes.dashboard} component={Dashboard} />
-          <ProtectedRoute
-            exact
-            path={routes.createFlower}
-            component={CreateFlower}
-          />
+          <Switch>
+            <Route exact path={routes.home} component={Home} />
+            <Route exact path={routes.logIn} component={LogIn} />
+            <Route exact path={routes.signUp} component={SignUp} />
+            <Route exact path={routes.userProfile} component={UserProfile} />
+            <Route exact path={routes.notFound} component={NotFound} />
+            <ProtectedRoute
+              exact
+              path={routes.flowerDetails}
+              component={FlowerDetails}
+            />
+            <ProtectedRoute
+              exact
+              path={routes.dashboard}
+              component={Dashboard}
+            />
+            <ProtectedRoute
+              exact
+              path={routes.createFlower}
+              component={CreateFlower}
+            />
+          </Switch>
         </ConnectedRouter>
       </Provider>
     );
