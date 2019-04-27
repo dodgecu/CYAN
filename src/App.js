@@ -20,6 +20,7 @@ import "./App.scss";
 
 class App extends Component {
   render() {
+    const isRegistered = store.getState().authReducer.isRegistered;
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>
