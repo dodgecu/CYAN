@@ -17,6 +17,7 @@ import Home from "./pages/home/home.component";
 
 //STYLES
 import "./App.scss";
+import { UserProfile } from "./pages/authorization/user-profile";
 
 class App extends Component {
   render() {
@@ -26,7 +27,12 @@ class App extends Component {
           <Route exact path={routes.home} component={Home} />
           <Route exact path={routes.logIn} component={LogIn} />
           <Route exact path={routes.signUp} component={SignUp} />
-          <Route exact path={routes.flowerDetails} component={FlowerDetails} />
+          <Route exact path={routes.userProfile} component={UserProfile} />
+          <ProtectedRoute
+            exact
+            path={routes.flowerDetails}
+            component={FlowerDetails}
+          />
           <ProtectedRoute exact path={routes.dashboard} component={Dashboard} />
           <ProtectedRoute
             exact
