@@ -1,14 +1,27 @@
+@import "../../../styles/abstracts/variables";
+
 .authorization {
-  max-width: 300px;
+  max-width: 360px;
   margin: 0 auto;
-  padding: 80px 40px;
-  font-family: 'Nunito Sans', sans-serif;
+  padding: 45px 20px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .authorization__title {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
-.form-control__label {
-  display: none;
+.authorization-link {
+  color: $linkColor;
+  font-weight: 500;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.authorization__helper {
+  margin-top: 10px;
+  font-size: 0.9rem;
 }

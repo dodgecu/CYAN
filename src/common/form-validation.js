@@ -15,6 +15,9 @@ export const email = value =>
     ? "Invalid email address"
     : undefined;
 
+export const passwordsMatch = (value, allValue) =>
+  value !== allValue.password ? "Passwords do not match" : undefined;
+
 const validate = field => {
   const errors = {};
   if (!field.name) {
