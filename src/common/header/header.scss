@@ -1,7 +1,7 @@
 @import '../../styles/abstracts/variables';
 
 .header {
-  min-height: 100px;
+  min-height: 60px;
   background-image: linear-gradient(to right, $primary, $focus);
   display: flex;
   &__title {
