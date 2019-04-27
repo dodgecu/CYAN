@@ -11,6 +11,7 @@ import {
   TYPES
 } from "../../../common/components/button/button.component";
 import Input from "../../../common/components/input/input.component";
+import Header from "../../../common/header/header.component";
 
 import routes from "../../../constants/routes";
 
@@ -31,46 +32,54 @@ class LogIn extends Component {
     const { handleSubmit, submitting, valid } = this.props;
 
     return (
-      <div className="authorization authorization--log-in">
-        <i
-          className="material-icons arrow-back"
-          onClick={() => {
-            this.props.push("/");
-          }}
-        >
-          arrow_back
-        </i>
-        <h2 className="authorization__title">Log In</h2>
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <Field
-            name="email"
-            type="email"
-            component={Input}
-            label="Email"
-            validate={[email, required]}
-          />
-          <Field
-            name="password"
-            type="password"
-            component={Input}
-            label="Password"
-            validate={required}
-          />
-          {this.props.message === "Wrong password" ? (
-            <div>{this.props.message}</div>
-          ) : null}
-          {this.props.message === "User does't exist" ? (
-            <div>{this.props.message}</div>
-          ) : null}
+      <>
+        <Header />
+        <div className="authorization authorization--log-in">
+          <h2 className="authorization__title">Login to Cyander</h2>
+          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            <Field
+              name="email"
+              type="email"
+              component={Input}
+              label="Email address"
+              placeholder="Email"
+              validate={[email, required]}
+            />
+            <Field
+              name="password"
+              type="password"
+              component={Input}
+              label="Password"
+              placeholder="Password"
+              validate={required}
+            />
+            {this.props.message === "Wrong password" ? (
+              <div>{this.props.message}</div>
+            ) : null}
+            {this.props.message === "User does't exist" ? (
+              <div>{this.props.message}</div>
+            ) : null}
 
-          <Button
-            title="Log In"
-            type="submit"
-            buttonType={TYPES.PRIMARY}
-            disabled={!valid || submitting}
-          />
-        </form>
-      </div>
+            <Button
+              title="SIGN IN"
+              type="submit"
+              buttonType={TYPES.PRIMARY}
+              disabled={!valid || submitting}
+            />
+          </form>
+          <div className="authorization__helper">
+            <span>New to Cyander?</span>
+            <span
+              className="authorization-link"
+              onClick={() => {
+                this.props.push(routes.signUp);
+              }}
+            >
+              Sign up
+            </span>
+          </div>
+        </div>
+      </>
     );
   }
 }
