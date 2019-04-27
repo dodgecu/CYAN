@@ -14,6 +14,7 @@ import LogIn from "./pages/authorization/log-in/log-in.component";
 import SignUp from "./pages/authorization/sign-up/sign-up.component";
 import Dashboard from "./pages/dashboard/dashboard.component";
 import Home from "./pages/home/home.component";
+import SignUpSuccess from "./pages/authorization/sign-up-success/sign-up-success.component";
 
 //STYLES
 import "./App.scss";
@@ -36,6 +37,11 @@ class App extends Component {
             exact
             path={routes.createFlower}
             component={CreateFlower}
+          />
+          <ProtectedRoute
+            exact
+            path={routes.signUpSuccess}
+            component={SignUpSuccess}
           />
         </ConnectedRouter>
       </Provider>
