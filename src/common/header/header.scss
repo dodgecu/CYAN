@@ -4,6 +4,9 @@
   min-height: 60px;
   background-image: linear-gradient(to right, $primary, $focus);
   display: flex;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
   &__title {
     order: 2;
     width: 100%;
