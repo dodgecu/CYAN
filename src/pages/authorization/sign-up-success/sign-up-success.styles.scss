@@ -1,8 +1,27 @@
-.sign-up-success__description {
-  text-align: center;
-  margin-top: 40px;
-}
+@import "../../../styles/abstracts/variables";
 
-.sign-up-success--link {
-  margin-top: 10px;
+.sign-up-success {
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 100px 20px;
+  font-family: 'Roboto', sans-serif;
+
+  &__title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 40px;
+  }
+
+  &__description {
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  &--link {
+    color: $linkColor;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+  }
 }
