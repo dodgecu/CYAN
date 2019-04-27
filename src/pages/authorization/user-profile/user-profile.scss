@@ -1,4 +1,8 @@
+@import '../../../styles/abstracts/variables';
+
 .authorization--form {
+  max-width: 360px;
+  clear: both;
   margin: 20px 0;
   form {
     margin-bottom: 15px;
@@ -6,4 +10,25 @@
       margin-bottom: 10px;
     }
   }
+  p {
+    font-size: 0.8rem;
+  }
+}
+.authorization--update {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control__error {
+  position: relative;
+}
+
+.btn {
+  float: right;
+  width: auto;
+  padding: 10px 20px;
+  font-weight: 300;
+}
+.btn--primary:disabled {
+  background-color: $silver;
 }

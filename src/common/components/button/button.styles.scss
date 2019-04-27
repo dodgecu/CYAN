@@ -1,4 +1,4 @@
-@import "../../../styles/abstracts/variables";
+@import '../../../styles/abstracts/variables';
 
 .btn {
   width: 100%;
@@ -29,7 +29,7 @@
   color: #000;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     right: 0;
@@ -40,4 +40,13 @@
     border-radius: 5px;
     background: linear-gradient(90deg, $primary -3.17%, $focus 100%);
   }
+}
+.btn--delete {
+  border: solid 2px transparent;
+  position: relative;
+  background: $danger;
+  background-clip: padding-box;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: #fff;
 }
