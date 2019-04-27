@@ -50,10 +50,10 @@
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 0;
+  top: 80px;
   left: 0;
   z-index: 10;
-  background-color: rgba($primary, 0.9);
+  background-color: $white;
   height: 100%;
   width: 0;
   overflow-x: hidden;
@@ -61,16 +61,16 @@
   transition: all 0.4s;
   &--active {
     width: 250px;
-    font-size: 25px;
+    font-size: 20px;
   }
   &__links {
     display: flex;
     flex-direction: column;
     order: 2;
-    padding: 20px;
+    padding: 50px 30px;
     list-style: none;
     &--link {
-      color: $white;
+      color: $authorizationLabel;
       text-decoration: none;
       margin: 10px 0;
       cursor: pointer;
