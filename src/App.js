@@ -22,8 +22,10 @@ import { UserProfile } from "./pages/authorization/user-profile";
 
 class App extends Component {
   render() {
+    const isRegistered = store.getState().authReducer.isRegistered;
     return (
       <Provider store={store}>
+        {console.log(isRegistered)}
         <ConnectedRouter history={history}>
           <Route exact path={routes.home} component={Home} />
           <Route exact path={routes.logIn} component={LogIn} />
@@ -42,6 +44,7 @@ class App extends Component {
           />
           <ProtectedRoute
             exact
+            protect={isRegistered}
             path={routes.signUpSuccess}
             component={SignUpSuccess}
           />
