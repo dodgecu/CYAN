@@ -4,13 +4,19 @@ import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
 
 import { register } from "../authorization.action";
-import { required, email, maxLength15 } from "../../../common/form-validation";
+import {
+  required,
+  email,
+  maxLength15,
+  passwordsMatch
+} from "../../../common/form-validation";
 
 import {
   Button,
   TYPES
 } from "../../../common/components/button/button.component";
 import Input from "../../../common/components/input/input.component";
+import Header from "../../../common/header/header.component";
 
 import routes from "../../../constants/routes";
 
@@ -29,49 +35,66 @@ class SignUp extends Component {
     const { handleSubmit, submitting, valid } = this.props;
 
     return (
-      <div className="authorization authorization--sign-up">
-        <i
-          className="material-icons arrow-back"
-          onClick={() => {
-            this.props.push("/");
-          }}
-        >
-          arrow_back
-        </i>
-        <h2 className="authorization__title">Sign Up</h2>
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <Field
-            name="name"
-            type="text"
-            component={Input}
-            label="User Name"
-            validate={[required, maxLength15]}
-          />
-          <Field
-            name="email"
-            type="email"
-            component={Input}
-            label="Email"
-            validate={[email, required]}
-          />
-          <Field
-            name="password"
-            type="password"
-            component={Input}
-            label="Password"
-            validate={required}
-          />
-          {this.props.message === "User already exists" ? (
-            <div>{this.props.message}</div>
-          ) : null}
-          <Button
-            title="Sign Up"
-            type="submit"
-            buttonType={TYPES.PRIMARY}
-            disabled={!valid || submitting}
-          />
-        </form>
-      </div>
+      <>
+        <Header />
+        <div className="authorization authorization--sign-up">
+          <h2 className="authorization__title">Register to Cyander</h2>
+          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            <Field
+              name="name"
+              type="text"
+              component={Input}
+              label="User name"
+              placeholder="User name"
+              validate={[required, maxLength15]}
+            />
+            <Field
+              name="email"
+              type="email"
+              component={Input}
+              label="Email"
+              placeholder="Email"
+              validate={[email, required]}
+            />
+            <Field
+              name="password"
+              type="password"
+              component={Input}
+              label="Password"
+              placeholder="Password"
+              validate={required}
+            />
+            <Field
+              name="repeat-password"
+              type="password"
+              component={Input}
+              label="Repeat password"
+              placeholder="Repeat password"
+              validate={[required, passwordsMatch]}
+            />
+            {this.props.message === "User already exists" ? (
+              <div>{this.props.message}</div>
+            ) : null}
+            <Button
+              title="SIGN UP"
+              type="submit"
+              buttonType={TYPES.PRIMARY}
+              disabled={!valid || submitting}
+            />
+          </form>
+          <div className="authorization__helper">
+            <span>Have an account?</span>
+            <span
+              className="authorization-link"
+              onClick={() => {
+                this.props.push(routes.logIn);
+              }}
+            >
+              Login
+            </span>
+          </div>
+        </div>
+      </>
     );
   }
 }

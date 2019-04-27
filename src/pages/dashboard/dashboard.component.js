@@ -53,10 +53,10 @@ class Dashboard extends React.Component {
       <FlowerThumbnail
         key={index}
         name={item.name}
-        temperature={item.temperature}
-        humidity={item.humidity}
-        light={item.light}
-        air={item.air}
+        temperature={3}
+        humidity={33}
+        light={5}
+        air={6}
         id={item.id}
       />
     ));
