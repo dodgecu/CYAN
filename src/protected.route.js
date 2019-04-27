@@ -1,12 +1,13 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-function ProtectedRouter({ component: Component, ...rest }) {
+function ProtectedRouter({ protect: protect, component: Component, ...rest }) {
+  protect = protect ? protect : localStorage.getItem("token");
   return (
     <Route
       {...rest}
       render={props => {
-        if (localStorage.getItem("token")) {
+        if (protect) {
           return <Component {...props} />;
         } else {
           return <Redirect to="/" />;
