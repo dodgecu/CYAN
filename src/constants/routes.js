@@ -4,7 +4,8 @@ const routes = {
   logIn: "/log-in",
   signUp: "/sign-up",
   dashboard: "/dashboard",
-  home: "/"
+  home: "/",
+  signUpSuccess: "/sign-up-success"
 };
 
 export default routes;
