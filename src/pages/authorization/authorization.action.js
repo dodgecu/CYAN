@@ -14,7 +14,7 @@ import {
 
 export const register = ({ name, email, password }) => dispatch => {
   dispatch({ type: LOADING });
-  const url = "http://localhost:5000/api/users";
+  const url = "http://localhost:4000/api/users";
 
   const config = {
     headers: {
@@ -32,7 +32,7 @@ export const register = ({ name, email, password }) => dispatch => {
 
 export const logIn = ({ email, password }) => dispatch => {
   dispatch({ type: LOADING });
-  const url = "http://localhost:5000/api/auth";
+  const url = "http://localhost:4000/api/auth";
 
   const config = {
     headers: {
@@ -50,7 +50,7 @@ export const logIn = ({ email, password }) => dispatch => {
 
 export const deleteUser = () => dispatch => {
   dispatch({ type: LOADING });
-  const url = "http://localhost:5000/api/auth/user";
+  const url = "http://localhost:4000/api/auth/user";
 
   const config = {
     headers: {
@@ -67,7 +67,7 @@ export const deleteUser = () => dispatch => {
 
 export const updateUser = property => dispatch => {
   dispatch({ type: LOADING });
-  const url = `http://localhost:5000/api/auth/user/${Object.keys(property)}`;
+  const url = `http://localhost:4000/api/auth/user/${Object.keys(property)}`;
 
   const config = {
     headers: {
