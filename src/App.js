@@ -21,7 +21,6 @@ import { UserProfile } from "./pages/authorization/user-profile";
 
 class App extends Component {
   render() {
-    const isRegistered = store.getState().authReducer.isRegistered;
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>
