@@ -17,11 +17,8 @@ class Sidebar extends Component {
   }
 
   openMenuHandler() {
-    this.setState({ isOpen: true });
-  }
-
-  closeMenuHandler() {
-    this.setState({ isOpen: false });
+    const closed = !this.state.isOpen;
+    this.setState({ isOpen: closed });
   }
 
   render() {
@@ -44,12 +41,6 @@ class Sidebar extends Component {
             );
           })}
         </ul>
-        <span
-          className="navigation--close"
-          onClick={this.closeMenuHandler.bind(this)}
-        >
-          &times;
-        </span>
       </div>
     );
     return (
