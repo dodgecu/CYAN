@@ -4,7 +4,8 @@ import "./button.styles.scss";
 
 export const TYPES = {
   PRIMARY: "btn--primary",
-  SECONDARY: "btn--secondary"
+  SECONDARY: "btn--secondary",
+  DELETE: "btn--delete"
 };
 
 export const Button = ({ title, buttonType, onClick, disabled, type }) => (

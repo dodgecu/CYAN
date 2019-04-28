@@ -3,7 +3,6 @@ import { reducer as formReducer } from "redux-form";
 import { connectRouter } from "connected-react-router";
 
 import authorizationReducer from "./pages/authorization/authorization.reducer";
-
 export default history =>
   combineReducers({
     authReducer: authorizationReducer,

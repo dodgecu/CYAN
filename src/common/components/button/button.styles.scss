@@ -41,5 +41,12 @@
     background: linear-gradient(90deg, $primary -3.17%, $focus 100%);
   }
 }
-
-
+.btn--delete {
+  border: solid 2px transparent;
+  position: relative;
+  background: $danger;
+  background-clip: padding-box;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: #fff;
+}
