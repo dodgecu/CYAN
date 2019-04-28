@@ -6,7 +6,8 @@ const flowerName = props => {
     <Field
       id="name"
       name="name"
-      label="Flower Nickname"
+      label="Alias"
+      description={"Pick any name you like for your flower"}
       component={props.validForm}
     />
   );

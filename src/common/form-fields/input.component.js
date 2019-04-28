@@ -12,13 +12,14 @@ const inputClassApply = (touched, error) => {
 };
 
 const input = inputsRenderer(
-  (input, touched, error, label, id, name, className) => {
+  (input, touched, error, label, id, name, className, description) => {
     return (
       <div className="form__controls">
         <input
           id={id}
           className={inputClassApply(touched, error)}
           {...input}
+          description={description}
           name={name}
           type="text"
           placeholder={label}

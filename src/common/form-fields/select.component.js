@@ -2,21 +2,21 @@ import React from "react";
 
 import inputsRenderer from "./inputs-renderer.component";
 
+import CustomSelect from "../custom-select/custom-select.component";
+
 import "./select.styles.scss";
 
 const select = inputsRenderer(
-  (input, touched, error, label, id, name, className, { children }) => {
+  (name, input, touched, error, label, id, className, options) => {
     return (
       <div className="form__controls">
-        <select
-          {...input}
+        <CustomSelect
           label={label}
           id={id}
-          name={name}
+          {...name}
           className={className}
-        >
-          {children}
-        </select>
+          {...options}
+        />
       </div>
     );
   }

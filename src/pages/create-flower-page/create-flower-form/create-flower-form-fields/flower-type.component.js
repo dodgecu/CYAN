@@ -3,25 +3,17 @@ import { Field } from "redux-form";
 
 import flowers from "../../../../constants/flowers";
 
-class flowerType extends Component {
-  render() {
-    return (
-      <Field
-        label="Flower Type"
-        id="flower-select"
-        name="flowerSelect"
-        className="form__controls--select"
-        component={this.props.validForm}
-      >
-        {flowers.map(flower => {
-          return (
-            <option className="flowerList" key={flower.id} value={flower.name}>
-              {flower.name}
-            </option>
-          );
-        })}
-      </Field>
-    );
-  }
-}
+const flowerType = props => {
+  return (
+    <Field
+      label="Flower type"
+      id="flower-select"
+      name="type"
+      className="form__controls--select"
+      component={props.validForm}
+      options={flowers}
+      setFieldValue={props.change}
+    />
+  );
+};
 export default flowerType;
