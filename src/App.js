@@ -25,7 +25,6 @@ class App extends Component {
     const isRegistered = store.getState().authReducer.isRegistered;
     return (
       <Provider store={store}>
-        {console.log(isRegistered)}
         <ConnectedRouter history={history}>
           <Route exact path={routes.home} component={Home} />
           <Route exact path={routes.logIn} component={LogIn} />
