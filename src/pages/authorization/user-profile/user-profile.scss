@@ -13,6 +13,15 @@
   p {
     font-size: 0.8rem;
   }
+  .btn {
+    float: right;
+    width: auto;
+    padding: 10px 20px;
+    font-weight: 300;
+  }
+  .btn--primary:disabled {
+    background-color: $silver;
+  }
 }
 .authorization--update {
   display: flex;
@@ -21,14 +30,4 @@
 
 .form-control__error {
   position: relative;
-}
-
-.btn {
-  float: right;
-  width: auto;
-  padding: 10px 20px;
-  font-weight: 300;
-}
-.btn--primary:disabled {
-  background-color: $silver;
 }
