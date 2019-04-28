@@ -45,9 +45,9 @@ class CreateFlower extends Component {
             config
           )
           .then(result => result)
-          .catch(err => error);
+          .catch(error => error);
       })
-      .catch(err => error);
+      .catch(err => err);
   };
   render() {
     return (
