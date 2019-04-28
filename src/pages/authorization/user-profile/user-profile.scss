@@ -1,3 +1,9 @@
+
+@import '../../../styles/abstracts/variables';
+
+.authorization--form {
+  max-width: 360px;
+  clear: both;
 .authorization--form {
   margin: 20px 0;
   form {
@@ -6,4 +12,25 @@
       margin-bottom: 10px;
     }
   }
+  p {
+    font-size: 0.8rem;
+  }
+  .btn {
+    float: right;
+    width: auto;
+    padding: 10px 20px;
+    font-weight: 300;
+  }
+  .btn--primary:disabled {
+    background-color: $silver;
+  }
+}
+.authorization--update {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control__error {
+  position: relative;
+}
 }

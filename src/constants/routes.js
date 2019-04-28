@@ -3,10 +3,11 @@ const routes = {
   flowerDetails: "/flower-details",
   logIn: "/log-in",
   signUp: "/sign-up",
-  userProfile: "/userProfile",
+  userProfile: "/user-profile",
   dashboard: "/dashboard",
   home: "/",
-  notFound: "*"
+  notFound: "*",
+  signUpSuccess: "/sign-up-success"
 };
 
 export default routes;
