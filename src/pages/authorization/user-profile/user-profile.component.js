@@ -22,9 +22,6 @@ import {
 
 class UserProfile extends Component {
   onSubmit(inputValue) {
-
-class UserProfile extends Component {
-  onSubmit(inputValue) 
     this.props.updateUser(inputValue);
   }
 
@@ -114,55 +111,6 @@ class UserProfile extends Component {
           </div>
         </div>
       </>
-    const { handleSubmit } = this.props;
-
-    return (
-      <div className="authorization authorization--update">
-        <h2 className="authorization--title">User Profile</h2>
-        <div className="authorization--form">
-          <form
-            onSubmit={handleSubmit(value =>
-              this.onSubmit({ name: value.name })
-            )}
-          >
-            <Field
-              name="name"
-              type="text"
-              component={Input}
-              label="User Name"
-            />
-            <Button title="Update" type="submit" buttonType={TYPES.PRIMARY} />
-          </form>
-
-          <form
-            onSubmit={handleSubmit(value =>
-              this.onSubmit({ email: value.email })
-            )}
-          >
-            <Field name="email" type="email" component={Input} label="Email" />
-            <Button title="Update" type="submit" buttonType={TYPES.PRIMARY} />
-          </form>
-
-          <form
-            onSubmit={handleSubmit(value =>
-              this.onSubmit({ password: value.password })
-            )}
-          >
-            <Field
-              name="password"
-              type="password"
-              component={Input}
-              label="Password"
-            />
-            <Button title="Update" type="submit" buttonType={TYPES.PRIMARY} />
-          </form>
-        </div>
-        <Button
-          title="Delete account"
-          onClick={() => this.props.deleteUser()}
-          buttonType={TYPES.SECONDARY}
-        />
-      </div>
     );
   }
 }
