@@ -3,7 +3,7 @@ import Sidebar from "../navigation/navigation.component";
 
 import "./header.scss";
 
-const Header = props => {
+const Header = () => {
   const links = [
     {
       title: "Dashboard",
@@ -19,7 +19,6 @@ const Header = props => {
   return (
     <header className="header">
       <Sidebar links={links} />
-      <h1 className="header__title">{props.title}</h1>
     </header>
   );
 };
