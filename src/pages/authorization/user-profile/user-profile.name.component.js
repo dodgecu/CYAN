@@ -24,7 +24,7 @@ class UpdateName extends Component {
     return (
       <>
         <div className="authorization--form">
-          <h4>Personal info</h4>
+          <h2 className="authorization--form__title">Personal info</h2>
           <form
             onSubmit={handleSubmit(value =>
               this.onSubmit.bind(this)({ name: value.name })

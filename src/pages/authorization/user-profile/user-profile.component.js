@@ -17,13 +17,16 @@ class UserProfile extends Component {
 
   render() {
     return (
-      <div className="authorization">
+      <>
         <Header />
-        <UpdateName />
-        <UpdateEmail />
-        <UpdatePassword />
-        <DeleteProfile />
-      </div>
+        <div className="authorization authorization--update">
+          <h1>Account settings</h1>
+          <UpdateName />
+          <UpdateEmail />
+          <UpdatePassword />
+          <DeleteProfile />
+        </div>
+      </>
     );
   }
 }

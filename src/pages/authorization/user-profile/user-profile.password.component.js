@@ -24,10 +24,13 @@ class UpdatePassword extends Component {
 
     return (
       <div className="authorization--form">
-        <h2>Password reset</h2>
+        <h2 className="authorization--form__title">Password reset</h2>
         <form
-          onSubmit={handleSubmit(value =>
-            this.onSubmit.bind(this)({ password: value.password })
+          onSubmit={handleSubmit(
+            value =>
+              this.onSubmit.bind(this)({ password: value.password }) && (
+                <span>j</span>
+              )
           )}
         >
           <Field

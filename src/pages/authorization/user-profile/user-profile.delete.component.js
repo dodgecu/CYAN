@@ -15,14 +15,16 @@ class DeleteProfile extends Component {
   render() {
     return (
       <div className="authorization--form">
-        <h2>Delete account</h2>
-        <p>
+        <h2 className="authorization--form__title">Delete account</h2>
+        <p className="authorization--form__description">
           This account will be permanently deleted. After this, you will not be
           able to restore it again.
         </p>
         <Button
           title="DELETE"
-          onClick={() => this.props.deleteUser()}
+          onClick={() => {
+            window.confirm("Are you sure?") && this.props.deleteUser();
+          }}
           buttonType={TYPES.DELETE}
         />
       </div>

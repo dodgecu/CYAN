@@ -4,25 +4,28 @@
   max-width: 360px;
   clear: both;
   margin: 20px 0;
-  form {
-    margin-bottom: 15px;
-    .form-control {
-      margin-bottom: 10px;
-    }
-  }
-  p {
+
+  &__description {
     font-size: 0.8rem;
+    padding-left: 10px;
   }
+
   .btn {
     float: right;
     width: auto;
     padding: 10px 20px;
     font-weight: 300;
-  }
-  .btn--primary:disabled {
-    background-color: $silver;
+
+    &--primary {
+      background: $focus;
+
+      &:disabled {
+        background-color: $silver;
+      }
+    }
   }
 }
+
 .authorization--update {
   display: flex;
   flex-direction: column;

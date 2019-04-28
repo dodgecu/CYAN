@@ -21,10 +21,9 @@ class UpdateEmail extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-
     return (
       <div className="authorization--form">
-        <h2>Change email</h2>
+        <h2 className="authorization--form__title">Change email</h2>
         <form
           onSubmit={handleSubmit(value =>
             this.onSubmit.bind(this)({ email: value.email })
