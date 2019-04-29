@@ -57,11 +57,12 @@
   height: 100%;
   width: 0;
   overflow-x: hidden;
-  font-size: 0;
-  transition: all 0.4s;
+
   &--active {
     width: 250px;
     font-size: 20px;
+    animation-name: slideInLeft;
+    animation-duration: 0.4s;
   }
   &__links {
     display: flex;
@@ -83,5 +84,35 @@
     font-weight: 900;
     cursor: pointer;
     color: $white;
+  }
+}
+.slideInLeft {
+  -webkit-animation-name: slideInLeft;
+  animation-name: slideInLeft;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes slideInLeft {
+  0% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+@keyframes slideInLeft {
+  0% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
   }
 }
