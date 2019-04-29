@@ -8,13 +8,20 @@ import AmbientLight from "./create-flower-form-fields/ambient-light.component";
 import FlowerName from "./create-flower-form-fields/flower-name.component";
 import FlowerType from "./create-flower-form-fields/flower-type.component";
 import SoilHumidity from "./create-flower-form-fields/soil-humidity.component";
+import Package from "./create-flower-form-fields/package.component";
 
 import {
   Button,
   TYPES
 } from "../../../common/components/button/button.component";
 
-const { validate, RenderInput, RenderSelect, RenderRange } = ValidateFields;
+const {
+  validate,
+  RenderInput,
+  RenderSelect,
+  RenderRange,
+  RenderSelectDefault
+} = ValidateFields;
 
 const createFlower = props => {
   const { handleSubmit, change } = props;
@@ -27,6 +34,7 @@ const createFlower = props => {
         <AirTemp validForm={RenderRange} />
         <AmbientLight validForm={RenderRange} />
         <SoilHumidity validForm={RenderRange} />
+        <Package validForm={RenderSelectDefault} />
         <Button title="CREATE" type="submit" buttonType={TYPES.PRIMARY} />
       </form>
     </div>

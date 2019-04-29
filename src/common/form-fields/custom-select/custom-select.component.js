@@ -1,10 +1,10 @@
 import React from "react";
 
-import inputsRenderer from "./inputs-renderer.component";
+import inputsRenderer from "../inputs-renderer.component";
 
-import CustomSelect from "../custom-select/custom-select.component";
+import CustomSelect from "../../custom-select/custom-select.component";
 
-import "./select.styles.scss";
+import "./custom-select.styles.scss";
 
 const select = inputsRenderer(
   (name, input, touched, error, label, id, className, options) => {

@@ -5,7 +5,7 @@ import Range from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import "./range.styles.scss";
 
-import inputsRenderer from "./inputs-renderer.component";
+import inputsRenderer from "../inputs-renderer.component";
 
 const range = inputsRenderer(
   (input, touched, error, label, id, name, className, description) => {
