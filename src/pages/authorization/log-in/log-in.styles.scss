@@ -3,15 +3,9 @@
 .authorization {
   max-width: 360px;
   margin: 0 auto;
-  padding: 100px 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   font-family: 'Roboto', sans-serif;
-
-  &__title {
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin-top: 0;
-    margin-bottom: 20px;
-  }
 
   &__helper {
     margin-top: 10px;

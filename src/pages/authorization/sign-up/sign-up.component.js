@@ -18,6 +18,7 @@ import {
 import Input from "../../../common/components/input/input.component";
 import Header from "../../../common/header/header.component";
 import CustomLink from "../../../common/components/custom-link/custom-link.component";
+import PageTitle from "./../../../common/page-title/page-title.component";
 
 import routes from "../../../constants/routes";
 
@@ -40,8 +41,8 @@ class SignUp extends Component {
     return (
       <>
         <Header />
+        <PageTitle title="Register to Cyander" />
         <div className="authorization authorization--sign-up">
-          <h2 className="authorization__title">Register to Cyander</h2>
           <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
             <Field
               name="name"
