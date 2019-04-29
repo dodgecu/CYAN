@@ -5,10 +5,10 @@ import { reduxForm } from "redux-form";
 import { updateUser } from "../authorization.action";
 import "./user-profile.scss";
 import Header from "../../../common/header/header.component";
-import UpdateName from "./user-profile.name.component";
-import UpdateEmail from "./user-profile.email.component";
-import UpdatePassword from "./user-profile.password.component";
-import DeleteProfile from "./user-profile.delete.component";
+import UpdateName from "./user-profile-name.component";
+import UpdateEmail from "./user-profile-email.component";
+import UpdatePassword from "./user-profile-password.component";
+import DeleteProfile from "./user-profile-delete.component";
 
 class UserProfile extends Component {
   onSubmit(inputValue) {
