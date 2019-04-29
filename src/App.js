@@ -16,25 +16,14 @@ import Dashboard from "./pages/dashboard/dashboard.component";
 import Home from "./pages/home/home.component";
 import NotFound from "./pages/not-found/not-found.component";
 import SignUpSuccess from "./pages/authorization/sign-up-success/sign-up-success.component";
+import Spinner from "./common/components/spinner/spinner.component";
 
 //STYLES
 import "./App.scss";
 import { UserProfile } from "./pages/authorization/user-profile";
 
 class App extends Component {
-  componentDidMount() {
-    debugger;
-    const root = document.getElementById("root");
-    const isLoading = store.getState().authReducer.isLoading;
-    console.log(root);
-    if (isLoading) {
-      debugger;
-      root.addClass("spinner");
-    }
-  }
-
   render() {
-    debugger;
     const isRegistered = store.getState().authReducer.isRegistered;
     return (
       <Provider store={store}>

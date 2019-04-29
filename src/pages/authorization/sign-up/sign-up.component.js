@@ -19,6 +19,7 @@ import Input from "../../../common/components/input/input.component";
 import Header from "../../../common/header/header.component";
 import CustomLink from "../../../common/components/custom-link/custom-link.component";
 import PageTitle from "./../../../common/page-title/page-title.component";
+import Spinner from "./../../../common/components/spinner/spinner.component";
 
 import routes from "../../../constants/routes";
 
@@ -40,6 +41,7 @@ class SignUp extends Component {
 
     return (
       <>
+        {this.props.isLoading ? <Spinner /> : null}
         <Header />
         <PageTitle title="Register to Cyander" />
         <div className="authorization authorization--sign-up">
@@ -76,8 +78,8 @@ class SignUp extends Component {
               placeholder="Repeat password"
               validate={[required, passwordsMatch]}
             />
-            {this.props.message === "User already exists" ? (
-              <div>{this.props.message}</div>
+            {this.props.message ? (
+              <div className="error-message">{this.props.message}</div>
             ) : null}
             <Button
               title="SIGN UP"
