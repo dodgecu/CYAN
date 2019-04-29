@@ -17,8 +17,11 @@ import {
 } from "../../../common/components/button/button.component";
 import Input from "../../../common/components/input/input.component";
 import Header from "../../../common/header/header.component";
+import CustomLink from "../../../common/components/custom-link/custom-link.component";
 
 import routes from "../../../constants/routes";
+
+import "./sign-up.styles.scss";
 
 class SignUp extends Component {
   onSubmit({ name, email, password }) {
@@ -84,14 +87,11 @@ class SignUp extends Component {
           </form>
           <div className="authorization__helper">
             <span>Have an account?</span>
-            <span
-              className="authorization-link"
-              onClick={() => {
-                this.props.push(routes.logIn);
-              }}
-            >
-              Login
-            </span>
+            <CustomLink
+              additionalClass="link--sign-up"
+              title="Login"
+              route={routes.logIn}
+            />
           </div>
         </div>
       </>
