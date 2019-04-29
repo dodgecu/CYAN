@@ -1,4 +1,5 @@
 import axios from "axios";
+import { backendUrl } from "./../../constants/backendUrl";
 
 import {
   REGISTRATION_FAIL,
@@ -14,7 +15,7 @@ import {
 
 export const register = ({ name, email, password }) => dispatch => {
   dispatch({ type: LOADING });
-  const url = "http://localhost:4000/api/users";
+  const url = `${backendUrl}/api/users`;
 
   const config = {
     headers: {
@@ -32,7 +33,7 @@ export const register = ({ name, email, password }) => dispatch => {
 
 export const logIn = ({ email, password }) => dispatch => {
   dispatch({ type: LOADING });
-  const url = "http://localhost:4000/api/auth";
+  const url = `${backendUrl}/api/auth`;
 
   const config = {
     headers: {
@@ -50,7 +51,7 @@ export const logIn = ({ email, password }) => dispatch => {
 
 export const deleteUser = () => dispatch => {
   dispatch({ type: LOADING });
-  const url = "http://localhost:4000/api/auth/user";
+  const url = `${backendUrl}/api/auth/user`;
 
   const config = {
     headers: {
@@ -67,7 +68,7 @@ export const deleteUser = () => dispatch => {
 
 export const updateUser = property => dispatch => {
   dispatch({ type: LOADING });
-  const url = `http://localhost:4000/api/auth/user/${Object.keys(property)}`;
+  const url = `${backendUrl}/api/auth/user/${Object.keys(property)}`;
 
   const config = {
     headers: {
