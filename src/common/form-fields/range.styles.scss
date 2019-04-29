@@ -1,25 +1,39 @@
 @import '../../styles/abstracts/variables';
 
 .input-range {
-  padding: 2rem 0;
-
+  padding: 40px 0;
   &__label {
-    word-wrap: unset;
+    white-space: unset;
     &--min,
     &--max {
-      bottom: 5px;
+      display: none;
+    }
+    &--value {
+      top: -40px;
     }
   }
   &__slider {
     height: 15px;
     width: 15px;
     margin-top: -10px;
-    background-color: $primary;
-    border: 1px solid $primary;
+    background-color: $linkColor;
+    border: 1px solid $linkColor;
   }
   &__track {
     &--active {
-      background: $primary;
+      background: $linkColor;
     }
+  }
+  &__label-container {
+    color: $authorizationLabel;
+    bottom: 14px;
+    font-size: 18px;
+  }
+}
+.tooltip {
+  display: flex;
+  flex-direction: column;
+  &__unit {
+    font-size: 13px;
   }
 }

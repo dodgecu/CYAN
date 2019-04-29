@@ -4,6 +4,7 @@ import { Field } from "redux-form";
 const soilHumidity = props => {
   return (
     <Field
+      description="Relative humidity of soil moisture"
       step={1}
       minValue={0}
       maxValue={100}
