@@ -6,6 +6,8 @@ import flowers from "../../constants/flowers";
 import Header from "../../common/header/header.component";
 import PageTitle from "../../common/page-title/page-title.component";
 
+import routes from "../../constants/routes";
+
 import "./create-flower.scss";
 
 class CreateFlower extends Component {
@@ -44,7 +46,11 @@ class CreateFlower extends Component {
             }),
             config
           )
-          .then(result => result)
+          .then(result => {
+            setTimeout(() => {
+              this.props.history.push(routes.dashboard);
+            }, 1000);
+          })
           .catch(error => error);
       })
       .catch(err => err);
@@ -56,7 +62,7 @@ class CreateFlower extends Component {
         <Header />
         <FlowerForm onSubmit={this.submitHandler} />
         <button
-          onClick={() => this.props.history.push("/dashboard")}
+          onClick={() => this.props.history.push(routes.dashboard)}
           className="button__cancel"
           type="text"
         >
