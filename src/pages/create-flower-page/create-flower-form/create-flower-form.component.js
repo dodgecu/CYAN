@@ -1,6 +1,5 @@
 import React from "react";
 import { reduxForm } from "redux-form";
-
 import ValidateFields from "../../../common/form-validation";
 
 import AirHumidity from "./create-flower-form-fields/air-humidity.component";
@@ -18,21 +17,17 @@ import {
 const { validate, RenderInput, RenderSelect, RenderRange } = ValidateFields;
 
 const createFlower = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, change } = props;
   return (
     <div className="create-flower">
       <form className="create-flower__form" onSubmit={handleSubmit}>
         <FlowerName validForm={RenderInput} />
-        <FlowerType validForm={RenderSelect} />
+        <FlowerType change={change} validForm={RenderSelect} />
         <AirHumidity validForm={RenderRange} />
-        <SoilHumidity validForm={RenderRange} />
         <AirTemp validForm={RenderRange} />
         <AmbientLight validForm={RenderRange} />
-        <Button
-          title="Submit Flower"
-          type="submit"
-          buttonType={TYPES.PRIMARY}
-        />
+        <SoilHumidity validForm={RenderRange} />
+        <Button title="CREATE" type="submit" buttonType={TYPES.PRIMARY} />
       </form>
     </div>
   );

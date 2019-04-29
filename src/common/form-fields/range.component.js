@@ -8,19 +8,7 @@ import "./range.styles.scss";
 import inputsRenderer from "./inputs-renderer.component";
 
 const range = inputsRenderer(
-  (
-    input,
-    touched,
-    error,
-    label,
-    id,
-    name,
-    className,
-    unit,
-    maxValue,
-    minValue,
-    step
-  ) => {
+  (input, touched, error, label, id, name, className, description) => {
     const val = input.value === "" ? (input.value = 0) : input.value;
     return (
       <div id={id} className="form__controls">
@@ -28,11 +16,20 @@ const range = inputsRenderer(
           name={name}
           className={className}
           label={label}
+          description={description}
           value={val}
-          formatLabel={value => `${value} ${unit.unit}`}
-          maxValue={unit.maxValue}
-          minValue={unit.minValue}
-          step={unit.step}
+          formatLabel={value => {
+            const tooltip = (
+              <span className="tooltip">
+                {value}
+                <span className="tooltip__unit">{description.unit}</span>
+              </span>
+            );
+            return tooltip;
+          }}
+          maxValue={description.maxValue}
+          minValue={description.minValue}
+          step={description.step}
           onBlur={input.onBlur}
           onChange={input.onChange}
           onDragStart={input.onDragStart}

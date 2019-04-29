@@ -13,6 +13,7 @@ const inputsRenderer = render => ({
     <label className="form__group-title" htmlFor={label}>
       {label}
     </label>
+    <p className="form__group-description">{rest.description}</p>
     {render(input, touched, error, label, id, name, className, rest)}
     {error && touched && <span className="form__group--error">{error}</span>}
   </div>

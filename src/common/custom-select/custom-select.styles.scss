@@ -1,0 +1,57 @@
+@import '../../styles/abstracts/variables';
+
+.custom-select {
+  padding: 10px 0;
+  .title {
+    text-align: center;
+    cursor: pointer;
+  }
+  &__options {
+    position: fixed;
+    z-index: 2;
+    top: 60px;
+    background-color: $white;
+    width: 100%;
+    left: 0;
+    overflow: auto;
+    height: 100vh;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-image: -webkit-linear-gradient(left, $primary, $focus);
+    }
+    &--option {
+      min-height: 100vh;
+      width: 100%;
+    }
+    &--params {
+      list-style: none;
+      text-align: center;
+      max-width: 70%;
+      margin: 40px auto 0;
+      padding: 0;
+      font-size: 25px;
+      .flower-param {
+        padding: 20px 0;
+      }
+    }
+    &--image {
+      max-width: 70%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      .flower-image {
+        max-width: 100%;
+        align-self: center;
+      }
+    }
+  }
+  &__placeholder {
+    font-size: 20px;
+    &--arrow {
+      padding: 0 10px;
+      font-size: 20px;
+    }
+  }
+}
