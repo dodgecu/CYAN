@@ -22,7 +22,19 @@ import "./App.scss";
 import { UserProfile } from "./pages/authorization/user-profile";
 
 class App extends Component {
+  componentDidMount() {
+    debugger;
+    const root = document.getElementById("root");
+    const isLoading = store.getState().authReducer.isLoading;
+    console.log(root);
+    if (isLoading) {
+      debugger;
+      root.addClass("spinner");
+    }
+  }
+
   render() {
+    debugger;
     const isRegistered = store.getState().authReducer.isRegistered;
     return (
       <Provider store={store}>

@@ -1,3 +1,3 @@
 import React, { Component } from "react";
 
-export const Spinner = () => <div class="spinner" />;
+export const Spinner = () => <div className="spinner" />;
