@@ -4,6 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
 
 import { register } from "../authorization.action";
+import { falseRegistered } from "../authorization.action";
 import {
   required,
   email,
@@ -33,6 +34,7 @@ class SignUp extends Component {
   componentDidUpdate() {
     if (this.props.isRegistered) {
       this.props.push(routes.signUpSuccess);
+      this.props.falseRegistered();
     }
   }
 
@@ -113,5 +115,5 @@ SignUp = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { register, push }
+  { register, push, falseRegistered }
 )(SignUp);
