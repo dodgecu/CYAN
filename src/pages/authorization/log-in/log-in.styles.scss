@@ -5,23 +5,21 @@
   margin: 0 auto;
   padding: 100px 20px;
   font-family: 'Roboto', sans-serif;
+
+  &__title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  &__helper {
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
+
 }
 
-.authorization__title {
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-
-.authorization-link {
-  color: $linkColor;
-  font-weight: 500;
+.link--log-in {
   margin-left: 10px;
-  cursor: pointer;
-}
-
-.authorization__helper {
-  margin-top: 10px;
-  font-size: 0.9rem;
 }

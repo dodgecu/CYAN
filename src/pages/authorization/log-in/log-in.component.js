@@ -12,6 +12,7 @@ import {
 } from "../../../common/components/button/button.component";
 import Input from "../../../common/components/input/input.component";
 import Header from "../../../common/header/header.component";
+import CustomLink from "../../../common/components/custom-link/custom-link.component";
 
 import routes from "../../../constants/routes";
 
@@ -69,14 +70,11 @@ class LogIn extends Component {
           </form>
           <div className="authorization__helper">
             <span>New to Cyander?</span>
-            <span
-              className="authorization-link"
-              onClick={() => {
-                this.props.push(routes.signUp);
-              }}
-            >
-              Sign up
-            </span>
+            <CustomLink
+              additionalClass="link--log-in"
+              title="Sign up"
+              route={routes.signUp}
+            />
           </div>
         </div>
       </>
