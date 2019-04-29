@@ -1,8 +1,8 @@
 @import '../../../styles/abstracts/variables';
 
 .link {
+  display: inline-block;
   color: $linkColor;
-  font-weight: 500;
-  margin-left: 10px;
+  font-weight: bold;
   cursor: pointer;
 }

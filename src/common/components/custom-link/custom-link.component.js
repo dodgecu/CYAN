@@ -7,7 +7,10 @@ import "./custom-link.styles.scss";
 class CustomLink extends Component {
   render() {
     return (
-      <div className="link" onClick={() => this.props.push(this.props.route)}>
+      <div
+        className={`link ${this.props.additionalClass}`}
+        onClick={() => this.props.push(this.props.route)}
+      >
         {this.props.title}
       </div>
     );
