@@ -34,7 +34,6 @@ class SignUp extends Component {
   componentDidUpdate() {
     if (this.props.isRegistered) {
       this.props.push(routes.signUpSuccess);
-      this.props.falseRegistered();
     }
   }
 
@@ -106,7 +105,8 @@ class SignUp extends Component {
 
 const mapStateToProps = state => ({
   isRegistered: state.authReducer.isRegistered,
-  message: state.authReducer.message
+  message: state.authReducer.message,
+  isLoading: state.authReducer.isLoading
 });
 
 SignUp = reduxForm({
