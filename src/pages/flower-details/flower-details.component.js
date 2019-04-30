@@ -34,22 +34,22 @@ class FlowerDetails extends Component {
       scales = (
         <div className="bars">
           <p>Temperature</p>
-          {temperature} C
+          {temperature} °C
           <div className="red">
             <div className="blue" style={temp} />
           </div>
           <p>Air Humidity</p>
-          {humidity} RH
+          {humidity}% RH
           <div className="red">
             <div className="blue" style={air} />
           </div>
           <p>Soil Moisture</p>
-          {soilMoisture["Sensor data"]} RH
+          {soilMoisture["Sensor data"]}% RH
           <div className="red">
             <div className="blue" style={soil} />
           </div>
           <p>Light</p>
-          {soilMoisture["Sensor data"]} LUX
+          {soilMoisture["Sensor data"]}% LUX
           <div className="red">
             <div className="blue" style={soil} />
           </div>
