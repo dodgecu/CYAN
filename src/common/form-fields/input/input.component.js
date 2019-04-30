@@ -1,6 +1,6 @@
 import React from "react";
 
-import inputsRenderer from "./inputs-renderer.component";
+import inputsRenderer from "../inputs-renderer.component";
 
 const inputClassApply = (touched, error) => {
   const inputClass =

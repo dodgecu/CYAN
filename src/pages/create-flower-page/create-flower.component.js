@@ -7,7 +7,7 @@ import Header from "../../common/header/header.component";
 import PageTitle from "../../common/page-title/page-title.component";
 
 import routes from "../../constants/routes";
-
+import { backendUrl } from "../../constants/backendUrl";
 import "./create-flower.scss";
 
 class CreateFlower extends Component {
@@ -22,7 +22,6 @@ class CreateFlower extends Component {
   }
 
   submitHandler = flowerData => {
-    const url = "http://localhost:4000/api/users";
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -35,11 +34,11 @@ class CreateFlower extends Component {
     const [img_path] = flowerImage;
     const flowerParams = { ...flowerData, img_path: img_path };
     axios
-      .post(`http://localhost:4000/flower`, flowerParams)
+      .post(`${backendUrl}/flower`, flowerParams)
       .then(res => {
         axios
           .put(
-            url,
+            `${backendUrl}/api/users`,
             JSON.stringify({
               flowerRecord: res.data._id,
               userRecord: this.state.userId
