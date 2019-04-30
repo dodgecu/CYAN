@@ -43,6 +43,6 @@ const createFlower = props => {
 
 export default reduxForm({
   form: "create-flower-form",
-  destroyOnUnmount: false,
+  destroyOnUnmount: true,
   validate
 })(createFlower);

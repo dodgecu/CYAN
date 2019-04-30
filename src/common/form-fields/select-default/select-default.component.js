@@ -9,7 +9,7 @@ const selectDefault = inputsRenderer(
     return (
       <div className="form__controls">
         <select
-          name={name}
+          {...name}
           {...input}
           label={label}
           className={className}

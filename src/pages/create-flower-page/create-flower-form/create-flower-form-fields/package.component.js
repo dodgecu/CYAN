@@ -12,23 +12,19 @@ class Package extends Component {
     return (
       <Field
         id="package"
-        name="package"
+        name="package_id"
         label="Select sensor"
+        className="form__constrols--sensor"
         description={"Select sensors you have attached to your flower"}
         component={this.props.validForm}
       >
-        {[this.props.sensors].map(sensor => {
+        {[this.props.sensors].map((sensor, index) => {
           return (
-            <option
-              className="flowerList"
-              key={sensor.package_id}
-              value={sensor.name}
-            >
+            <option className="sensor" key={index} value={sensor.package_id}>
               {sensor.name}
             </option>
           );
         })}
-        }
       </Field>
     );
   }
