@@ -7,7 +7,8 @@ import {
   DELETE_FAIL,
   UPDATE_SUCCESS,
   UPDATE_FAIL,
-  LOADING
+  LOADING,
+  REGISTERED_FALSE
 } from "./authorization.action-types";
 
 const initialState = {
@@ -82,6 +83,11 @@ export default function(state = initialState, action) {
         ...state,
         message: action.payload.message,
         isLoading: false
+      };
+    case REGISTERED_FALSE:
+      return {
+        ...state,
+        isRegistered: false
       };
     default:
       return state;

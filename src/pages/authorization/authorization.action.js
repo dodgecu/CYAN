@@ -10,8 +10,13 @@ import {
   DELETE_FAIL,
   UPDATE_SUCCESS,
   UPDATE_FAIL,
-  LOADING
+  LOADING,
+  REGISTERED_FALSE
 } from "./authorization.action-types";
+
+export const falseRegistered = () => dispatch => {
+  dispatch({ type: REGISTERED_FALSE });
+};
 
 export const register = ({ name, email, password }) => dispatch => {
   dispatch({ type: LOADING });
