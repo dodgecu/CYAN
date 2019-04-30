@@ -4,59 +4,50 @@ import PlantImage from "../../assets/plant-image.png";
 
 function FlowerThumbnail(props) {
   return (
-    <>
-      <header className="header">
-        <h1 className="header__text">{props.name}</h1>
-      </header>
-      <div className="plant">
-        <img className="plant__avatar" src={PlantImage} alt="plant" />
+    <div className="thumbnail">
+      <div className="thumbnail--flower">
+        <h2 className="thumbnail__name">{props.name}</h2>
+        <p className="thumbnail__type">{props.type}</p>
       </div>
-      <div className="ranges">
-        <span>Temperature</span>
-        <input
-          className="range range--temperature"
-          type="range"
-          min="0"
-          max="100"
-          value={props.temperature}
-          readOnly
-        />
-        <span>Humidity</span>
-        <input
-          className="range range--humidity"
-          type="range"
-          min="0"
-          max="100"
-          value={props.humidity}
-          readOnly
-        />
-        <span>Light</span>
-        <input
-          className="range range--light"
-          type="range"
-          min="0"
-          max="23"
-          readOnly
-          value={props.light}
-        />
-        <span>Air</span>
-        <input
-          className="range range--air"
-          type="range"
-          min="0"
-          max="56"
-          readOnly
-          value={props.air}
-        />
+      <div className="plant--info">
+        <div className="plant">
+          <img className="plant__avatar" src={PlantImage} alt="plant" />
+        </div>
+        <div className="ranges">
+          <span className="ranges__title">Temperature</span>
+          <div className="range range--temperature">
+            <div
+              className="range--temperature__fill"
+              style={{ width: `${props.airTemperature}%` }}
+            />
+          </div>
+          <span className="ranges__title">Humidity</span>
+          <div className="range range--humidity">
+            <div
+              className="range--humidity__fill"
+              style={{ width: `${props.airHumidity}%` }}
+            />
+          </div>
+          <span className="ranges__title">Ambient light</span>
+          <div className="range range--light">
+            <div
+              className="range--light__fill"
+              style={{ width: `${props.ambientLight}%` }}
+            />
+          </div>
+          <span className="ranges__title">Soil humidity</span>
+          <div className="range range--soil">
+            <div
+              className="range--soil__fill"
+              style={{ width: `${props.soilHumidity}%` }}
+            />
+          </div>
+        </div>
       </div>
-      <footer className="thumbnail__footer">
-        <button className="btn">
-          <a className="btn__details" href={`/details/${props.id}`}>
-            Details
-          </a>
-        </button>
-      </footer>
-    </>
+      <a className="details" href={`/details/${props.id}`}>
+        View details
+      </a>
+    </div>
   );
 }
 
