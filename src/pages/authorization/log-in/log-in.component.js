@@ -14,6 +14,7 @@ import Input from "../../../common/components/input/input.component";
 import Header from "../../../common/header/header.component";
 import CustomLink from "../../../common/components/custom-link/custom-link.component";
 import PageTitle from "./../../../common/page-title/page-title.component";
+import Spinner from "./../../../common/components/spinner/spinner.component";
 
 import routes from "../../../constants/routes";
 
@@ -35,6 +36,7 @@ class LogIn extends Component {
 
     return (
       <>
+        {this.props.isLoading ? <Spinner /> : null}
         <Header />
         <PageTitle title="Login to Cyander" />
         <div className="authorization authorization--log-in">
@@ -55,11 +57,8 @@ class LogIn extends Component {
               placeholder="Password"
               validate={required}
             />
-            {this.props.message === "Wrong password" ? (
-              <div>{this.props.message}</div>
-            ) : null}
-            {this.props.message === "User does't exist" ? (
-              <div>{this.props.message}</div>
+            {this.props.message ? (
+              <div className="error-message">{this.props.message}</div>
             ) : null}
 
             <Button
@@ -85,7 +84,8 @@ class LogIn extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.authReducer.isAuthenticated,
-  message: state.authReducer.message
+  message: state.authReducer.message,
+  isLoading: state.authReducer.isLoading
 });
 
 LogIn = reduxForm({

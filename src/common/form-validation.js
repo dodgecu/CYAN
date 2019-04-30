@@ -1,6 +1,7 @@
-import RenderInput from "./form-fields/input.component";
-import RenderRange from "./form-fields/range.component";
-import RenderSelect from "./form-fields/select.component";
+import RenderInput from "./form-fields/input/input.component";
+import RenderRange from "./form-fields/range/range.component";
+import RenderSelect from "./form-fields/custom-select/custom-select.component";
+import RenderSelectDefault from "./form-fields/select-default/select-default.component";
 
 export const required = value =>
   value || typeof value === "number" ? undefined : "Required";
@@ -38,6 +39,9 @@ const validate = field => {
   if (!field.light) {
     errors.light = "Please, specify light value";
   }
+  if (!field.package_id) {
+    errors.package_id = "You must specify sensors package";
+  }
 
   return errors;
 };
@@ -46,5 +50,6 @@ export default {
   validate,
   RenderInput,
   RenderRange,
-  RenderSelect
+  RenderSelect,
+  RenderSelectDefault
 };
