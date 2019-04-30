@@ -7,7 +7,6 @@ class FlowerDetails extends Component {
     this.props.fetchSensors();
   }
   render() {
-    console.log(this.props.sensors);
     return <h1>Flower Details</h1>;
   }
 }
