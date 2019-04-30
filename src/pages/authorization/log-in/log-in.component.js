@@ -4,7 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
 
 import { logIn } from "../authorization.action";
-import { required, email } from "../../../common/form-validation";
+import { requirePassword, email, requireEmail } from "./log-in.validation";
 
 import {
   Button,
@@ -47,7 +47,7 @@ class LogIn extends Component {
               component={Input}
               label="Email address"
               placeholder="Email"
-              validate={[email, required]}
+              validate={[requireEmail, email]}
             />
             <Field
               name="password"
@@ -55,7 +55,7 @@ class LogIn extends Component {
               component={Input}
               label="Password"
               placeholder="Password"
-              validate={required}
+              validate={requirePassword}
             />
             {this.props.message ? (
               <div className="error-message">{this.props.message}</div>
