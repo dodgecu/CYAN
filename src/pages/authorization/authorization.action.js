@@ -1,4 +1,5 @@
 import axios from "axios";
+import md5 from "md5";
 import { backendUrl } from "./../../constants/backendUrl";
 
 import {
@@ -28,6 +29,7 @@ export const register = ({ name, email, password }) => dispatch => {
     }
   };
 
+  password = md5(password);
   const body = JSON.stringify({ name, email, password });
 
   axios
@@ -46,6 +48,7 @@ export const logIn = ({ email, password }) => dispatch => {
     }
   };
 
+  password = md5(password);
   const body = JSON.stringify({ email, password });
 
   axios
