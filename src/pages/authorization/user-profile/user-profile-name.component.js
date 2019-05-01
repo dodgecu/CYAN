@@ -44,6 +44,7 @@ class UpdateName extends Component {
     );
   }
 }
+debugger;
 
 const mapStateToProps = state => ({
   message: state.authReducer.message
