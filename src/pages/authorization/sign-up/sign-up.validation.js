@@ -1,14 +1,14 @@
 export const requirePassword = value =>
-  value ? undefined : "Please type your password";
+  value ? undefined : "Please enter your password";
 
 export const repeatPassword = value =>
-  value ? undefined : "Please repeat password you have written above";
+  value ? undefined : "Please repeat your password";
 
 export const requireUserName = value =>
-  value ? undefined : "Please type your name";
+  value ? undefined : "Please enter your name";
 
 export const requireEmail = value =>
-  value ? undefined : "Please type your email address";
+  value ? undefined : "Please enter your email address";
 
 export const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
