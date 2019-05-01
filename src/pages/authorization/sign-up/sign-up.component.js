@@ -6,11 +6,14 @@ import { push } from "connected-react-router";
 import { register } from "../authorization.action";
 import { falseRegistered } from "../authorization.action";
 import {
-  required,
+  requirePassword,
+  requireUserName,
   email,
+  requireEmail,
   maxLength15,
-  passwordsMatch
-} from "../../../common/form-validation";
+  passwordsMatch,
+  repeatPassword
+} from "./sign-up.validation";
 
 import {
   Button,
@@ -53,7 +56,7 @@ class SignUp extends Component {
               component={Input}
               label="User name"
               placeholder="User name"
-              validate={[required, maxLength15]}
+              validate={[requireUserName, maxLength15]}
             />
             <Field
               name="email"
@@ -61,7 +64,7 @@ class SignUp extends Component {
               component={Input}
               label="Email"
               placeholder="Email"
-              validate={[email, required]}
+              validate={[email, requireEmail]}
             />
             <Field
               name="password"
@@ -69,7 +72,7 @@ class SignUp extends Component {
               component={Input}
               label="Password"
               placeholder="Password"
-              validate={required}
+              validate={requirePassword}
             />
             <Field
               name="repeat-password"
@@ -77,7 +80,7 @@ class SignUp extends Component {
               component={Input}
               label="Repeat password"
               placeholder="Repeat password"
-              validate={[required, passwordsMatch]}
+              validate={[repeatPassword, passwordsMatch]}
             />
             {this.props.message ? (
               <div className="error-message">{this.props.message}</div>
