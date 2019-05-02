@@ -2,12 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchSensors } from "../../common/sensors/sensors.middleware";
 
+import Header from "../../common/header/header.component";
+import PageTitle from "../../common/page-title/page-title.component";
+
+import "./flower-details.styles.scss";
 class FlowerDetails extends Component {
   componentDidMount() {
     this.props.fetchSensors();
   }
   render() {
-    return <h1>Flower Details</h1>;
+    return (
+      <>
+        <PageTitle title="Flower details" />
+        <Header />
+      </>
+    );
   }
 }
 

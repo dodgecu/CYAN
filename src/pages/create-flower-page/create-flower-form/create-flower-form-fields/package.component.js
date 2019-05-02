@@ -10,19 +10,13 @@ class Package extends Component {
   }
 
   render() {
-    const sensorsAvailable = Object.entries(this.props.sensors).length;
-    let output;
-    if (sensorsAvailable <= 0) {
-      output = <option>No sensors are currently available</option>;
-    } else {
-      output = [this.props.sensors].map((sensor, index) => {
-        return (
-          <option className="sensor" key={index} value={sensor.package_id}>
-            {sensor.name}
-          </option>
-        );
-      });
-    }
+    let sensorAvailable = true;
+
+    this.props.sensors.map(sensor =>
+      Object.keys(sensor).length === 0
+        ? (sensorAvailable = false)
+        : (sensorAvailable = true)
+    );
     return (
       <Field
         id="package"
@@ -30,10 +24,24 @@ class Package extends Component {
         label="Select sensor"
         className="form__constrols--sensor"
         description={"Select sensors you have attached to your flower"}
-        disabled={sensorsAvailable === 0 ? true : false}
+        disabled={!sensorAvailable ? true : false}
         component={this.props.validForm}
       >
-        {output}
+        {this.props.sensors.map((item, i) => {
+          return item.pack === undefined ? (
+            <option className="no-sensor" key={i}>
+              no sensors
+            </option>
+          ) : (
+            <option
+              key={item.pack.name}
+              value={item.pack.package_id}
+              className="sensor"
+            >
+              {item.pack.name}
+            </option>
+          );
+        })}
       </Field>
     );
   }
