@@ -4,6 +4,10 @@ import { fetchSensors } from "../../common/sensors/sensors.middleware";
 
 import Diagram from "./diagram/diagram.component";
 
+import Header from "../../common/header/header.component";
+import PageTitle from "../../common/page-title/page-title.component";
+
+import "./flower-details.styles.scss";
 class FlowerDetails extends Component {
   componentDidMount() {
     this.props.fetchSensors();
@@ -36,6 +40,8 @@ class FlowerDetails extends Component {
           strokeColor="#15E9A6"
           dotsColor="#15E9A6"
         />
+        <PageTitle title="Flower details" />
+        <Header />
       </>
     );
   }
