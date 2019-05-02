@@ -1,0 +1,17 @@
+.line {
+  stroke-width: 3;
+}
+
+.focus {
+  stroke: #fff;
+}
+
+.hover-line {
+  stroke-width: 2px;
+  stroke-dasharray: 3,3;
+}
+
+.axis {
+  color: #666;
+  stroke-width: 0.2;
+}
