@@ -21,7 +21,7 @@ class Package extends Component {
         {[this.props.sensors].map((sensor, index) => {
           return (
             <option className="sensor" key={index} value={sensor.package_id}>
-              {sensor.name}
+              {sensor.name} Dummy
             </option>
           );
         })}

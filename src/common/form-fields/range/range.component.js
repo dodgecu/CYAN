@@ -10,6 +10,7 @@ import inputsRenderer from "../inputs-renderer.component";
 const range = inputsRenderer(
   (input, touched, error, label, id, name, className, description) => {
     const val = input.value === "" ? (input.value = 0) : input.value;
+
     return (
       <div id={id} className="form__controls">
         <Range

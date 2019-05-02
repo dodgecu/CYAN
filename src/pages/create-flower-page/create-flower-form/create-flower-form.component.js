@@ -1,5 +1,7 @@
 import React from "react";
 import { reduxForm } from "redux-form";
+import { connect } from "react-redux";
+
 import ValidateFields from "../../../common/form-validation";
 
 import AirHumidity from "./create-flower-form-fields/air-humidity.component";
@@ -23,8 +25,9 @@ const {
   RenderSelectDefault
 } = ValidateFields;
 
-const createFlower = props => {
+let createFlower = props => {
   const { handleSubmit, change } = props;
+  console.log(props);
   return (
     <div className="create-flower">
       <form className="create-flower__form" onSubmit={handleSubmit}>
@@ -41,8 +44,19 @@ const createFlower = props => {
   );
 };
 
-export default reduxForm({
+const mapStateToProps = state => {
+  return {
+    ...state.form,
+    initialValues: state.flowerType.type,
+    type: state.flowerType
+  };
+};
+
+createFlower = reduxForm({
   form: "create-flower-form",
-  destroyOnUnmount: true,
   validate
 })(createFlower);
+
+createFlower = connect(mapStateToProps)(createFlower);
+
+export default createFlower;
