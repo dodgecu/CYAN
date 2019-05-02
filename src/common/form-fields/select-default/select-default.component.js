@@ -11,6 +11,7 @@ const selectDefault = inputsRenderer(
         <select
           {...name}
           {...input}
+          disabled={options.disabled}
           label={label}
           className={className}
           id={id}

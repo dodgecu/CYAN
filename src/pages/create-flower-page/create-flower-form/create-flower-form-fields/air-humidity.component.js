@@ -8,6 +8,7 @@ const airHumidity = props => {
       step={1}
       minValue={0}
       maxValue={100}
+      defaultVal={props.defaultVal}
       unit="RH"
       id="airHumidity"
       name="airHumidity"

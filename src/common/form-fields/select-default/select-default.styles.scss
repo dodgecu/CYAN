@@ -1,8 +1,10 @@
+@import '../../../styles/abstracts/variables';
+
 .form__constrols--sensor {
   width: 100%;
-  background-color: #f6f6f6;
-  color: #858585;
+  background-color: $input-bg;
+  color: $input-placeholder;
   border: transparent;
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 5px;
 }

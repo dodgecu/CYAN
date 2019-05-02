@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import "./custom-select.styles.scss";
 
+import { connect } from "react-redux";
+
+import flowers from "../../constants/flowers";
+
+import { getType } from "./create-flower.action";
+
 class CustomSelect extends Component {
   state = { selectActive: false };
 
@@ -8,6 +14,18 @@ class CustomSelect extends Component {
   openOverlay = () => this.setState({ selectActive: true });
 
   selectValueHandler = value => () => {
+    const option = flowers.filter(flower => flower.name === value)[0];
+
+    const defaults = {
+      name: this.props.form["create-flower-form"].values.name,
+      type: value,
+      airTemperature: parseInt(option.defaultAirTemp),
+      airHumidity: parseInt(option.defaultAirHumidity),
+      light: parseInt(option.defaultLux),
+      soilHumidity: parseInt(option.defaultSoilHumidity)
+    };
+
+    this.props.getType(defaults);
     this.setValue(value);
     this.closeOverlay();
   };
@@ -20,22 +38,15 @@ class CustomSelect extends Component {
 
   renderOptionsHandler = () => {
     return this.props.options.map(option => {
-      const {
-        id,
-        name,
-        flower_img,
-        alt,
-        defaultAirHumidity,
-        defaultAirTemp,
-        defaultLux,
-        defaultSoilHumidity
-      } = option;
+      const { id, name, flower_img, alt } = option;
 
       return (
-        <article className="custom-select__options--option" key={id}>
-          <h2 className="title" onClick={this.selectValueHandler(name)}>
-            {name}
-          </h2>
+        <article
+          className="custom-select__options--option"
+          key={id}
+          onClick={this.selectValueHandler(name)}
+        >
+          <p className="title">{name}</p>
           <div className="custom-select__options--image">
             <img
               className="flower-image"
@@ -43,16 +54,6 @@ class CustomSelect extends Component {
               alt={alt}
             />
           </div>
-          <ul className="custom-select__options--params">
-            <li className="flower-param">
-              Air Humidity: {defaultAirHumidity}RH
-            </li>
-            <li className="flower-param">Air Temperature: {defaultAirTemp}C</li>
-            <li className="flower-param">Ambient Light: {defaultLux}LUX</li>
-            <li className="flower-param">
-              Soil Moisture: {defaultSoilHumidity}RH
-            </li>
-          </ul>
         </article>
       );
     });
@@ -72,7 +73,9 @@ class CustomSelect extends Component {
             onClick={selectActive ? this.closeOverlay : this.openOverlay}
           >
             {this.renderSelectedHandler()}
-            <span className="custom-select__placeholder--arrow">&rarr;</span>
+            <span className="custom-select__placeholder--arrow">
+              {selectActive ? "▴" : "▾"}
+            </span>
           </div>
         </div>
         {selectActive ? (
@@ -88,4 +91,13 @@ class CustomSelect extends Component {
   }
 }
 
-export default CustomSelect;
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getType }
+)(CustomSelect);

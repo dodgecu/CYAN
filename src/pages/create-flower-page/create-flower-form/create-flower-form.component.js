@@ -1,5 +1,7 @@
 import React from "react";
 import { reduxForm } from "redux-form";
+import { connect } from "react-redux";
+
 import ValidateFields from "../../../common/form-validation";
 
 import AirHumidity from "./create-flower-form-fields/air-humidity.component";
@@ -23,17 +25,24 @@ const {
   RenderSelectDefault
 } = ValidateFields;
 
-const createFlower = props => {
+let createFlower = props => {
   const { handleSubmit, change } = props;
+  const {
+    airTemperature,
+    airHumidity,
+    light,
+    soilHumidity
+  } = props.initialValues;
+
   return (
     <div className="create-flower">
       <form className="create-flower__form" onSubmit={handleSubmit}>
         <FlowerName validForm={RenderInput} />
         <FlowerType change={change} validForm={RenderSelect} />
-        <AirHumidity validForm={RenderRange} />
-        <AirTemp validForm={RenderRange} />
-        <AmbientLight validForm={RenderRange} />
-        <SoilHumidity validForm={RenderRange} />
+        <AirHumidity defaultVal={airHumidity} validForm={RenderRange} />
+        <AirTemp defaultVal={airTemperature} validForm={RenderRange} />
+        <AmbientLight defaultVal={light} validForm={RenderRange} />
+        <SoilHumidity defaultVal={soilHumidity} validForm={RenderRange} />
         <Package validForm={RenderSelectDefault} />
         <Button title="CREATE" type="submit" buttonType={TYPES.PRIMARY} />
       </form>
@@ -41,8 +50,21 @@ const createFlower = props => {
   );
 };
 
-export default reduxForm({
+const mapStateToProps = state => {
+  return {
+    ...state.form,
+    initialValues: state.flowerType.type,
+    type: state.flowerType
+  };
+};
+
+createFlower = reduxForm({
   form: "create-flower-form",
-  destroyOnUnmount: true,
-  validate
+  enableReinitialize: true,
+  validate,
+  destroyOnUnmount: false
 })(createFlower);
+
+createFlower = connect(mapStateToProps)(createFlower);
+
+export default createFlower;
