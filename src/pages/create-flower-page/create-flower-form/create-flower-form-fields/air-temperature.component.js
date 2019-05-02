@@ -8,6 +8,7 @@ const airTemp = props => {
       step={1}
       minValue={0}
       maxValue={100}
+      defaultVal={props.defaultVal}
       unit="C°"
       id="airTemperature"
       name="airTemperature"

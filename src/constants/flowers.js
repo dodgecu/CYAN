@@ -3,7 +3,7 @@ const flowers = [
     id: 1,
     name: "Rose of China",
     flower_img: "plant-image.png",
-    defaultLux: "16000",
+    defaultLux: "60",
     defaultAirTemp: "23",
     defaultAirHumidity: "29",
     defaultSoilHumidity: "56"
@@ -12,7 +12,7 @@ const flowers = [
     id: 2,
     name: "Cactus",
     flower_img: "plant-image.png",
-    defaultLux: "50000",
+    defaultLux: "50",
     defaultAirTemp: "18",
     defaultAirHumidity: "45",
     defaultSoilHumidity: "52"
@@ -21,7 +21,7 @@ const flowers = [
     id: 3,
     name: "Flamingo Flower",
     flower_img: "plant-image.png",
-    defaultLux: "34330",
+    defaultLux: "34",
     defaultAirTemp: "28",
     defaultAirHumidity: "43",
     defaultSoilHumidity: "71"
@@ -30,7 +30,7 @@ const flowers = [
     id: 4,
     name: "Kaffir Lily",
     flower_img: "plant-image.png",
-    defaultLux: "14440",
+    defaultLux: "14",
     defaultAirTemp: "19",
     defaultAirHumidity: "33",
     defaultSoilHumidity: "55"
@@ -39,7 +39,7 @@ const flowers = [
     id: 5,
     name: "Flaming Katy",
     flower_img: "plant-image.png",
-    defaultLux: "16300",
+    defaultLux: "16",
     defaultAirTemp: "24",
     defaultAirHumidity: "31",
     defaultSoilHumidity: "10"
@@ -48,7 +48,7 @@ const flowers = [
     id: 6,
     name: "Lollipop Plant",
     flower_img: "plant-image.png",
-    defaultLux: "86065",
+    defaultLux: "86",
     defaultAirTemp: "25",
     defaultAirHumidity: "89",
     defaultSoilHumidity: "52"
@@ -57,7 +57,7 @@ const flowers = [
     id: 7,
     name: "Moth Orchid",
     flower_img: "plant-image.png",
-    defaultLux: "56030",
+    defaultLux: "56",
     defaultAirTemp: "33",
     defaultAirHumidity: "76",
     defaultSoilHumidity: "81"
@@ -66,7 +66,7 @@ const flowers = [
     id: 8,
     name: "Zebra Plant",
     flower_img: "plant-image.png",
-    defaultLux: "16000",
+    defaultLux: "16",
     defaultAirTemp: "43",
     defaultAirHumidity: "59",
     defaultSoilHumidity: "36"

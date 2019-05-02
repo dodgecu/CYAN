@@ -10,7 +10,6 @@ import inputsRenderer from "../inputs-renderer.component";
 const range = inputsRenderer(
   (input, touched, error, label, id, name, className, description) => {
     const val = input.value === "" ? (input.value = 0) : input.value;
-
     return (
       <div id={id} className="form__controls">
         <Range
@@ -28,6 +27,7 @@ const range = inputsRenderer(
             );
             return tooltip;
           }}
+          defaultVal={description.defaultVal}
           maxValue={description.maxValue}
           minValue={description.minValue}
           step={description.step}
@@ -37,6 +37,12 @@ const range = inputsRenderer(
           onDrop={input.onDrop}
           onFocus={input.onFocus}
         />
+        <div className="default-val">
+          <span
+            className="default-val__grab"
+            style={{ left: `${description.defaultVal}%` }}
+          />
+        </div>
       </div>
     );
   }

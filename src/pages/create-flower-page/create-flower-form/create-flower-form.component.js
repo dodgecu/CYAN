@@ -27,16 +27,22 @@ const {
 
 let createFlower = props => {
   const { handleSubmit, change } = props;
-  console.log(props);
+  const {
+    airTemperature,
+    airHumidity,
+    light,
+    soilHumidity
+  } = props.initialValues;
+
   return (
     <div className="create-flower">
       <form className="create-flower__form" onSubmit={handleSubmit}>
         <FlowerName validForm={RenderInput} />
         <FlowerType change={change} validForm={RenderSelect} />
-        <AirHumidity validForm={RenderRange} />
-        <AirTemp validForm={RenderRange} />
-        <AmbientLight validForm={RenderRange} />
-        <SoilHumidity validForm={RenderRange} />
+        <AirHumidity defaultVal={airHumidity} validForm={RenderRange} />
+        <AirTemp defaultVal={airTemperature} validForm={RenderRange} />
+        <AmbientLight defaultVal={light} validForm={RenderRange} />
+        <SoilHumidity defaultVal={soilHumidity} validForm={RenderRange} />
         <Package validForm={RenderSelectDefault} />
         <Button title="CREATE" type="submit" buttonType={TYPES.PRIMARY} />
       </form>
@@ -54,7 +60,9 @@ const mapStateToProps = state => {
 
 createFlower = reduxForm({
   form: "create-flower-form",
-  validate
+  enableReinitialize: true,
+  validate,
+  destroyOnUnmount: false
 })(createFlower);
 
 createFlower = connect(mapStateToProps)(createFlower);

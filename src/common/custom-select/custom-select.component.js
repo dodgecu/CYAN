@@ -17,6 +17,7 @@ class CustomSelect extends Component {
     const option = flowers.filter(flower => flower.name === value)[0];
 
     const defaults = {
+      name: this.props.form["create-flower-form"].values.name,
       type: value,
       airTemperature: parseInt(option.defaultAirTemp),
       airHumidity: parseInt(option.defaultAirHumidity),

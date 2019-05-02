@@ -1,5 +1,10 @@
 const initialState = {
-  type: { airTemperature: 0, airHumidity: 0, light: 0, soilHumidity: 0 }
+  type: {
+    airTemperature: 0,
+    airHumidity: 0,
+    light: 0,
+    soilHumidity: 0
+  }
 };
 
 const setType = (state = initialState, action) => {

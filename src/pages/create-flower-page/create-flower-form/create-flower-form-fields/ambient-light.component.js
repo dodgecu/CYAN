@@ -5,9 +5,10 @@ const ambientLight = props => {
   return (
     <Field
       description="Optimal level of ambient light of the environment"
-      step={100}
+      step={1}
       minValue={0}
-      maxValue={100000}
+      maxValue={100}
+      defaultVal={props.defaultVal}
       unit="lux"
       id="light"
       name="light"
