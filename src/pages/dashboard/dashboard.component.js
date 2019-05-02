@@ -5,6 +5,7 @@ import "./dashboard.styles.scss";
 
 import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 import Header from "../../common/header/header.component";
+import PageTitle from "../../common/page-title/page-title.component";
 
 import ArrowUp from "../../assets/arrow-up.svg";
 import ArrowDown from "../../assets/arrow-down.svg";
@@ -14,7 +15,26 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       filter: "",
-      flowers: this.props.flowers,
+      flowers: [
+        {
+          id: 1,
+          name: "Aloa",
+          type: "aloe",
+          airTemperature: "87",
+          airHumidity: "100",
+          ambientLight: "45",
+          soilHumidity: "4"
+        },
+        {
+          id: 2,
+          name: "Aloe",
+          type: "alo",
+          airTemperature: "87",
+          airHumidity: "13",
+          ambientLight: "45",
+          soilHumidity: "4"
+        }
+      ],
       sortBy: "name",
       isAscendingSort: true
     };
@@ -50,15 +70,18 @@ class Dashboard extends React.Component {
 
   renderThumbnails(data) {
     return data.map((item, index) => (
-      <FlowerThumbnail
-        key={index}
-        name={item.name}
-        temperature={3}
-        humidity={33}
-        light={5}
-        air={6}
-        id={item.id}
-      />
+      <div className="dashboard--thumbnail__item">
+        <FlowerThumbnail
+          key={index}
+          name={item.name}
+          type={item.type}
+          airTemperature={item.airTemperature}
+          airHumidity={item.airHumidity}
+          ambientLight={item.ambientLight}
+          soilHumidity={item.soilHumidity}
+          id={item.id}
+        />
+      </div>
     ));
   }
 
@@ -77,59 +100,68 @@ class Dashboard extends React.Component {
     );
 
     return (
-      <>
-        <Header title="Dashboard" />
+      <div className="dashboard--page">
+        <PageTitle title="Dashboard" />
+        <Header />
         <section className="dashboard">
-          <input
-            className="dashboard__search-field"
-            type="text"
-            placeholder="Search by name"
-            value={filter}
-            onChange={this.onFilter}
-          />
-
-          <div className="dashboard__sorting">
-            <span>Sort by</span>
-
-            <select
-              className="dashboard__sorting__select"
-              value={this.state.sortBy}
-              onChange={this.onSelect}
-            >
-              <option value="name">name</option>
-              <option value="type">type</option>
-            </select>
-
-            <button className="dashboard__sort-button" onClick={this.onSort}>
-              <img
-                className="icon"
-                src={isAscendingSort ? ArrowUp : ArrowDown}
-              />
-            </button>
+          <div className="dashboard__search">
+            <label>Search:</label>
+            <input
+              className="dashboard__search--field"
+              type="text"
+              placeholder="Search"
+              value={filter}
+              onChange={this.onFilter}
+            />
           </div>
 
-          <Link to="/create">Create flower</Link>
+          <div className="dashboard--sorting">
+            <span>Sort by</span>
 
-          {data.length
-            ? this.renderThumbnails(data)
-            : this.renderFallbackMessage()}
+            <div className="dashboard--sorting--alphabetical">
+              Alphabetical
+              <button
+                className="dashboard--sorting__button"
+                onClick={this.onSort}
+              >
+                <img
+                  className="icon"
+                  src={isAscendingSort ? ArrowUp : ArrowDown}
+                />
+              </button>
+            </div>
+          </div>
+          <div className="dashboard--sorting">
+            <span>Sort by</span>
+
+            <div className="dashboard--sorting--problematical">
+              Problematical
+              <button
+                className="dashboard--sorting__button"
+                onClick={this.onSort}
+              >
+                <img
+                  className="icon"
+                  src={isAscendingSort ? ArrowUp : ArrowDown}
+                />
+              </button>
+            </div>
+          </div>
         </section>
-      </>
+        <div className="dashboard--flower-list">
+          <h2>Flower list</h2>
+          <Link to="/create-flower" className="dashboard__link">
+            CREATE FLOWER
+          </Link>
+          <div className="dashboard--thumbnail">
+            {data.length
+              ? this.renderThumbnails(data)
+              : this.renderFallbackMessage()}
+          </div>
+        </div>
+      </div>
     );
   }
 }
-
-Dashboard.defaultProps = {
-  flowers: [
-    {
-      id: 1,
-      name: "Flower name",
-      temperature: "0",
-      humidity: "0",
-      light: "0",
-      air: "0"
-    }
-  ]
-};
 
 export default Dashboard;

@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import ProtectedRoute from "./protected.route";
+import ReactDOM from "react-dom";
 
 import routes from "./constants/routes";
 import store, { history } from "./store";
@@ -16,6 +17,7 @@ import Dashboard from "./pages/dashboard/dashboard.component";
 import Home from "./pages/home/home.component";
 import NotFound from "./pages/not-found/not-found.component";
 import SignUpSuccess from "./pages/authorization/sign-up-success/sign-up-success.component";
+import Spinner from "./common/components/spinner/spinner.component";
 
 //STYLES
 import "./App.scss";
@@ -54,6 +56,9 @@ class App extends Component {
             <Route exact path={routes.notFound} component={NotFound} />
           </Switch>
         </ConnectedRouter>
+
+        {store.getState().authReducer.isLoading &&
+          ReactDOM.createPortal(<Spinner />, document.getElementById("portal"))}
       </Provider>
     );
   }

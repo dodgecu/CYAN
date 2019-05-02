@@ -1,54 +1,89 @@
+@import '../../styles/abstracts/variables';
+
+.dashboard--page {
+  max-width: 360px;
+  font-family: 'Roboto', sans-serif;
+}
+
 .dashboard {
-  max-width: 375px;
-  padding: 25px;
-  margin: 0 auto;
+  padding: 0 25px;
   display: flex;
   flex-direction: column;
 
-  &__sorting {
+  &__search {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+
+    &--field {
+      border: 1px solid $silver;
+      border-radius: 3px;
+      background-color: $silver;
+      opacity: 0.5;
+      height: 30px;
+      padding: 5px;
+      margin: 5px;
+    }
   }
 
-  &__select {
-    outline: none;
-    border: none;
-    background: #f1f1f1;
-    padding: 10px 15px;
-    border-radius: 5px;
-    flex-grow: 1;
-    margin: 0 10px;
+  &__link {
+    text-decoration: none;
+    color: $primary;
+    font-size: 0.8rem;
+    font-weight: 700;
   }
 
-  &__search-field {
-    border: none;
-    outline: none;
-    padding: 10px 15px;
-    background: #f1f1f1;
-    position: relative;
-    border-radius: 5px;
-  }
+  &--sorting {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
 
-  &__sort-button {
-    border: none;
-    border-radius: 5px;
-    padding: 11px 16px;
+    &--alphabetical,
+    &--problematical {
+      font-size: 0.7rem;
+    }
+
+    &__button {
+      border: none;
+      border-radius: 5px;
+      padding: 10px 10px;
+      margin: 10px 0;
+      align-self: flex-start;
+      background: transparent;
+      color: #ffffff;
+      cursor: pointer;
+      outline: none;
+      position: relative;
+
+      .icon {
+        max-width: 10px;
+      }
+
+      &:hover {
+        background: darken(#f1f1f1, 5%);
+      }
+    }
+  }
+}
+
+.dashboard--thumbnail {
+  box-sizing: border-box;
+
+  &__item {
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     margin: 10px 0;
-    align-self: flex-start;
-    background: #f1f1f1;
-    color: #ffffff;
-    cursor: pointer;
-    outline: none;
-    position: relative;
-
-    .icon {
-      width: 100%;
-      max-width: 12px;
-    }
-
-    &:hover {
-      background: darken(#f1f1f1, 5%);
-    }
+    border-radius: 3px;
   }
+}
+
+.dashboard--flower-list {
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.progress-bar,
+.progress-bar:before {
+  height: 3px;
+  width: 100%;
+  margin: 0;
 }
