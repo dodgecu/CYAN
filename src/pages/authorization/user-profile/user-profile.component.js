@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
 
-import { updateUser, logIn } from "../authorization.action";
+import { updateUser } from "../authorization.action";
 import "./user-profile.scss";
 import Header from "../../../common/header/header.component";
 import UpdateName from "./user-profile-name.component";
 import UpdateEmail from "./user-profile-email.component";
 import UpdatePassword from "./user-profile-password.component";
 import DeleteProfile from "./user-profile-delete.component";
+import LogOut from "../log-out/log-out.component";
 
 class UserProfile extends Component {
   onSubmit(inputValue) {
@@ -25,6 +26,7 @@ class UserProfile extends Component {
           <UpdateEmail />
           <UpdatePassword />
           <DeleteProfile />
+          <LogOut />
         </div>
       </>
     );
