@@ -7,7 +7,11 @@ import Ranges from "./flower-info-components/flower-ranges.component";
 const flowerInfo = props => {
   return (
     <section className="flower-details">
-      <DetailsMain name={props.flowerName} thumbnail={props.thumb} />
+      <DetailsMain
+        name={props.flowerName}
+        thumbnail={props.thumb}
+        isConnected={props.connected}
+      />
       <FlowerInformation flowerType={props.type} dateAdded={props.created_at} />
       <Ranges
         soilMoisture={props.soil}

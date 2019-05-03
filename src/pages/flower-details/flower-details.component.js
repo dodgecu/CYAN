@@ -73,6 +73,7 @@ class FlowerDetails extends Component {
             humidity={humidity}
             light={light}
             created_at={created_at}
+            connected={true}
           />
         );
       } else {
@@ -86,6 +87,7 @@ class FlowerDetails extends Component {
             humidity={airHumidity}
             light={light}
             created_at={created_at}
+            connected={false}
           />
         );
       }
