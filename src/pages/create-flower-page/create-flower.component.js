@@ -5,6 +5,7 @@ import FlowerForm from "./create-flower-form/create-flower-form.component";
 import flowers from "../../constants/flowers";
 import Header from "../../common/header/header.component";
 import PageTitle from "../../common/page-title/page-title.component";
+import Footer from "../../common/footer/footer.component";
 
 import routes from "../../constants/routes";
 import { backendUrl } from "../../constants/backendUrl";
@@ -35,7 +36,8 @@ class CreateFlower extends Component {
     const flowerParams = {
       ...flowerData,
       img_path: img_path,
-      user_id: this.state.userId
+      user_id: this.state.userId,
+      created_at: new Date().getTime()
     };
     axios
       .post(`${backendUrl}/flower`, flowerParams)
@@ -61,8 +63,8 @@ class CreateFlower extends Component {
   render() {
     return (
       <>
-        <PageTitle title="Create Flower" />
         <Header />
+        <PageTitle title="Create Flower" />
         <FlowerForm onSubmit={this.submitHandler} />
         <button
           onClick={() => this.props.history.push(routes.dashboard)}
@@ -71,6 +73,7 @@ class CreateFlower extends Component {
         >
           Cancel
         </button>
+        <Footer />
       </>
     );
   }

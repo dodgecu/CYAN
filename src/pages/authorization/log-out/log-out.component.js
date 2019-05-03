@@ -1,28 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
+import { push } from "connected-react-router";
 
-import { logOut } from "./log-out.action";
+import { logOut } from "../authorization.action";
+import {
+  Button,
+  TYPES
+} from "../../../common/components/button/button.component";
 
 class LogOut extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: "",
-      password: ""
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  onSubmit({ email, password }) {
-    this.props.logOut({ email, password });
+  onLogoutClick() {
+    this.props.logOut();
   }
 
   componentDidUpdate() {
     if (!this.props.isAuthenticated) {
-      this.props.history.push("/");
+      this.props.push("/");
     }
   }
 
@@ -31,24 +25,28 @@ class LogOut extends Component {
 
     return (
       <>
-        <button type="submit" disabled={submitting}>
-          Log out
-        </button>
+        <Button
+          title="LOG OUT"
+          buttonType={TYPES.PRIMARY}
+          type="submit"
+          disabled={submitting}
+          onClick={this.onLogoutClick.bind(this)}
+        />
       </>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.logout.isAuthenticated,
-  message: state.logout.message
+  isAuthenticated: state.authReducer.isAuthenticated,
+  message: state.authReducer.message
 });
 
-LogIn = reduxForm({
+LogOut = reduxForm({
   form: "logOut"
-})(LogOutn);
+})(LogOut);
 
 export default connect(
   mapStateToProps,
-  { logOut }
+  { logOut, push }
 )(LogOut);

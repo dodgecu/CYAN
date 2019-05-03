@@ -56,6 +56,7 @@
 }
 
 .navigation {
+  font-family: 'Roboto', sans-serif;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -71,7 +72,10 @@
   &--active {
     width: 250px;
     font-size: 20px;
-
+    padding: 50px 30px;
+    &__title {
+      margin-bottom: 0;
+    }
     animation-name: slideInLeft;
     animation-duration: 0.5s;
   }
@@ -80,9 +84,13 @@
     display: flex;
     flex-direction: column;
     order: 2;
-    padding: 50px 30px;
+    padding: 0;
     list-style: none;
     &--link {
+      &.static {
+        margin-top: 30px;
+      }
+      white-space: nowrap;
       color: $authorizationLabel;
       text-decoration: none;
       margin: 10px 0;

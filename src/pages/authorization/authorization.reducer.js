@@ -91,9 +91,11 @@ export default function(state = initialState, action) {
         isRegistered: false
       };
     case LOGOUT_SUCCESS:
-      localStorage.removeItem("token", action.payload.token);
+      localStorage.removeItem("token");
       return {
         ...state,
+        token: null,
+        user: null,
         isAuthenticated: false,
         isLoading: false
       };

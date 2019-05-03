@@ -94,21 +94,9 @@ export const updateUser = property => dispatch => {
     .catch(err => dispatch({ type: UPDATE_FAIL, payload: err.response }));
 };
 
-export const logOut = ({ email, password }) => dispatch => {
-  const url = `${backendUrl}/api/auth`;
-
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-
-  const body = JSON.stringify({ email, password });
-
-  axios.post(url, body, config).then(res =>
-    dispatch({
-      type: LOGOUT_SUCCESS,
-      payload: res.data
-    })
-  );
+export const logOut = () => dispatch => {
+  dispatch({
+    type: LOGOUT_SUCCESS,
+    payload: "Logout success"
+  });
 };
