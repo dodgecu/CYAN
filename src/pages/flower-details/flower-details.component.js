@@ -18,30 +18,9 @@ class FlowerDetails extends Component {
         <Header />
         <PageTitle title="Flower details" />
 
-        <Diagram
-          selector="water"
-          title="Water chart"
-          startGradientColor="#C8D7FF"
-          stopGradientColor="rgba(99, 161, 255, 0)"
-          strokeColor="#6D8DFF"
-          dotsColor="#235EF5"
-        />
-        {/*         <Diagram
-          selector="light"
-          title="Light chart"
-          startGradientColor="#FFCA63"
-          stopGradientColor="#FFFFFF"
-          strokeColor="#FFCA63"
-          dotsColor="#FFCA63"
-        />
-        <Diagram
-          selector="air"
-          title="Air humidity"
-          startGradientColor="#AEFFEC"
-          stopGradientColor="#FFFFFF"
-          strokeColor="#15E9A6"
-          dotsColor="#15E9A6"
-        /> */}
+        <Diagram selector="water" title="Water chart" />
+        <Diagram selector="light" title="Light chart" />
+        <Diagram selector="air" title="Air humidity" />
       </>
     );
   }

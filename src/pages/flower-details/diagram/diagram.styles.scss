@@ -1,3 +1,5 @@
+@import '../../../styles/abstracts/variables';
+
 .line {
   stroke-width: 3;
 }
@@ -8,10 +10,86 @@
 
 .hover-line {
   stroke-width: 2px;
-  stroke-dasharray: 3,3;
+  stroke-dasharray: 3, 3;
 }
 
 .axis {
   color: #666;
   stroke-width: 0.2;
+}
+
+.tick line {
+  stroke: $ticksColor;
+}
+
+.water-chart {
+  &__container {
+    .start {
+      stop-color: $waterChartGradientStart;
+    }
+
+    .stop {
+      stop-color: $waterChartGradientEnd;
+    }
+  }
+
+  &__path {
+    stroke: $waterChartStrokeColor;
+  }
+
+  .hover-line {
+    stroke: $waterChartStrokeColor
+  }
+
+  .focus-circle {
+    fill: $waterChartDotColor;
+  }
+}
+
+.light-chart {
+  &__container {
+    .start {
+      stop-color: $lightChartGradientStart;
+    }
+
+    .stop {
+      stop-color: $lightChartGradientEnd;
+    }
+  }
+
+  &__path {
+    stroke: $lightChartStrokeColor;
+  }
+
+  .hover-line {
+    stroke: $lightChartStrokeColor
+  }
+
+  .focus-circle {
+    fill: $lightChartDotColor;
+  }
+}
+
+.air-chart {
+  &__container {
+    .start {
+      stop-color: $airChartGradientStart;
+    }
+
+    .stop {
+      stop-color: $airChartGradientEnd;
+    }
+  }
+
+  &__path {
+    stroke: $airChartStrokeColor;
+  }
+
+  .hover-line {
+    stroke: $airChartStrokeColor
+  }
+
+  .focus-circle {
+    fill: $airChartDotColor;
+  }
 }
