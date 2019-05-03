@@ -27,6 +27,7 @@ const range = inputsRenderer(
             );
             return tooltip;
           }}
+          defaultVal={description.defaultVal}
           maxValue={description.maxValue}
           minValue={description.minValue}
           step={description.step}
@@ -36,6 +37,12 @@ const range = inputsRenderer(
           onDrop={input.onDrop}
           onFocus={input.onFocus}
         />
+        <div className="default-val">
+          <span
+            className="default-val__grab"
+            style={{ left: `${description.defaultVal}%` }}
+          />
+        </div>
       </div>
     );
   }

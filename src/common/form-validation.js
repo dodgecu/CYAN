@@ -39,9 +39,6 @@ const validate = field => {
   if (!field.light) {
     errors.light = "Please, specify light value";
   }
-  if (!field.package_id) {
-    errors.package_id = "You must specify sensors package";
-  }
 
   return errors;
 };

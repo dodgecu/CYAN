@@ -29,10 +29,14 @@ class CreateFlower extends Component {
       }
     };
     const flowerImage = flowers
-      .filter(img => img.name === flowerData.flowerSelect)
+      .filter(img => img.name === flowerData.type)
       .map(img => img.flower_img);
     const [img_path] = flowerImage;
-    const flowerParams = { ...flowerData, img_path: img_path };
+    const flowerParams = {
+      ...flowerData,
+      img_path: img_path,
+      user_id: this.state.userId
+    };
     axios
       .post(`${backendUrl}/flower`, flowerParams)
       .then(res => {

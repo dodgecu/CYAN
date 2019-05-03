@@ -45,12 +45,19 @@ class Sidebar extends Component {
     );
     return (
       <>
+        {this.state.isOpen ? (
+          <div
+            onClick={this.openMenuHandler.bind(this)}
+            className="with-overlay"
+          />
+        ) : null}
         <div
           className={this.state.isOpen ? "burger burger--active" : "burger"}
           onClick={this.openMenuHandler.bind(this)}
         >
           <span className="burger__icon" />
         </div>
+
         {renderOverlay}
       </>
     );
