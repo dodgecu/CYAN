@@ -44,9 +44,9 @@ const mapStateToProps = state => ({
   message: state.logout.message
 });
 
-LogIn = reduxForm({
+LogOut = reduxForm({
   form: "logOut"
-})(LogOutn);
+})(LogOut);
 
 export default connect(
   mapStateToProps,

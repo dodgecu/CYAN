@@ -35,7 +35,7 @@ let createFlower = props => {
   } = props.initialValues;
 
   return (
-    <div className="create-flower">
+    <section className="create-flower">
       <form className="create-flower__form" onSubmit={handleSubmit}>
         <FlowerName validForm={RenderInput} />
         <FlowerType change={change} validForm={RenderSelect} />
@@ -46,7 +46,7 @@ let createFlower = props => {
         <Package validForm={RenderSelectDefault} />
         <Button title="CREATE" type="submit" buttonType={TYPES.PRIMARY} />
       </form>
-    </div>
+    </section>
   );
 };
 
