@@ -26,7 +26,7 @@ class UpdatePassword extends Component {
       <div className="authorization--form">
         <h2 className="authorization--form__title">Password reset</h2>
         <form
-          onSubmit={handleSubmit(
+          onChange={handleSubmit(
             value =>
               this.onSubmit.bind(this)({ password: value.password }) && (
                 <span>j</span>

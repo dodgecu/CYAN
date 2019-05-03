@@ -12,7 +12,8 @@ import {
   UPDATE_SUCCESS,
   UPDATE_FAIL,
   LOADING,
-  REGISTERED_FALSE
+  REGISTERED_FALSE,
+  LOGOUT_SUCCESS
 } from "./authorization.action-types";
 
 export const falseRegistered = () => dispatch => {
@@ -91,4 +92,23 @@ export const updateUser = property => dispatch => {
     .put(url, body, config)
     .then(res => dispatch({ type: UPDATE_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: UPDATE_FAIL, payload: err.response }));
+};
+
+export const logOut = ({ email, password }) => dispatch => {
+  const url = `${backendUrl}/api/auth`;
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  const body = JSON.stringify({ email, password });
+
+  axios.post(url, body, config).then(res =>
+    dispatch({
+      type: LOGOUT_SUCCESS,
+      payload: res.data
+    })
+  );
 };
