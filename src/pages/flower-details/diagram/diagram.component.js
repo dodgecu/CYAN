@@ -171,7 +171,6 @@ export default class Diagram extends Component {
       let i = bisectData(data, x0, 1);
       const d0 = data[i - 1];
       const d1 = data[i];
-      console.log(d0, d1, i);
       const d = x0 - d0.day > d1.day - x0 ? d1 : d0;
 
       focus.attr(
@@ -183,10 +182,24 @@ export default class Diagram extends Component {
     }
   }
 
+  pickDate() {
+    const timestamp = new Date(this.datepicker.value).getTime();
+    console.log(timestamp);
+  }
+
   render() {
     return (
-      <div className="chart">
-        <h2 className="chart__title">{this.props.title}</h2>
+      <div className={`${this.props.selector}-chart`}>
+        <button onClick={this.pickDate.bind(this)}>get date</button>
+        <input
+          ref={node => (this.datepicker = node)}
+          type="date"
+          name="date"
+          id="date"
+        />
+        <h2 className={`${this.props.selector}-chart__title`}>
+          {this.props.title}
+        </h2>
         <svg className={`${this.props.selector}-chart__container`} />
       </div>
     );

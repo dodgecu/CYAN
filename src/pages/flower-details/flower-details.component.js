@@ -15,7 +15,9 @@ class FlowerDetails extends Component {
   render() {
     return (
       <>
-        <h1>Flower Details</h1>;
+        <Header />
+        <PageTitle title="Flower details" />
+
         <Diagram
           selector="water"
           title="Water chart"
@@ -24,7 +26,7 @@ class FlowerDetails extends Component {
           strokeColor="#6D8DFF"
           dotsColor="#235EF5"
         />
-        <Diagram
+        {/*         <Diagram
           selector="light"
           title="Light chart"
           startGradientColor="#FFCA63"
@@ -39,9 +41,7 @@ class FlowerDetails extends Component {
           stopGradientColor="#FFFFFF"
           strokeColor="#15E9A6"
           dotsColor="#15E9A6"
-        />
-        <PageTitle title="Flower details" />
-        <Header />
+        /> */}
       </>
     );
   }
