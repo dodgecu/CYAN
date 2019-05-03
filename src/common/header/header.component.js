@@ -10,13 +10,21 @@ const Header = props => {
   const links = [
     {
       title: "Dashboard",
-      path: "/dashboard",
-      id: "dashboard"
+      path: routes.dashboard,
+      id: "dashboard",
+      className: ""
     },
     {
       title: "Create Flower",
-      path: "/create-flower",
-      id: "create-flower"
+      path: routes.createFlower,
+      id: "create-flower",
+      className: ""
+    },
+    {
+      title: "Account settings",
+      path: routes.userProfile,
+      id: "user-profile",
+      className: "static"
     }
   ];
   const { pathname } = props.history.location;

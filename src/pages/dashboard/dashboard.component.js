@@ -90,9 +90,8 @@ class Dashboard extends React.Component {
           } = active[0].pack;
 
           return (
-            <div className="dashboard--thumbnail__item">
+            <div className="dashboard--thumbnail__item" key={item._id}>
               <FlowerThumbnail
-                key={item._id}
                 name={item.name}
                 type={item.type}
                 soilHumidity={soilMoisture["Sensor data"]}
@@ -106,9 +105,8 @@ class Dashboard extends React.Component {
         }
       }
       return (
-        <div className="dashboard--thumbnail__item">
+        <div className="dashboard--thumbnail__item" key={item._id}>
           <FlowerThumbnail
-            key={item._id}
             name={item.name}
             type={item.type}
             soilHumidity={item.soilHumidity}

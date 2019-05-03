@@ -6,7 +6,7 @@
 
 .create-flower {
   color: $authorizationLabel;
-  padding: 0 25px;
+  padding: 0 20px;
   &__form {
     display: flex;
     flex-direction: column;
@@ -29,6 +29,12 @@
     position: absolute;
   }
 }
+
+.form__controls {
+  max-width: 95%;
+  margin: 0 auto;
+}
+
 .button__cancel {
   margin: 10px;
   padding: 10px;
