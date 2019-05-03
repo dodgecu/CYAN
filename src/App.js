@@ -32,7 +32,6 @@ class App extends Component {
             <Route exact path={routes.home} component={Home} />
             <Route exact path={routes.logIn} component={LogIn} />
             <Route exact path={routes.signUp} component={SignUp} />
-            <Route exact path={routes.userProfile} component={UserProfile} />
             <ProtectedRoute
               exact
               path={routes.flowerDetails}
@@ -52,6 +51,11 @@ class App extends Component {
               exact
               path={routes.signUpSuccess}
               component={SignUpSuccess}
+            />
+            <ProtectedRoute
+              exact
+              path={routes.userProfile}
+              component={UserProfile}
             />
             <Route exact path={routes.notFound} component={NotFound} />
           </Switch>

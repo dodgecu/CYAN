@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
 
-import { updateUser, logIn } from "../authorization.action";
+import { updateUser } from "../authorization.action";
 import "./user-profile.scss";
 import Header from "../../../common/header/header.component";
 import UpdateName from "./user-profile-name.component";
