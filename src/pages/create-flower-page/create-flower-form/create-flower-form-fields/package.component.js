@@ -29,7 +29,7 @@ class Package extends Component {
       >
         {this.props.sensors.map((item, i) => {
           return item.pack === undefined ? (
-            <option className="no-sensor" key={i}>
+            <option className="no-sensor" key={i} value="">
               no sensors
             </option>
           ) : (

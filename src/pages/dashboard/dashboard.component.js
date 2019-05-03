@@ -1,11 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+import axios from "axios";
 
 import "./dashboard.styles.scss";
 
 import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 import Header from "../../common/header/header.component";
 import PageTitle from "../../common/page-title/page-title.component";
+
+import { fetchSensors } from "../../common/sensors/sensors.middleware";
+
+import { backendUrl } from "../../constants/backendUrl";
 
 import ArrowUp from "../../assets/arrow-up.svg";
 import ArrowDown from "../../assets/arrow-down.svg";
@@ -15,26 +22,7 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       filter: "",
-      flowers: [
-        {
-          id: 1,
-          name: "Aloa",
-          type: "aloe",
-          airTemperature: "87",
-          airHumidity: "100",
-          ambientLight: "45",
-          soilHumidity: "4"
-        },
-        {
-          id: 2,
-          name: "Aloe",
-          type: "alo",
-          airTemperature: "87",
-          airHumidity: "13",
-          ambientLight: "45",
-          soilHumidity: "4"
-        }
-      ],
+      flowers: [],
       sortBy: "name",
       isAscendingSort: true
     };
@@ -44,6 +32,24 @@ class Dashboard extends React.Component {
     this.onSelect = this.onSelect.bind(this);
     this.renderThumbnails = this.renderThumbnails.bind(this);
     this.renderFallbackMessage = this.renderFallbackMessage.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchSensors();
+    const curretnUser = JSON.parse(`${localStorage.getItem("state")}`)
+      .authReducer.user.id;
+
+    axios
+      .get(`${backendUrl}/user-flowers?id=${curretnUser}`)
+      .then(flower => {
+        flower.data.forEach(current => {
+          this.setState(state => {
+            const flowers = state.flowers.push(current);
+            return flowers;
+          });
+        });
+      })
+      .catch(err => err);
   }
 
   onFilter(e) {
@@ -69,20 +75,51 @@ class Dashboard extends React.Component {
   }
 
   renderThumbnails(data) {
-    return data.map((item, index) => (
-      <div className="dashboard--thumbnail__item">
-        <FlowerThumbnail
-          key={index}
-          name={item.name}
-          type={item.type}
-          airTemperature={item.airTemperature}
-          airHumidity={item.airHumidity}
-          ambientLight={item.ambientLight}
-          soilHumidity={item.soilHumidity}
-          id={item.id}
-        />
-      </div>
-    ));
+    return data.map(item => {
+      const flowerId = parseInt(item.package_id);
+      const active = this.props.sensors.filter(item => {
+        if (item.pack !== undefined) {
+          return item.pack.package_id === flowerId;
+        }
+        return item;
+      });
+      if (active.length > 0) {
+        if (active[0].pack !== undefined) {
+          const {
+            sensors: { humidity, temperature, soilMoisture }
+          } = active[0].pack;
+
+          return (
+            <div className="dashboard--thumbnail__item">
+              <FlowerThumbnail
+                key={item._id}
+                name={item.name}
+                type={item.type}
+                soilHumidity={soilMoisture["Sensor data"]}
+                airTemperature={temperature}
+                airHumidity={humidity}
+                ambientLight={temperature}
+                id={item._id}
+              />
+            </div>
+          );
+        }
+      }
+      return (
+        <div className="dashboard--thumbnail__item">
+          <FlowerThumbnail
+            key={item._id}
+            name={item.name}
+            type={item.type}
+            soilHumidity={item.soilHumidity}
+            airTemperature={item.airTemperature}
+            airHumidity={item.airHumidity}
+            ambientLight={item.light}
+            id={item._id}
+          />
+        </div>
+      );
+    });
   }
 
   renderFallbackMessage() {
@@ -127,6 +164,7 @@ class Dashboard extends React.Component {
                 <img
                   className="icon"
                   src={isAscendingSort ? ArrowUp : ArrowDown}
+                  alt=""
                 />
               </button>
             </div>
@@ -143,6 +181,7 @@ class Dashboard extends React.Component {
                 <img
                   className="icon"
                   src={isAscendingSort ? ArrowUp : ArrowDown}
+                  alt=""
                 />
               </button>
             </div>
@@ -164,4 +203,10 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => {
+  return state.sensors;
+};
+export default connect(
+  mapStateToProps,
+  { fetchSensors }
+)(Dashboard);
