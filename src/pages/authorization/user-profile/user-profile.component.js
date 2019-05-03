@@ -9,7 +9,6 @@ import UpdateName from "./user-profile-name.component";
 import UpdateEmail from "./user-profile-email.component";
 import UpdatePassword from "./user-profile-password.component";
 import DeleteProfile from "./user-profile-delete.component";
-import LogOut from "../log-out/log-out.component";
 
 class UserProfile extends Component {
   onSubmit(inputValue) {
@@ -26,7 +25,6 @@ class UserProfile extends Component {
           <UpdateEmail />
           <UpdatePassword />
           <DeleteProfile />
-          <LogOut />
         </div>
       </>
     );
