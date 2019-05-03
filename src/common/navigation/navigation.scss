@@ -68,10 +68,13 @@
   overflow-x: hidden;
   font-size: 0;
   transition: width 0.3s;
+  .nav-title {
+    margin-bottom: 0;
+  }
   &--active {
     width: 250px;
     font-size: 20px;
-
+    padding: 50px 30px;
     animation-name: slideInLeft;
     animation-duration: 0.5s;
   }
@@ -80,13 +83,18 @@
     display: flex;
     flex-direction: column;
     order: 2;
-    padding: 50px 30px;
+    padding: 0;
     list-style: none;
+
     &--link {
       color: $authorizationLabel;
       text-decoration: none;
       margin: 10px 0;
       cursor: pointer;
+      white-space: nowrap;
+      &.static {
+        margin-top: 40px;
+      }
     }
   }
   &--close {

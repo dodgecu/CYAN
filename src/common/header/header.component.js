@@ -11,12 +11,20 @@ const Header = props => {
     {
       title: "Dashboard",
       path: "/dashboard",
-      id: "dashboard"
+      id: "dashboard",
+      className: ""
     },
     {
       title: "Create Flower",
       path: "/create-flower",
-      id: "create-flower"
+      id: "create-flower",
+      className: ""
+    },
+    {
+      title: "Account settings",
+      path: "/user-profile",
+      id: "user-profile",
+      className: "static"
     }
   ];
   const { pathname } = props.history.location;

@@ -28,12 +28,13 @@ class Sidebar extends Component {
           this.state.isOpen ? "navigation navigation--active" : "navigation"
         }
       >
+        <h4 className="nav-title">General</h4>
         <ul className="navigation__links">
           {this.props.links.map(link => {
             return (
               <li
                 key={link.id}
-                className="navigation__links--link"
+                className={`navigation__links--link  ${link.className}`}
                 onClick={this.navigate.bind(this, link.path)}
               >
                 {link.title}
