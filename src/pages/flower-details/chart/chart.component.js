@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import dataArray from "./data";
 import { ChartModel } from "./chart.model";
+import { getDaySensorData } from "./chart.action";
 
 import "./chart.styles.scss";
 
-export default class Chart extends Component {
+class Chart extends Component {
   componentDidMount() {
     const chart = new ChartModel({
       selector: this.props.selector
@@ -17,6 +20,7 @@ export default class Chart extends Component {
   pickDate() {
     const timestamp = new Date(this.datepicker.value).getTime();
     console.log(timestamp);
+    this.props.getDaySensorData();
   }
 
   render() {
@@ -37,3 +41,8 @@ export default class Chart extends Component {
     );
   }
 }
+
+export default connect(
+  null,
+  { getDaySensorData }
+)(Chart);

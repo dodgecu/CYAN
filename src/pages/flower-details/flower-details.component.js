@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchSensors } from "../../common/sensors/sensors.middleware";
 
-import Diagram from "./diagram/diagram.component";
+import Chart from "./chart/chart.component";
 
 import Header from "../../common/header/header.component";
 import PageTitle from "../../common/page-title/page-title.component";
@@ -18,9 +18,9 @@ class FlowerDetails extends Component {
         <Header />
         <PageTitle title="Flower details" />
 
-        <Diagram selector="water" title="Water chart" />
-        <Diagram selector="light" title="Light chart" />
-        <Diagram selector="air" title="Air humidity" />
+        <Chart selector="water" title="Water chart" />
+        <Chart selector="light" title="Light chart" />
+        <Chart selector="air" title="Air humidity" />
       </>
     );
   }
