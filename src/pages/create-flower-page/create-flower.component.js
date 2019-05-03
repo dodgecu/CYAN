@@ -5,6 +5,7 @@ import FlowerForm from "./create-flower-form/create-flower-form.component";
 import flowers from "../../constants/flowers";
 import Header from "../../common/header/header.component";
 import PageTitle from "../../common/page-title/page-title.component";
+import Footer from "../../common/footer/footer.component";
 
 import routes from "../../constants/routes";
 import { backendUrl } from "../../constants/backendUrl";
@@ -71,6 +72,7 @@ class CreateFlower extends Component {
         >
           Cancel
         </button>
+        <Footer />
       </>
     );
   }

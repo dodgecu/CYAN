@@ -1,0 +1,12 @@
+@import '../../styles/abstracts/variables';
+
+.footer {
+  color: $footer;
+  margin: 20px 20px 0 20px;
+  border-top: 2px solid $footer;
+  padding: 10px 0;
+  text-align: center;
+  &__copyright {
+    font-size: 12px;
+  }
+}
