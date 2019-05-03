@@ -12,6 +12,10 @@
         max-width: 100%;
       }
     }
+    &--connection-status {
+      color: $connect-error;
+      font-size: 12px;
+    }
   }
   &__information__info {
     &--type,
