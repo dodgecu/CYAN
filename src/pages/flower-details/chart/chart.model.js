@@ -1,10 +1,10 @@
 import * as d3 from "d3";
 
-export const Chart = function(opts) {
+export const ChartModel = function(opts) {
   this.selector = opts.selector;
 };
 
-Chart.prototype.draw = function() {
+ChartModel.prototype.draw = function() {
   this.margin = {
     top: 50,
     right: 50,
@@ -25,7 +25,7 @@ Chart.prototype.draw = function() {
   this.addAxes();
 };
 
-Chart.prototype.createGradient = function() {
+ChartModel.prototype.createGradient = function() {
   // Create gradient
   const defs = this.svg.append("defs");
 
@@ -48,7 +48,7 @@ Chart.prototype.createGradient = function() {
     .attr("offset", "100%");
 };
 
-Chart.prototype.createScales = function() {
+ChartModel.prototype.createScales = function() {
   // X scale
   this.xScale = d3
     .scaleLinear()
@@ -62,7 +62,7 @@ Chart.prototype.createScales = function() {
     .range([this.height, 0]);
 };
 
-Chart.prototype.addAxes = function() {
+ChartModel.prototype.addAxes = function() {
   this.svg
     .append("g")
     .attr("class", "axis axis--x")
@@ -92,7 +92,7 @@ Chart.prototype.addAxes = function() {
     .remove();
 };
 
-Chart.prototype.addArea = function(data) {
+ChartModel.prototype.addArea = function(data) {
   this.data = data;
   const _this = this;
   // line generator
@@ -127,7 +127,7 @@ Chart.prototype.addArea = function(data) {
     .attr("d", line(this.data));
 };
 
-Chart.prototype.toolTip = function(data) {
+ChartModel.prototype.toolTip = function(data) {
   //Apply the tooltip ability
   const _this = this; //do this because inside mousemove function can lost the context
   const focus = this.svg

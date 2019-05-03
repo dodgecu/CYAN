@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-import * as d3 from "d3";
 import dataArray from "./data";
-import { Chart } from "./diagram.model";
+import { ChartModel } from "./chart.model";
 
-import "./diagram.styles.scss";
+import "./chart.styles.scss";
 
-export default class Diagram extends Component {
+export default class Chart extends Component {
   componentDidMount() {
-    const chart = new Chart({
+    const chart = new ChartModel({
       selector: this.props.selector
     });
-    console.log(chart);
     chart.draw();
     chart.addArea(dataArray);
     chart.toolTip(dataArray);
