@@ -34,7 +34,7 @@ const flowerInformation = props => {
         <span className="flower-details__information__info--birth">
           Birthday:
         </span>
-        {date}{" "}
+        {date}
         <span className="flower-details__information__info--totaldays">
           {Math.floor(dayCount / 86400000)} days
         </span>

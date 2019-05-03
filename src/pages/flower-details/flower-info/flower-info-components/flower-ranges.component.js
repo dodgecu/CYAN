@@ -12,7 +12,6 @@ const flowerInformation = props => {
             style={{ width: `${props.soilMoisture}%` }}
           />
           <span className="scales__scales-block--value">
-            {" "}
             {props.soilMoisture}%
           </span>
         </div>
@@ -40,10 +39,7 @@ const flowerInformation = props => {
             className="scales__scales-block--light"
             style={{ width: `${props.amblight}%` }}
           />
-          <span className="scales__scales-block--value">
-            {" "}
-            {props.amblight}%
-          </span>
+          <span className="scales__scales-block--value">{props.amblight}%</span>
         </div>
       </div>
     </article>
