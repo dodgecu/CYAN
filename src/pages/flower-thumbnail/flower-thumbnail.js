@@ -20,6 +20,7 @@ function FlowerThumbnail(props) {
               className="range--temperature__fill"
               style={{ width: `${props.airTemperature}%` }}
             />
+            {props.airTemperature}
           </div>
           <span className="ranges__title">Humidity</span>
           <div className="range range--humidity">
@@ -28,6 +29,7 @@ function FlowerThumbnail(props) {
               style={{ width: `${props.airHumidity}%` }}
             />
           </div>
+          {props.airHumidity}
           <span className="ranges__title">Ambient light</span>
           <div className="range range--light">
             <div
@@ -41,10 +43,11 @@ function FlowerThumbnail(props) {
               className="range--soil__fill"
               style={{ width: `${props.soilHumidity}%` }}
             />
+            {props.soilHumidity}
           </div>
         </div>
       </div>
-      <a className="details" href={`/details/${props.id}`}>
+      <a className="details" href={`/flower-details/${props.id}`}>
         View details
       </a>
     </div>
