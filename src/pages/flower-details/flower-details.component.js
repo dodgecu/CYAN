@@ -50,7 +50,8 @@ class FlowerDetails extends Component {
         created_at,
         img_path
       } = this.state.flower;
-      if (availableSensors) {
+
+      if (availableSensors && this.state.flower.package_id !== "") {
         const flowerId = parseInt(this.state.flower.package_id);
 
         const [pack] = this.props.sensors.filter(item => {
