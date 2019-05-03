@@ -35,7 +35,8 @@ class CreateFlower extends Component {
     const flowerParams = {
       ...flowerData,
       img_path: img_path,
-      user_id: this.state.userId
+      user_id: this.state.userId,
+      created_at: new Date().getTime()
     };
     axios
       .post(`${backendUrl}/flower`, flowerParams)
@@ -61,8 +62,8 @@ class CreateFlower extends Component {
   render() {
     return (
       <>
-        <PageTitle title="Create Flower" />
         <Header />
+        <PageTitle title="Create Flower" />
         <FlowerForm onSubmit={this.submitHandler} />
         <button
           onClick={() => this.props.history.push(routes.dashboard)}

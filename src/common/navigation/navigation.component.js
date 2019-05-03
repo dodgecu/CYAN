@@ -23,17 +23,18 @@ class Sidebar extends Component {
 
   render() {
     const renderOverlay = (
-      <div
+      <nav
         className={
           this.state.isOpen ? "navigation navigation--active" : "navigation"
         }
       >
+        <h3 className="navigation--active__title">General</h3>
         <ul className="navigation__links">
           {this.props.links.map(link => {
             return (
               <li
                 key={link.id}
-                className="navigation__links--link"
+                className={`navigation__links--link ${link.className}`}
                 onClick={this.navigate.bind(this, link.path)}
               >
                 {link.title}
@@ -41,7 +42,7 @@ class Sidebar extends Component {
             );
           })}
         </ul>
-      </div>
+      </nav>
     );
     return (
       <>
