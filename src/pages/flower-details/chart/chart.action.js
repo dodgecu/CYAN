@@ -7,6 +7,7 @@ import {
 } from "./chart.action-types";
 
 export const getDaySensorData = ({ id, time }) => dispatch => {
+  debugger;
   const url = `${backendUrl}/flower-sensor/${id}/${time}`;
   axios
     .get(url)

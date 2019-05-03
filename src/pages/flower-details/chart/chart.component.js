@@ -18,9 +18,11 @@ class Chart extends Component {
   }
 
   pickDate() {
-    const timestamp = new Date(this.datepicker.value).getTime();
-    console.log(timestamp);
-    this.props.getDaySensorData();
+    const time = new Date(this.datepicker.value).getTime();
+    /* const time = 1556893176250; */
+    const id = 1;
+    console.log(time);
+    this.props.getDaySensorData({ id, time });
   }
 
   render() {
