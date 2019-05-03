@@ -8,7 +8,8 @@ import {
   UPDATE_SUCCESS,
   UPDATE_FAIL,
   LOADING,
-  REGISTERED_FALSE
+  REGISTERED_FALSE,
+  LOGOUT_SUCCESS
 } from "./authorization.action-types";
 
 const initialState = {
@@ -88,6 +89,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isRegistered: false
+      };
+    case LOGOUT_SUCCESS:
+      localStorage.removeItem("token", action.payload.token);
+      return {
+        ...state,
+        isAuthenticated: false,
+        isLoading: false
       };
     default:
       return state;
