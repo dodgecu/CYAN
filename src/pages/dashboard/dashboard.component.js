@@ -170,20 +170,11 @@ class Dashboard extends React.Component {
             </div>
           </div>
           <div className="dashboard--sorting">
-            <span>Sort by</span>
+            <span>Filter by</span>
 
             <div className="dashboard--sorting--problematical">
               Problematical
-              <button
-                className="dashboard--sorting__button"
-                onClick={this.onSort}
-              >
-                <img
-                  className="icon"
-                  src={isAscendingSort ? ArrowUp : ArrowDown}
-                  alt=""
-                />
-              </button>
+              <button className="dashboard--sorting__button" />
             </div>
           </div>
         </section>

@@ -21,7 +21,7 @@
       opacity: 0.5;
       height: 30px;
       padding: 5px;
-      margin: 5px;
+      margin: 5px 0;
     }
   }
 
@@ -56,10 +56,13 @@
 
       .icon {
         max-width: 10px;
-      }
 
-      &:hover {
-        background: darken(#f1f1f1, 5%);
+        &:hover {
+          background: none;
+        }
+        &:active {
+          background: none;
+        }
       }
     }
   }
