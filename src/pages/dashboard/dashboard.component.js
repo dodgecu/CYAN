@@ -154,25 +154,29 @@ class Dashboard extends React.Component {
             <span>Sort by</span>
 
             <div className="dashboard--sorting--alphabetical">
-              Alphabetical
-              <button
-                className="dashboard--sorting__button"
-                onClick={this.onSort}
-              >
-                <img
-                  className="icon"
-                  src={isAscendingSort ? ArrowUp : ArrowDown}
-                  alt=""
-                />
-              </button>
+              <label>
+                Alphabetical
+                <button
+                  className="dashboard--sorting__button"
+                  onClick={this.onSort}
+                >
+                  <img
+                    className="icon"
+                    src={isAscendingSort ? ArrowUp : ArrowDown}
+                    alt=""
+                  />
+                </button>
+              </label>
             </div>
           </div>
           <div className="dashboard--sorting">
             <span>Filter by</span>
 
             <div className="dashboard--sorting--problematical">
-              Problematical
-              <button className="dashboard--sorting__button" />
+              <label>
+                Problematical
+                <input type="checkbox" className="dashboard--sorting__button" />
+              </label>
             </div>
           </div>
         </section>
