@@ -13,7 +13,7 @@ export default history =>
     form: formReducer,
     flowerType: setType,
     sensors: sensorsReducer,
-    chart: chartReducer,
+    chartReducer,
 
     router: connectRouter(history)
   });

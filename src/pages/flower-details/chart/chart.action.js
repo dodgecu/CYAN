@@ -7,12 +7,14 @@ import {
 } from "./chart.action-types";
 
 export const getDaySensorData = ({ id, time }) => dispatch => {
-  debugger;
   const url = `${backendUrl}/flower-sensor/${id}/${time}`;
   axios
     .get(url)
     .then(sensorDayData =>
-      dispatch({ type: SUCCESS_GET_DAY_SENSOR_DATA, payload: sensorDayData })
+      dispatch({
+        type: SUCCESS_GET_DAY_SENSOR_DATA,
+        payload: sensorDayData.data
+      })
     )
     .catch(err =>
       dispatch({ type: FAIL_GET_DAY_SENSOR_DATA, payload: err.response })

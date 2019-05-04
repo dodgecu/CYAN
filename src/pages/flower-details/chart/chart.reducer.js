@@ -9,7 +9,6 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  debugger;
   switch (action.type) {
     case SUCCESS_GET_DAY_SENSOR_DATA:
       return {

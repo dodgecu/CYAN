@@ -60,7 +60,6 @@ class App extends Component {
             <Route exact path={routes.notFound} component={NotFound} />
           </Switch>
         </ConnectedRouter>
-
         {store.getState().authReducer.isLoading &&
           ReactDOM.createPortal(<Spinner />, document.getElementById("portal"))}
       </Provider>

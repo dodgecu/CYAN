@@ -18,7 +18,7 @@ class FlowerDetails extends Component {
     flower: {}
   };
 
-  componentDidMount() {
+  /*   componentDidMount() {
     axios
       .get(`${backendUrl}/flower-id?id=${this.props.location.state.flower}`)
       .then(flower => {
@@ -28,7 +28,7 @@ class FlowerDetails extends Component {
       .catch(err => err);
 
     this.props.fetchSensors();
-  }
+  } */
 
   validFlowerData = data => {
     return Object.entries(data).length !== 0 && data.constructor === Object;
