@@ -5,13 +5,21 @@ import "./button.styles.scss";
 export const TYPES = {
   PRIMARY: "btn--primary",
   SECONDARY: "btn--secondary",
-  DELETE: "btn--delete"
+  DELETE: "btn--delete",
+  EDIT: "btn--edit"
 };
 
-export const Button = ({ title, buttonType, onClick, disabled, type }) => (
+export const Button = ({
+  title,
+  buttonType,
+  onClick,
+  disabled,
+  type,
+  customClass
+}) => (
   <button
     type={type}
-    className={`${buttonType} btn`}
+    className={`${buttonType} btn ${customClass}`}
     disabled={disabled}
     onClick={onClick}
   >
