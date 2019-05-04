@@ -3,8 +3,9 @@
 .flower-details {
   font-family: 'Roboto', sans-serif;
   padding: 0 20px;
-}
-.flower-details {
+  &__name {
+    position: relative;
+  }
   &__main {
     &--thumbnail {
       margin: 0;
@@ -14,7 +15,18 @@
     }
     &--connection-status {
       color: $connect-error;
+      display: flex;
+      align-items: center;
       font-size: 12px;
+    }
+
+    &--issue {
+      color: $connect-error;
+      font-size: 24px;
+      font-weight: 100;
+      margin-left: 10px;
+      position: absolute;
+      top: 2px;
     }
   }
   &__information__info {
@@ -26,12 +38,28 @@
     }
     &--totaldays {
       color: $cancel-btn;
+      margin-left: 10px;
     }
   }
   &__scales {
     &--title {
       margin-bottom: 10px;
       margin-top: 50px;
+    }
+  }
+
+  &__problems {
+    &--title {
+      margin-bottom: 0;
+      margin-top: 50px;
+    }
+    &--list {
+      list-style: none;
+      padding: 0;
+      .problem {
+        font-size: 14px;
+        padding: 8px 0;
+      }
     }
   }
 }
@@ -77,4 +105,8 @@
       transition: width 0.5s;
     }
   }
+}
+
+.noconnected-message {
+  margin-left: 10px;
 }

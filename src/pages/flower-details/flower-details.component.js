@@ -34,7 +34,6 @@ class FlowerDetails extends Component {
 
   render() {
     let flowerInfo;
-
     const availableSensors = this.props.sensors.every(obj =>
       this.validFlowerData(obj)
     );
@@ -51,6 +50,8 @@ class FlowerDetails extends Component {
         img_path
       } = this.state.flower;
 
+      const flowerLight = light;
+
       if (availableSensors && this.state.flower.package_id !== "") {
         const flowerId = parseInt(this.state.flower.package_id);
 
@@ -64,6 +65,22 @@ class FlowerDetails extends Component {
           soilMoisture,
           temperature
         } = pack.pack.sensors;
+
+        const issues = [];
+
+        if (soilMoisture["Sensor data"] < soilHumidity) {
+          issues.push("The flower is thirsty");
+        }
+        if (humidity < airHumidity) {
+          issues.push("Low level of humidity");
+        }
+        if (light < flowerLight) {
+          issues.push("The flower needs more light");
+        }
+        if (temperature < airTemperature) {
+          issues.push("The flower is cold");
+        }
+
         flowerInfo = (
           <FLowerInfo
             flowerName={name}
@@ -75,6 +92,7 @@ class FlowerDetails extends Component {
             light={light}
             created_at={created_at}
             connected={true}
+            issues={issues}
           />
         );
       } else {

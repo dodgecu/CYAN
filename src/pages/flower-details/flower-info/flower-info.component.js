@@ -3,6 +3,7 @@ import React from "react";
 import DetailsMain from "./flower-info-components/flower-primary.component";
 import FlowerInformation from "./flower-info-components/flower-information.component";
 import Ranges from "./flower-info-components/flower-ranges.component";
+import Problems from "./flower-info-components/flower-problems.component";
 
 const flowerInfo = props => {
   return (
@@ -11,6 +12,7 @@ const flowerInfo = props => {
         name={props.flowerName}
         thumbnail={props.thumb}
         isConnected={props.connected}
+        isNeedy={props.issues}
       />
       <FlowerInformation flowerType={props.type} dateAdded={props.created_at} />
       <Ranges
@@ -19,6 +21,7 @@ const flowerInfo = props => {
         airHumidity={props.humidity}
         amblight={props.light}
       />
+      <Problems isNeedy={props.issues} isConnected={props.connected} />
     </section>
   );
 };
