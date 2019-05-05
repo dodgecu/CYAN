@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { push } from "connected-react-router";
+
 import axios from "axios";
 
 import { fetchSensors } from "../../common/sensors/sensors.middleware";
 import { backendUrl } from "../../constants/backendUrl";
+import routes from "../../constants/routes";
 
 import Chart from "./chart/chart.component";
 
 import Header from "../../common/header/header.component";
 import PageTitle from "../../common/page-title/page-title.component";
+import { Button, TYPES } from "../../common/components/button/button.component";
+import Footer from "../../common/footer/footer.component";
 
 import FLowerInfo from "./flower-info/flower-info.component";
 
@@ -18,21 +23,30 @@ class FlowerDetails extends Component {
     flower: {}
   };
 
-  /*   componentDidMount() {
-    axios
-      .get(`${backendUrl}/flower-id?id=${this.props.location.state.flower}`)
-      .then(flower => {
-        const [current_flower] = flower.data;
-        this.setState({ flower: current_flower });
-      })
-      .catch(err => err);
+  componentDidMount() {
+    if (typeof this.props.location.state !== "undefined") {
+      axios
+        .get(`${backendUrl}/flower-id?id=${this.props.location.state.flower}`)
+        .then(flower => {
+          const [current_flower] = flower.data;
+          this.setState({ flower: current_flower });
+        })
+        .catch(err => err);
 
-    this.props.fetchSensors();
-  } */
+      this.props.fetchSensors();
+    } else {
+      this.props.history.push(routes.dashboard);
+    }
+  }
 
   validFlowerData = data => {
     return Object.entries(data).length !== 0 && data.constructor === Object;
   };
+
+  redirect = () =>
+    this.props.push(routes.createFlower, {
+      currentFlower: this.state.flower
+    });
 
   render() {
     let flowerInfo;
@@ -123,6 +137,13 @@ class FlowerDetails extends Component {
         <Chart selector="light" title="Light chart" />
         <Chart selector="air" title="Air humidity" />
         {flowerInfo}
+        <Button
+          title="Edit flower"
+          type="submit"
+          buttonType={TYPES.EDIT}
+          onClick={() => this.redirect()}
+        />
+        <Footer />
       </>
     );
   }
@@ -134,5 +155,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchSensors }
+  { fetchSensors, push }
 )(FlowerDetails);

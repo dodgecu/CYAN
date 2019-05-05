@@ -46,7 +46,10 @@ class UpdateName extends Component {
 }
 
 const mapStateToProps = state => ({
-  message: state.authReducer.message
+  message: state.authReducer.message,
+  initialValues: {
+    name: state.authReducer.user.name
+  }
 });
 
 UpdateName = reduxForm({

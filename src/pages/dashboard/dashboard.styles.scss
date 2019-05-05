@@ -21,15 +21,17 @@
       opacity: 0.5;
       height: 30px;
       padding: 5px;
-      margin: 5px;
+      margin: 5px 0;
     }
   }
 
   &__link {
     text-decoration: none;
-    color: $primary;
+    color: #13ea6e;
     font-size: 0.8rem;
     font-weight: 700;
+    float: right;
+    padding: 10px 0;
   }
 
   &--sorting {
@@ -56,10 +58,13 @@
 
       .icon {
         max-width: 10px;
-      }
 
-      &:hover {
-        background: darken(#f1f1f1, 5%);
+        &:hover {
+          background: none;
+        }
+        &:active {
+          background: none;
+        }
       }
     }
   }
@@ -67,6 +72,7 @@
 
 .dashboard--thumbnail {
   box-sizing: border-box;
+  clear: both;
 
   &__item {
     width: 100%;

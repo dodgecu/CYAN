@@ -25,6 +25,8 @@ const {
   RenderSelectDefault
 } = ValidateFields;
 
+let valuesToEdit = null;
+
 let createFlower = props => {
   const { handleSubmit, change } = props;
   const {
@@ -33,6 +35,25 @@ let createFlower = props => {
     light,
     soilHumidity
   } = props.initialValues;
+
+  if (props.currentFlower !== null) {
+    const {
+      airHumidity,
+      airTemperature,
+      light,
+      name,
+      type,
+      soilHumidity
+    } = props.currentFlower;
+    valuesToEdit = {
+      airHumidity: airHumidity,
+      airTemperature: airTemperature,
+      light: light,
+      name: name,
+      type: type,
+      soilHumidity: soilHumidity
+    };
+  }
 
   return (
     <section className="create-flower">
@@ -44,8 +65,17 @@ let createFlower = props => {
         <AmbientLight defaultVal={light} validForm={RenderRange} />
         <SoilHumidity defaultVal={soilHumidity} validForm={RenderRange} />
         <Package validForm={RenderSelectDefault} />
-        <Button title="CREATE" type="submit" buttonType={TYPES.PRIMARY} />
+        <Button title={"SAVE"} type="submit" buttonType={TYPES.PRIMARY} />
       </form>
+      {props.currentFlower !== null ? (
+        <Button
+          title={"DELETE"}
+          type="text"
+          buttonType={TYPES.DELETE}
+          onClick={props.deleteFlower}
+          customClass={"delete-flower"}
+        />
+      ) : null}
     </section>
   );
 };
@@ -53,7 +83,10 @@ let createFlower = props => {
 const mapStateToProps = state => {
   return {
     ...state.form,
-    initialValues: state.flowerType.type,
+    initialValues:
+      valuesToEdit !== null && !state.flowerType.type.type
+        ? valuesToEdit
+        : state.flowerType.type,
     type: state.flowerType
   };
 };
