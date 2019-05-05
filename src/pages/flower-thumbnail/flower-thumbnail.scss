@@ -1,17 +1,20 @@
 .thumbnail {
-  padding: 10px;
-  font-family: serif;
+  padding: 20px;
+  font-family: Roboto, sans-serif;
+  color: #666666;
 
   &--flower {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
   }
+
   &__name {
     margin: 0;
+    color: #333333;
   }
   &__type {
-    margin: 0;
+    margin: 5px 0;
   }
 }
 
@@ -20,21 +23,21 @@
   flex-direction: row-reverse;
   justify-content: space-evenly;
   max-width: 360px;
-  margin: 10px;
 }
 
 .ranges {
   width: 100%;
-  padding-left: 10px;
+
+  .percentage {
+    font-size: 0.5rem;
+  }
 
   &__title {
     font-size: 0.5rem;
   }
 
   .range {
-    height: 2px;
-    width: 100%;
-    background-color: transparent;
+    height: 3px;
     margin: 5px 0;
     display: flex;
 
@@ -57,12 +60,13 @@
 }
 
 .plant__avatar {
-  max-width: 180px;
-  max-height: 180px;
+  max-width: 150px;
+  max-height: 150px;
 }
 
 .details {
   text-decoration: none;
-  color: #336699;
+  color: #235ef5;
   font-size: 0.7rem;
+  cursor: pointer;
 }
