@@ -187,9 +187,11 @@ class Dashboard extends React.Component {
         </section>
         <div className="dashboard--flower-list">
           <h2>Flower list</h2>
-          <Link to="/create-flower" className="dashboard__link">
+          {/*temporary*/}
+          <Link to="/create-update" className="dashboard__link">
             CREATE FLOWER
           </Link>
+          {/*temporary*/}
           <div className="dashboard--thumbnail">
             {data.length
               ? this.renderThumbnails(data)
