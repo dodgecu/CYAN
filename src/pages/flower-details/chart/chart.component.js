@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 
 import dataArray from "./data";
+import { getAvarage } from "./convertFunction";
 import { ChartModel } from "./chart.model";
 import { getDaySensorData } from "./chart.action";
 
@@ -16,26 +17,12 @@ class Chart extends Component {
     chart.draw();
     chart.addArea(dataArray);
     chart.toolTip(dataArray);
-    for (let i = 0; i < 5; i++) {
-      console.log(this.props.data[i].time);
-    }
-    const start = moment(this.props.data[0].time).format("DD MMM YYYY hh:mm a");
-    const end = moment(this.props.data[2000].time).format(
-      "DD MMM YYYY hh:mm a"
-    );
-    debugger;
-    console.log(end);
-    const diff = end.diff(start);
-    console.log(diff);
-    const diffDuration = moment.duration(diff);
-
-    console.log(diffDuration.hours());
   }
 
   pickDate() {
     const time = new Date(this.datepicker.value).getTime();
     const id = 1;
-    this.props.getDaySensorData({ id, time });
+    this.props.getDaySensorData({ id, type: this.props.selector, time });
   }
 
   render() {
