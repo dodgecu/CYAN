@@ -1,6 +1,6 @@
 const routes = {
-  createFlower: "/create-flower",
-  flowerDetails: "/flower-details",
+  createFlower: "/create-update",
+  flowerDetails: "/details",
   logIn: "/log-in",
   signUp: "/sign-up",
   userProfile: "/user-profile",

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+import { push } from "connected-react-router";
 
 import FlowerForm from "./create-flower-form/create-flower-form.component";
 import flowers from "../../constants/flowers";
@@ -11,72 +13,119 @@ import routes from "../../constants/routes";
 import { backendUrl } from "../../constants/backendUrl";
 import "./create-flower.scss";
 
+import { Button } from "../../common/components/button/button.component";
+
 class CreateFlower extends Component {
-  state = {
-    userId: ""
+  isEditPage = () => typeof this.props.location.state !== "undefined";
+
+  deleteFlower = () => {
+    axios
+      .delete(
+        `${backendUrl}/flower-delete?id=${
+          this.props.location.state.currentFlower._id
+        }`
+      )
+      .then(res => this.props.history.push(routes.dashboard))
+      .catch(err => err);
   };
 
-  componentDidMount() {
-    const lsdata = localStorage.getItem("state");
-    const user = JSON.parse(lsdata);
-    this.setState({ userId: user.authReducer.user.id });
-  }
-
-  submitHandler = flowerData => {
+  recordUserFlower = userRecord => {
     const config = {
       headers: {
         "Content-Type": "application/json",
         "auth-token": `${localStorage.getItem("token")}`
       }
     };
+    axios
+      .put(`${backendUrl}/api/users`, JSON.stringify(userRecord), config)
+      .then(result => {
+        setTimeout(() => {
+          this.props.history.push(routes.dashboard);
+        }, 1000);
+      });
+  };
+
+  submitFlower = flower => {
+    return axios.post(`${backendUrl}/flower`, flower);
+  };
+
+  updateFlower = updateData => {
+    axios
+      .put(
+        `${backendUrl}/flower-update?id=${
+          this.props.location.state.currentFlower._id
+        }`,
+        updateData
+      )
+      .then(res => setTimeout(() => this.props.history.goBack(), 1000))
+      .catch(err => err);
+  };
+
+  submitHandler = flowerData => {
     const flowerImage = flowers
       .filter(img => img.name === flowerData.type)
       .map(img => img.flower_img);
     const [img_path] = flowerImage;
+
+    const user = JSON.parse(localStorage.getItem("state"));
+    const userId = user.authReducer.user.id;
+
     const flowerParams = {
       ...flowerData,
       img_path: img_path,
-      user_id: this.state.userId,
+      user_id: userId,
       created_at: new Date().getTime()
     };
-    axios
-      .post(`${backendUrl}/flower`, flowerParams)
-      .then(res => {
-        axios
-          .put(
-            `${backendUrl}/api/users`,
-            JSON.stringify({
-              flowerRecord: res.data._id,
-              userRecord: this.state.userId
-            }),
-            config
-          )
-          .then(result => {
-            setTimeout(() => {
-              this.props.history.push(routes.dashboard);
-            }, 1000);
-          })
-          .catch(error => error);
-      })
-      .catch(err => err);
+
+    if (!this.isEditPage()) {
+      this.submitFlower(flowerParams).then(res => {
+        this.recordUserFlower({
+          flowerRecord: res.data._id,
+          userRecord: userId
+        });
+      });
+    } else {
+      this.updateFlower(flowerData);
+    }
   };
+
   render() {
     return (
       <>
         <Header />
-        <PageTitle title="Create Flower" />
-        <FlowerForm onSubmit={this.submitHandler} />
-        <button
-          onClick={() => this.props.history.push(routes.dashboard)}
-          className="button__cancel"
+        <PageTitle
+          title={this.isEditPage() ? "Edit Flower" : "Create Flower"}
+        />
+
+        <FlowerForm
+          currentFlower={
+            this.isEditPage() ? this.props.location.state.currentFlower : null
+          }
+          onSubmit={this.submitHandler}
+          deleteFlower={this.deleteFlower}
+        />
+
+        <Button
+          onClick={() =>
+            this.isEditPage()
+              ? this.props.history.goBack()
+              : this.props.history.push(routes.dashboard)
+          }
+          customClass="button__cancel"
           type="text"
-        >
-          Cancel
-        </button>
+          title={"Cancel"}
+        />
         <Footer />
       </>
     );
   }
 }
 
-export default CreateFlower;
+const mapStateToProps = state => {
+  return state;
+};
+
+export default connect(
+  mapStateToProps,
+  { push }
+)(CreateFlower);

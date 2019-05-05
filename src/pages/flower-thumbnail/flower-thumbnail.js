@@ -1,13 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
-import { push } from "connected-react-router";
-
-import routes from "./../../constants/routes";
 import "./flower-thumbnail.scss";
 import PlantImage from "../../assets/plant-image.png";
 
 function FlowerThumbnail(props) {
-  const redirect = () => props.push(routes.flowerDetails, { flower: props.id });
   return (
     <div className="thumbnail">
       <div className="thumbnail--flower">
@@ -53,14 +48,11 @@ function FlowerThumbnail(props) {
           </div>
         </div>
       </div>
-      <span className="details" onClick={() => redirect()}>
+      <a className="details" href={`/flower-details/${props.id}`}>
         View details
-      </span>
+      </a>
     </div>
   );
 }
 
-export default connect(
-  null,
-  { push }
-)(FlowerThumbnail);
+export default FlowerThumbnail;
