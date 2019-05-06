@@ -8,8 +8,8 @@ import "./dashboard.styles.scss";
 
 import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 import Header from "../../common/header/header.component";
-import PageTitle from "../../common/page-title/page-title.component";
 import Footer from "../../common/footer/footer.component";
+import PageTitle from "../../common/page-title/page-title.component";
 
 import { fetchSensors } from "../../common/sensors/sensors.middleware";
 
@@ -33,7 +33,6 @@ class Dashboard extends React.Component {
     this.onSelect = this.onSelect.bind(this);
     this.renderThumbnails = this.renderThumbnails.bind(this);
     this.renderFallbackMessage = this.renderFallbackMessage.bind(this);
-    this.fil = this.fil.bind(this);
   }
 
   componentDidMount() {
@@ -74,10 +73,6 @@ class Dashboard extends React.Component {
 
       return { flowers, isAscendingSort: !isAscendingSort };
     });
-  }
-
-  fil() {
-    this.flowers.filter(flower => flower.issues.length !== 0);
   }
 
   renderThumbnails(data) {
@@ -141,68 +136,66 @@ class Dashboard extends React.Component {
     );
 
     return (
-      <>
-        <div className="dashboard--page">
-          <PageTitle title="Dashboard" />
-          <Header />
-          <section className="dashboard">
-            <div className="dashboard__search">
-              <label>Search:</label>
-              <input
-                className="dashboard__search--field"
-                type="text"
-                placeholder="Search"
-                value={filter}
-                onChange={this.onFilter}
-              />
-            </div>
+      <div className="dashboard--page">
+        <PageTitle title="Dashboard" />
+        <Header />
+        <section className="dashboard">
+          <div className="dashboard__search">
+            <label>Search:</label>
+            <input
+              className="dashboard__search--field"
+              type="text"
+              placeholder="Search"
+              value={filter}
+              onChange={this.onFilter}
+            />
+          </div>
 
-            <div className="dashboard--sorting">
-              <span>Sort by</span>
+          <div className="dashboard--sorting">
+            <span>Sort by</span>
 
-              <div className="dashboard--sorting--alphabetical">
-                <label>
-                  Alphabetical
-                  <button
-                    className="dashboard--sorting__button"
-                    onClick={this.onSort}
-                  >
-                    <img
-                      className="icon"
-                      src={isAscendingSort ? ArrowUp : ArrowDown}
-                      alt=""
-                    />
-                  </button>
-                </label>
-              </div>
+            <div className="dashboard--sorting--alphabetical">
+              <label>
+                Alphabetical
+                <button
+                  className="dashboard--sorting__button"
+                  onClick={this.onSort}
+                >
+                  <img
+                    className="icon"
+                    src={isAscendingSort ? ArrowUp : ArrowDown}
+                    alt=""
+                  />
+                </button>
+              </label>
             </div>
-            <div className="dashboard--sorting">
-              <span>Filter by</span>
+          </div>
+          <div className="dashboard--sorting">
+            <span>Filter by</span>
 
-              <div className="dashboard--sorting--problematical">
-                <label>
-                  Problematical
-                  <input type="checkbox" onClick={this.fil} />
-                </label>
-              </div>
+            <div className="dashboard--sorting--problematical">
+              <label>
+                Problematical
+                <input type="checkbox" />
+              </label>
             </div>
-          </section>
-          <div className="dashboard--flower-list">
-            <h2>Flower list</h2>
-            {/*temporary*/}
-            <Link to="/create-update" className="dashboard__link">
-              CREATE FLOWER
-            </Link>
-            {/*temporary*/}
-            <div className="dashboard--thumbnail">
-              {data.length
-                ? this.renderThumbnails(data)
-                : this.renderFallbackMessage()}
-            </div>
+          </div>
+        </section>
+        <div className="dashboard--flower-list">
+          <h2>Flower list</h2>
+          {/*temporary*/}
+          <Link to="/create-update" className="dashboard__link">
+            CREATE FLOWER
+          </Link>
+          {/*temporary*/}
+          <div className="dashboard--thumbnail">
+            {data.length
+              ? this.renderThumbnails(data)
+              : this.renderFallbackMessage()}
           </div>
         </div>
         <Footer />
-      </>
+      </div>
     );
   }
 }
@@ -214,3 +207,4 @@ export default connect(
   mapStateToProps,
   { fetchSensors }
 )(Dashboard);
+
