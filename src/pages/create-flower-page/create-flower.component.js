@@ -7,6 +7,7 @@ import FlowerForm from "./create-flower-form/create-flower-form.component";
 import flowers from "../../constants/flowers";
 import Header from "../../common/header/header.component";
 import PageTitle from "../../common/page-title/page-title.component";
+import { confirm } from "../../common/confirm-popup/confirm-popup.component";
 import Footer from "../../common/footer/footer.component";
 
 import routes from "../../constants/routes";
@@ -27,6 +28,14 @@ class CreateFlower extends Component {
       )
       .then(res => this.props.history.push(routes.dashboard))
       .catch(err => err);
+  };
+
+  confirmDelete = () => {
+    confirm({
+      title: "Are you sure you want to delete",
+      item: this.props.location.state.currentFlower.name,
+      confirmRemove: () => this.deleteFlower()
+    });
   };
 
   recordUserFlower = userRecord => {
@@ -102,7 +111,7 @@ class CreateFlower extends Component {
             this.isEditPage() ? this.props.location.state.currentFlower : null
           }
           onSubmit={this.submitHandler}
-          deleteFlower={this.deleteFlower}
+          deleteFlower={this.confirmDelete}
         />
 
         <Button

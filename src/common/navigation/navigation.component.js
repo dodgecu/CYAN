@@ -14,6 +14,7 @@ class Sidebar extends Component {
 
   navigate(route) {
     this.props.push(route);
+    this.openMenuHandler();
   }
 
   openMenuHandler() {

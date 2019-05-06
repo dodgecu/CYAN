@@ -19,7 +19,9 @@ export const Button = ({
 }) => (
   <button
     type={type}
-    className={`${buttonType} btn ${customClass}`}
+    className={`${buttonType} btn ${
+      customClass === undefined ? "" : customClass
+    }`}
     disabled={disabled}
     onClick={onClick}
   >

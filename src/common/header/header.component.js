@@ -2,6 +2,8 @@ import React from "react";
 import Sidebar from "../navigation/navigation.component";
 import { withRouter } from "react-router";
 
+import LogOut from "../../pages/authorization/log-out/log-out.component";
+
 import routes from "../../constants/routes";
 
 import "./header.scss";
@@ -15,7 +17,7 @@ const Header = props => {
       className: ""
     },
     {
-      title: "Create Flower",
+      title: "Create flower",
       path: routes.createFlower,
       id: "create-flower",
       className: ""
@@ -25,6 +27,12 @@ const Header = props => {
       path: routes.userProfile,
       id: "user-profile",
       className: "static"
+    },
+    {
+      title: <LogOut />,
+      path: "/",
+      id: "log-out",
+      className: "logout"
     }
   ];
   const { pathname } = props.history.location;
