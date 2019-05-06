@@ -8,6 +8,7 @@ import "./dashboard.styles.scss";
 
 import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 import Header from "../../common/header/header.component";
+import Footer from "../../common/footer/footer.component";
 import PageTitle from "../../common/page-title/page-title.component";
 
 import { fetchSensors } from "../../common/sensors/sensors.middleware";
@@ -193,6 +194,7 @@ class Dashboard extends React.Component {
               : this.renderFallbackMessage()}
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
