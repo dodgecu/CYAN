@@ -6,15 +6,19 @@ import {
   FAIL_GET_DAY_SENSOR_DATA
 } from "./chart.action-types";
 
-export const getDaySensorData = ({ id, type, time }) => dispatch => {
-  const url = `${backendUrl}/flower-sensor/${id}/${type}/${time}`;
-
+export const getDaySensorData = (
+  id,
+  statisticType,
+  time = 1556841600000
+) => dispatch => {
+  const url = `${backendUrl}/flower-sensor/${id}?type=${statisticType}&time=${time}`;
+  const dataType = statisticType;
   axios
     .get(url)
     .then(sensorDayData =>
       dispatch({
         type: SUCCESS_GET_DAY_SENSOR_DATA,
-        payload: sensorDayData.data
+        payload: { dataType: statisticType, data: sensorDayData.data }
       })
     )
     .catch(err =>

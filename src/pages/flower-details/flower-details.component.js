@@ -134,7 +134,7 @@ class FlowerDetails extends Component {
         <PageTitle title="Flower details" />
 
         <Chart selector="water" title="Water chart" />
-        <Chart selector="light" title="Light chart" />
+        <Chart selector="temperature" title="Temperature chart" />
         <Chart selector="air" title="Air humidity" />
         {flowerInfo}
         <Button

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import moment from "moment";
 
 import dataArray from "./data";
-import { getAvarage } from "./convertFunction";
 import { ChartModel } from "./chart.model";
 import { getDaySensorData } from "./chart.action";
 
@@ -11,6 +9,9 @@ import "./chart.styles.scss";
 
 class Chart extends Component {
   componentDidMount() {
+    this.props.getDaySensorData(1, this.props.selector);
+    debugger;
+    const dataArray = this.props[this.props.selector];
     const chart = new ChartModel({
       selector: this.props.selector
     });
@@ -22,7 +23,7 @@ class Chart extends Component {
   pickDate() {
     const time = new Date(this.datepicker.value).getTime();
     const id = 1;
-    this.props.getDaySensorData({ id, type: this.props.selector, time });
+    /*     this.props.getDaySensorData(id, this.props.selector, time); */
   }
 
   render() {
@@ -45,7 +46,9 @@ class Chart extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.chartReducer.sensorData
+  water: state.chartReducer.water || [],
+  air: state.chartReducer.air || [],
+  temperature: state.chartReducer.temperature || []
 });
 
 export default connect(

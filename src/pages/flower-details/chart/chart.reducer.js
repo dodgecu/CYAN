@@ -4,17 +4,31 @@ import {
 } from "./chart.action-types";
 
 const initialState = {
-  sensorData: null,
+  water: [],
+  air: [],
+  temperature: [],
   message: null
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case SUCCESS_GET_DAY_SENSOR_DATA:
-      return {
-        ...state,
-        sensorData: action.payload
-      };
+      if (action.payload.dataType === "water") {
+        return {
+          ...state,
+          water: action.payload.data
+        };
+      } else if (action.payload.dataType === "temperature") {
+        return {
+          ...state,
+          temperature: action.payload.data
+        };
+      } else if (action.payload.dataType === "air") {
+        return {
+          ...state,
+          air: action.payload.data
+        };
+      }
     case FAIL_GET_DAY_SENSOR_DATA:
       return {
         ...state,

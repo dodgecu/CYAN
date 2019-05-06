@@ -46,27 +46,27 @@
   }
 }
 
-.light-chart {
+.temperature-chart {
   &__container {
     .start {
-      stop-color: $lightChartGradientStart;
+      stop-color: $temperatureChartGradientStart;
     }
 
     .stop {
-      stop-color: $lightChartGradientEnd;
+      stop-color: $temperatureChartGradientEnd;
     }
   }
 
   &__path {
-    stroke: $lightChartStrokeColor;
+    stroke: $temperatureChartStrokeColor;
   }
 
   .hover-line {
-    stroke: $lightChartStrokeColor
+    stroke: $temperatureChartStrokeColor
   }
 
   .focus-circle {
-    fill: $lightChartDotColor;
+    fill: $temperatureChartDotColor;
   }
 }
 

@@ -1,42 +1,42 @@
 const dataArray = [
   {
-    day: 1,
+    hour: 1,
     value: 0.3
   },
   {
-    day: 2,
+    hour: 2,
     value: 0.5
   },
   {
-    day: 3,
+    hour: 3,
     value: 0.1
   },
   {
-    day: 4,
+    hour: 4,
     value: 0.5
   },
   {
-    day: 5,
+    hour: 5,
     value: 0.7
   },
   {
-    day: 6,
+    hour: 6,
     value: 0.3
   },
   {
-    day: 7,
+    hour: 7,
     value: 0.5
   },
   {
-    day: 8,
+    hour: 8,
     value: 0.7
   },
   {
-    day: 9,
+    hour: 9,
     value: 0.2
   },
   {
-    day: 10,
+    hour: 10,
     value: 0.3
   }
 ];

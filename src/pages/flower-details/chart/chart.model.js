@@ -98,14 +98,14 @@ ChartModel.prototype.addArea = function(data) {
   // line generator
   const line = d3
     .line()
-    .x(d => _this.xScale(d.day))
+    .x(d => _this.xScale(d.hour))
     .y(d => _this.yScale(d.value))
     .curve(d3.curveMonotoneX);
 
   // area generator
   const area = d3
     .area()
-    .x((d, i) => _this.xScale(d.day))
+    .x((d, i) => _this.xScale(d.hour))
     .y0(this.height)
     .y1(d => _this.yScale(d.value))
     .curve(d3.curveMonotoneX); //apply smoothing to the line
@@ -156,18 +156,18 @@ ChartModel.prototype.toolTip = function(data) {
   this.svg.on("mousemove", mousemove);
 
   function mousemove() {
-    const bisectData = d3.bisector(d => d.day).left;
+    const bisectData = d3.bisector(d => d.hour).left;
     const x0 = _this.xScale.invert(d3.mouse(this)[0]);
     let i = bisectData(data, x0, 1);
     const d0 = data[i - 1];
     const d1 = data[i];
-    const d = x0 - d0.day > d1.day - x0 ? d1 : d0;
+    const d = x0 - d0.hour > d1.hour - x0 ? d1 : d0;
 
     focus.attr(
       "transform",
-      `translate(${_this.xScale(d.day)}, ${_this.yScale(d.value)})`
+      `translate(${_this.xScale(d.hour)}, ${_this.yScale(d.value)})`
     );
     xLine.attr("y2", _this.height - _this.yScale(d.value));
-    yLine.attr("x1", -(_this.width - (_this.width - _this.xScale(d.day))));
+    yLine.attr("x1", -(_this.width - (_this.width - _this.xScale(d.hour))));
   }
 };
