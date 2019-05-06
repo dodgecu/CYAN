@@ -14,14 +14,19 @@ const flowerInfo = props => {
         isConnected={props.connected}
         isNeedy={props.issues}
       />
-      <FlowerInformation flowerType={props.type} dateAdded={props.created_at} />
-      <Ranges
-        soilMoisture={props.soil}
-        temp={props.temperature}
-        airHumidity={props.humidity}
-        amblight={props.light}
-      />
-      <Problems isNeedy={props.issues} isConnected={props.connected} />
+      <div className="flower-details__desktop-view">
+        <FlowerInformation
+          flowerType={props.type}
+          dateAdded={props.created_at}
+        />
+        <Ranges
+          soilMoisture={props.soil}
+          temp={props.temperature}
+          airHumidity={props.humidity}
+          amblight={props.light}
+        />
+        <Problems isNeedy={props.issues} isConnected={props.connected} />
+      </div>
     </section>
   );
 };
