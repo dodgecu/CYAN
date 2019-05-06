@@ -205,3 +205,4 @@ export default connect(
   mapStateToProps,
   { fetchSensors }
 )(Dashboard);
+
