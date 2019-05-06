@@ -9,6 +9,8 @@ import {
   TYPES
 } from "../../../common/components/button/button.component";
 
+import "./log-out.styles.scss";
+
 class LogOut extends Component {
   onLogoutClick() {
     this.props.logOut();
@@ -26,10 +28,11 @@ class LogOut extends Component {
     return (
       <>
         <Button
-          title="LOG OUT"
+          title="Log out"
           buttonType={TYPES.PRIMARY}
           type="submit"
           disabled={submitting}
+          customClass={"logout"}
           onClick={this.onLogoutClick.bind(this)}
         />
       </>
