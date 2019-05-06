@@ -19,8 +19,7 @@ export const fetchSensors = () => dispatch => {
   socket.on("eastPackage", east => {
     dispatch({ type: "GET_EAST", payload: east });
   });
-
   socket.on("connect_error", data => {
-    console.log("connection error");
+    dispatch({ type: "SOCKET_ERR", payload: { socketErr: true } });
   });
 };
