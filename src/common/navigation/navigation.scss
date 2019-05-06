@@ -1,4 +1,5 @@
 @import '../../styles/abstracts/variables';
+@import '../../styles/base/animations';
 
 .with-overlay {
   position: absolute;
@@ -7,6 +8,7 @@
   top: 60px;
   left: 0;
   background: rgba(0, 0, 0, 0.7);
+  animation: expand 0.3s ease-in-out;
 }
 
 .burger {
@@ -104,15 +106,5 @@
     font-weight: 900;
     cursor: pointer;
     color: $white;
-  }
-}
-
-@keyframes slideInLeft {
-  0% {
-    transform: translateX(-100%);
-    visibility: visible;
-  }
-  100% {
-    transform: translateX(0);
   }
 }

@@ -1,5 +1,5 @@
 .thumbnail {
-  padding: 10px;
+  padding: 20px;
   font-family: Roboto, sans-serif;
   color: #666666;
 
@@ -29,7 +29,7 @@
   width: 100%;
 
   .percentage {
-    font-size: 0.4rem;
+    font-size: 0.5rem;
   }
 
   &__title {
@@ -38,7 +38,7 @@
 
   .range {
     height: 3px;
-    margin: 2px 0;
+    margin: 5px 0;
     display: flex;
 
     &--temperature__fill {
@@ -68,4 +68,5 @@
   text-decoration: none;
   color: #235ef5;
   font-size: 0.7rem;
+  cursor: pointer;
 }
