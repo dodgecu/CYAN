@@ -32,7 +32,6 @@ class Dashboard extends React.Component {
     this.onSelect = this.onSelect.bind(this);
     this.renderThumbnails = this.renderThumbnails.bind(this);
     this.renderFallbackMessage = this.renderFallbackMessage.bind(this);
-    this.fil = this.fil.bind(this);
   }
 
   componentDidMount() {
@@ -73,10 +72,6 @@ class Dashboard extends React.Component {
 
       return { flowers, isAscendingSort: !isAscendingSort };
     });
-  }
-
-  fil() {
-    this.flowers.filter(flower => flower.issues.length !== 0);
   }
 
   renderThumbnails(data) {
@@ -180,7 +175,7 @@ class Dashboard extends React.Component {
             <div className="dashboard--sorting--problematical">
               <label>
                 Problematical
-                <input type="checkbox" onClick={this.fil} />
+                <input type="checkbox" />
               </label>
             </div>
           </div>
