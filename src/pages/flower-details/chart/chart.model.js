@@ -10,7 +10,7 @@ ChartModel.prototype.init = function(opts) {
 };
 
 ChartModel.prototype.clear = function() {
-  d3.select("g").remove();
+  this.svg.remove();
 };
 
 ChartModel.prototype.draw = function() {
@@ -25,8 +25,6 @@ ChartModel.prototype.draw = function() {
   this.height = 400 - this.margin.top - this.margin.bottom;
   this.svg = d3
     .select(`.${this.selector}-chart__container`)
-    /*     .attr("width", this.width + this.margin.left + this.margin.right)
-    .attr("height", this.height + this.margin.top + this.margin.bottom) */
     .attr(
       "viewBox",
       `0 0  ${this.width + this.margin.left + this.margin.right} ${this.height +
@@ -129,15 +127,15 @@ ChartModel.prototype.addArea = function(data) {
 
   // Append the path, bind the data, and call the area generator
   this.svg
-    .append("path")
     .data(this.data) //bind data
+    .append("path")
     .attr("d", area(this.data)) //Calls the area generator
     .attr("fill", `url(#${this.selector})`);
 
   // Append the path, bind the data, and call the line generator
   this.svg
-    .append("path")
     .data(this.data)
+    .append("path")
     .attr("class", `${this.selector}-chart__path`)
     .attr("stroke-width", "2")
     .attr("fill", "transparent")
