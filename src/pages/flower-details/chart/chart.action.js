@@ -11,6 +11,7 @@ export const getDaySensorData = (
   statisticType,
   time = 1556841600000
 ) => dispatch => {
+  debugger;
   const url = `${backendUrl}/flower-sensor/${id}?type=${statisticType}&time=${time}`;
   const dataType = statisticType;
   axios

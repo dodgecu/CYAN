@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import dataArray from "./data";
 import { ChartModel } from "./chart.model";
 import { getDaySensorData } from "./chart.action";
 
@@ -9,11 +8,13 @@ import "./chart.styles.scss";
 
 class Chart extends Component {
   componentDidMount() {
-    this.props.getDaySensorData(1, this.props.selector);
     debugger;
+    this.props.getDaySensorData(1, this.props.selector);
     const dataArray = this.props[this.props.selector];
+
     const chart = new ChartModel({
-      selector: this.props.selector
+      selector: this.props.selector,
+      data: dataArray
     });
     chart.draw();
     chart.addArea(dataArray);
@@ -21,9 +22,10 @@ class Chart extends Component {
   }
 
   pickDate() {
+    debugger;
     const time = new Date(this.datepicker.value).getTime();
     const id = 1;
-    /*     this.props.getDaySensorData(id, this.props.selector, time); */
+    this.props.getDaySensorData(id, this.props.selector, time);
   }
 
   render() {
@@ -39,16 +41,18 @@ class Chart extends Component {
         <h2 className={`${this.props.selector}-chart__title`}>
           {this.props.title}
         </h2>
-        <svg className={`${this.props.selector}-chart__container`} />
+        <div className="svg-box">
+          <svg className={`${this.props.selector}-chart__container`} />
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  water: state.chartReducer.water || [],
-  air: state.chartReducer.air || [],
-  temperature: state.chartReducer.temperature || []
+  water: state.chartReducer.water,
+  air: state.chartReducer.air,
+  temperature: state.chartReducer.temperature
 });
 
 export default connect(

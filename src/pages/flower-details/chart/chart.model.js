@@ -2,6 +2,9 @@ import * as d3 from "d3";
 
 export const ChartModel = function(opts) {
   this.selector = opts.selector;
+  this.hourDomainStart = opts.data[0].hour;
+  this.hourDomainEnd = opts.data[opts.data.length - 1].hour;
+  this.xTicksAmount = opts.data.length;
 };
 
 ChartModel.prototype.draw = function() {
@@ -16,8 +19,14 @@ ChartModel.prototype.draw = function() {
   this.height = 400 - this.margin.top - this.margin.bottom;
   this.svg = d3
     .select(`.${this.selector}-chart__container`)
-    .attr("width", this.width + this.margin.left + this.margin.right)
-    .attr("height", this.height + this.margin.top + this.margin.bottom)
+    /*     .attr("width", this.width + this.margin.left + this.margin.right)
+    .attr("height", this.height + this.margin.top + this.margin.bottom) */
+    .attr(
+      "viewBox",
+      `0 0  ${this.width + this.margin.left + this.margin.right} ${this.height +
+        this.margin.top +
+        this.margin.bottom}`
+    )
     .append("g")
     .attr("transform", `translate(${this.margin.left}, ${this.margin.top})`);
   this.createGradient();
@@ -52,7 +61,7 @@ ChartModel.prototype.createScales = function() {
   // X scale
   this.xScale = d3
     .scaleLinear()
-    .domain([1, 10])
+    .domain([this.hourDomainStart, this.hourDomainEnd])
     .range([0, this.width]);
 
   // Y scale
@@ -71,6 +80,7 @@ ChartModel.prototype.addAxes = function() {
       d3
         .axisBottom()
         .scale(this.xScale)
+        .ticks(this.xTicksAmount)
         .tickSize(0)
         .tickPadding(10)
     );
@@ -105,8 +115,8 @@ ChartModel.prototype.addArea = function(data) {
   // area generator
   const area = d3
     .area()
-    .x((d, i) => _this.xScale(d.hour))
-    .y0(this.height)
+    .x(d => _this.xScale(d.hour))
+    .y0(this.yScale(0))
     .y1(d => _this.yScale(d.value))
     .curve(d3.curveMonotoneX); //apply smoothing to the line
 
@@ -160,7 +170,7 @@ ChartModel.prototype.toolTip = function(data) {
     const x0 = _this.xScale.invert(d3.mouse(this)[0]);
     let i = bisectData(data, x0, 1);
     const d0 = data[i - 1];
-    const d1 = data[i];
+    const d1 = data[i] || data[data.length - 1];
     const d = x0 - d0.hour > d1.hour - x0 ? d1 : d0;
 
     focus.attr(
