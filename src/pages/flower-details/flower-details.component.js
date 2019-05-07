@@ -50,9 +50,14 @@ class FlowerDetails extends Component {
 
   render() {
     let flowerInfo;
-    const availableSensors = this.props.sensors.every(obj =>
-      this.validFlowerData(obj)
-    );
+
+    const availableSensors = obj => {
+      if (obj.dh22Err || obj.soilErr || obj.socketErr) {
+        return false;
+      } else {
+        return obj.every(obj => this.validFlowerData(obj));
+      }
+    };
 
     if (this.validFlowerData(this.state.flower)) {
       const {
@@ -68,7 +73,10 @@ class FlowerDetails extends Component {
 
       const flowerLight = light;
 
-      if (availableSensors && this.state.flower.package_id !== "") {
+      if (
+        availableSensors(this.props.sensors) &&
+        this.state.flower.package_id !== ""
+      ) {
         const flowerId = parseInt(this.state.flower.package_id);
 
         const [pack] = this.props.sensors.filter(item => {

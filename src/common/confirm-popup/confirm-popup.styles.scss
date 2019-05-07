@@ -41,3 +41,16 @@
   border: none;
   margin: 10px;
 }
+
+@media screen and (min-width: 768px) {
+  .confirm-modal {
+    max-width: 50%;
+    &__flower-name {
+      padding: 0 0 40px 0;
+    }
+    &__title {
+      margin: 0;
+      padding: 10px 0;
+    }
+  }
+}

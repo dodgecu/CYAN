@@ -4,11 +4,15 @@ const initialState = {
 const dataReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_MAIN":
+      let newState = initialState;
       return {
         ...state,
-        sensors: state.sensors.map((pack, i) =>
-          i === 0 ? { ...pack, pack: action.payload } : pack
-        )
+        sensors:
+          action.payload.dh22Err || action.payload.soilErr
+            ? action.payload
+            : newState.sensors.map((pack, i) =>
+                i === 0 ? { ...pack, pack: action.payload } : pack
+              )
       };
     case "GET_SOUTH":
       return {
@@ -30,6 +34,11 @@ const dataReducer = (state = initialState, action) => {
         sensors: state.sensors.map((pack, i) =>
           i === 3 ? { ...pack, pack: action.payload } : pack
         )
+      };
+    case "SOCKET_ERR":
+      return {
+        ...state,
+        sensors: action.payload
       };
     default:
       return state;
