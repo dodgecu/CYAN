@@ -7,25 +7,33 @@ import { getDaySensorData } from "./chart.action";
 import "./chart.styles.scss";
 
 class Chart extends Component {
-  componentDidMount() {
-    debugger;
-    this.props.getDaySensorData(1, this.props.selector);
-    const dataArray = this.props[this.props.selector];
+  constructor(props) {
+    super(props);
+    this.chart = new ChartModel();
+  }
 
-    const chart = new ChartModel({
-      selector: this.props.selector,
-      data: dataArray
+  fetchData(id = 1, fieldType = this.props.selector, time = 1556841600000) {
+    this.props.getDaySensorData(1, fieldType, time).then(array => {
+      this.chart.init({
+        selector: this.props.selector,
+        data: array
+      });
+
+      this.chart.draw();
+      this.chart.addArea(array);
+      this.chart.toolTip(array);
     });
-    chart.draw();
-    chart.addArea(dataArray);
-    chart.toolTip(dataArray);
+  }
+
+  componentDidMount() {
+    this.fetchData();
   }
 
   pickDate() {
-    debugger;
     const time = new Date(this.datepicker.value).getTime();
     const id = 1;
-    this.props.getDaySensorData(id, this.props.selector, time);
+    this.chart.clear();
+    this.fetchData(id, this.props.selector, time);
   }
 
   render() {

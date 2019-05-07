@@ -11,18 +11,21 @@ export const getDaySensorData = (
   statisticType,
   time = 1556841600000
 ) => dispatch => {
-  debugger;
   const url = `${backendUrl}/flower-sensor/${id}?type=${statisticType}&time=${time}`;
   const dataType = statisticType;
-  axios
+  return axios
     .get(url)
-    .then(sensorDayData =>
+    .then(sensorDayData => {
       dispatch({
         type: SUCCESS_GET_DAY_SENSOR_DATA,
         payload: { dataType: statisticType, data: sensorDayData.data }
-      })
-    )
-    .catch(err =>
-      dispatch({ type: FAIL_GET_DAY_SENSOR_DATA, payload: err.response })
-    );
+      });
+
+      return sensorDayData.data;
+    })
+    .catch(err => {
+      dispatch({ type: FAIL_GET_DAY_SENSOR_DATA, payload: err.response });
+
+      return [];
+    });
 };

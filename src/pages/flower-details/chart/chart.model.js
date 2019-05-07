@@ -1,10 +1,16 @@
 import * as d3 from "d3";
 
-export const ChartModel = function(opts) {
+export const ChartModel = function() {};
+
+ChartModel.prototype.init = function(opts) {
   this.selector = opts.selector;
   this.hourDomainStart = opts.data[0].hour;
   this.hourDomainEnd = opts.data[opts.data.length - 1].hour;
   this.xTicksAmount = opts.data.length;
+};
+
+ChartModel.prototype.clear = function() {
+  d3.select("g").remove();
 };
 
 ChartModel.prototype.draw = function() {
@@ -106,6 +112,7 @@ ChartModel.prototype.addArea = function(data) {
   this.data = data;
   const _this = this;
   // line generator
+
   const line = d3
     .line()
     .x(d => _this.xScale(d.hour))
