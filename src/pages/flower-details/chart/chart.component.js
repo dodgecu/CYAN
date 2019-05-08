@@ -39,12 +39,12 @@ class Chart extends Component {
   render() {
     return (
       <div className={`${this.props.selector}-chart`}>
-        <button onClick={this.pickDate.bind(this)}>get date</button>
         <input
           ref={node => (this.datepicker = node)}
           type="date"
           name="date"
           id="date"
+          onChange={this.pickDate.bind(this)}
         />
         <h2 className={`${this.props.selector}-chart__title`}>
           {this.props.title}
