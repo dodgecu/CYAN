@@ -109,6 +109,7 @@ ChartModel.prototype.addAxes = function() {
 ChartModel.prototype.addArea = function(data) {
   this.data = data;
   const _this = this;
+  const animation = this.svg.transition().duration(2500);
   // line generator
 
   const line = d3
@@ -143,6 +144,11 @@ ChartModel.prototype.addArea = function(data) {
 };
 
 ChartModel.prototype.toolTip = function(data) {
+  const dataType = {
+    water: "%",
+    air: "%",
+    temperature: `°C`
+  };
   //Apply the tooltip ability
   const _this = this; //do this because inside mousemove function can lost the context
   const focus = this.svg
@@ -164,7 +170,28 @@ ChartModel.prototype.toolTip = function(data) {
   focus
     .append("circle")
     .attr("class", "focus-circle")
-    .attr("r", 7);
+    .attr("r", 8);
+
+  const focus_g = focus.append("g").attr("class", `${this.selector}-tip`);
+
+  const tipRect = focus_g
+    .append("rect")
+    .attr("class", `${this.selector}-tip__rect`)
+    .attr("fill", "#5E5E5E")
+    .attr("rx", "5")
+    .attr("rx", "5");
+
+  const tipRectWidth = tipRect.node().getBBox().width;
+
+  const tipText = focus_g
+    .append("text")
+    .attr("class", `${this.selector}-tip__text`)
+    .attr("x", `${tipRectWidth / 2}`)
+    .attr("y", "15")
+    .attr("alignment-baseline", "middle")
+    .attr("text-anchor", "middle")
+    .attr("font-family", "Roboto")
+    .attr("fill", "#fff");
 
   this.svg.on("mouseover", () => focus.style("display", null));
   this.svg.on("mouseout", () => focus.style("display", "none"));
@@ -182,7 +209,16 @@ ChartModel.prototype.toolTip = function(data) {
       "transform",
       `translate(${_this.xScale(d.hour)}, ${_this.yScale(d.value)})`
     );
+
     xLine.attr("y2", _this.height - _this.yScale(d.value));
     yLine.attr("x1", -(_this.width - (_this.width - _this.xScale(d.hour))));
+    tipText.text(
+      () =>
+        `${_this.selector}: ${parseInt(d.value * 100)}${
+          dataType[_this.selector]
+        }`
+    );
+
+    focus_g.attr("transform", `translate(-${tipRectWidth / 2}, -50)`);
   }
 };

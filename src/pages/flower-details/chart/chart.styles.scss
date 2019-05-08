@@ -37,6 +37,7 @@
     stroke: $waterChartStrokeColor;
   }
 
+
   .hover-line {
     stroke: $waterChartStrokeColor
   }
@@ -46,6 +47,18 @@
   }
 }
 
+.water-tip,
+.air-tip,
+.temperature-tip {
+  &__rect {
+    width: 150px;
+    height: 30px;
+  }
+
+  &__text {
+    stroke-width: 0;
+  }
+}
 .temperature-chart {
   &__container {
     .start {

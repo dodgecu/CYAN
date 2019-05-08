@@ -8,6 +8,7 @@
     "classnames": "^2.2.6",
     "connected-react-router": "^6.4.0",
     "d3": "^5.9.2",
+    "d3-tip": "^0.9.1",
     "express": "^4.16.4",
     "moment": "^2.24.0",
     "mongoose": "^5.5.1",
