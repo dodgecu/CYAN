@@ -30,7 +30,12 @@ class SignUpSuccess extends Component {
               Your account has been successfully created. Now you are able to
               login in the app.
             </div>
-            <CustomLink title="Go to login" route={routes.logIn} />
+            <CustomLink
+              title="Go to login"
+              onClick={() => {
+                this.props.push(routes.logIn);
+              }}
+            />
           </div>
         </div>
       </>

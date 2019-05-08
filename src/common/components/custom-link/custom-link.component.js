@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { push } from "connected-react-router";
 
 import "./custom-link.styles.scss";
 
@@ -9,7 +7,7 @@ class CustomLink extends Component {
     return (
       <div
         className={`link ${this.props.additionalClass}`}
-        onClick={() => this.props.push(this.props.route)}
+        onClick={this.props.onClick}
       >
         {this.props.title}
       </div>
@@ -17,7 +15,4 @@ class CustomLink extends Component {
   }
 }
 
-export default connect(
-  null,
-  { push }
-)(CustomLink);
+export default CustomLink;
