@@ -8,6 +8,8 @@ import { fetchSensors } from "../../common/sensors/sensors.middleware";
 import { backendUrl } from "../../constants/backendUrl";
 import routes from "../../constants/routes";
 
+import Chart from "./chart/chart.component";
+
 import Header from "../../common/header/header.component";
 import PageTitle from "../../common/page-title/page-title.component";
 import { Button, TYPES } from "../../common/components/button/button.component";
@@ -138,6 +140,10 @@ class FlowerDetails extends Component {
       <>
         <Header />
         <PageTitle title="Flower details" />
+
+        <Chart selector="water" title="Water chart" />
+        <Chart selector="temperature" title="Temperature chart" />
+        <Chart selector="air" title="Air humidity" />
         {flowerInfo}
         <Button
           title="Edit flower"

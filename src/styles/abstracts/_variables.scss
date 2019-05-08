@@ -12,6 +12,23 @@ $description: #666666;
 $cancel-btn: #797979;
 $black: #000;
 
+// CHARTS
+$waterChartGradientStart: #C8D7FF;
+$waterChartGradientEnd: rgba(99, 161, 255, 0);
+$waterChartStrokeColor: #6D8DFF;
+$waterChartDotColor: #235EF5;
+
+$temperatureChartGradientStart: #FFCA63;
+$temperatureChartGradientEnd: #FFFFFF;
+$temperatureChartStrokeColor: #FFCA63;
+$temperatureChartDotColor: #FFCA63;
+
+$airChartGradientStart: #AEFFEC;
+$airChartGradientEnd: #FFFFFF;
+$airChartStrokeColor: #15E9A6;
+$airChartDotColor: #15E9A6;
+
+$ticksColor: #979EA6;
 $soil-water: #63a1ff;
 $light: #ffca63;
 $temperature: #46dc00;

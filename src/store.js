@@ -22,7 +22,8 @@ const store = createStore(
 
 store.subscribe(() => {
   saveState({
-    authReducer: store.getState().authReducer
+    authReducer: store.getState().authReducer,
+    chartReducer: store.getState().chartReducer
   });
 });
 
