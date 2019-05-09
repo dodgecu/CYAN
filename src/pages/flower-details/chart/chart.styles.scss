@@ -4,6 +4,19 @@
   stroke-width: 3;
 }
 
+.chart-input {
+  font-size: 1rem;
+  color: #333;
+  background: $input-bg;
+  border-radius: 5px;
+  text-align: center;
+  padding: 5px;
+}
+
+h2[class$='chart__title'] {
+  margin-bottom: 0;
+}
+
 .focus {
   stroke: #fff;
 }
@@ -108,6 +121,27 @@
 }
 
 .svg-box {
-  min-width: 300px;
-  max-width: 600px;
+  min-width: 290px;
+  max-width: 800px;
+}
+
+.charts {
+  padding: 0 20px;
+}
+
+.error-chart {
+  max-width: 100%;
+  display: flex;
+  padding: 50px 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.error-chart__title {
+  margin: 0;
+  text-align: center;
+  font-size: 1.2rem;
+  color: $danger;
 }

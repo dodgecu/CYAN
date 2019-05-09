@@ -15,7 +15,6 @@ const flowerInfo = props => {
         isConnected={props.connected}
         isNeedy={props.issues}
       />
-
       <FlowerInformation flowerType={props.type} dateAdded={props.created_at} />
       <Ranges
         soilMoisture={props.soil}
