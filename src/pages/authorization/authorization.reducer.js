@@ -9,7 +9,8 @@ import {
   UPDATE_FAIL,
   LOADING,
   REGISTERED_FALSE,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  CLEAR_MESSAGE
 } from "./authorization.action-types";
 
 const initialState = {
@@ -98,6 +99,11 @@ export default function(state = initialState, action) {
         user: null,
         isAuthenticated: false,
         isLoading: false
+      };
+    case CLEAR_MESSAGE:
+      return {
+        ...state,
+        message: null
       };
     default:
       return state;

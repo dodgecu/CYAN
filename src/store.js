@@ -22,7 +22,13 @@ const store = createStore(
 
 store.subscribe(() => {
   saveState({
-    authReducer: store.getState().authReducer,
+    authReducer: {
+      isAuthenticated: store.getState().authReducer.isAuthenticated,
+      isLoading: store.getState().authReducer.isLoading,
+      isRegistered: store.getState().authReducer.isRegistered,
+      token: store.getState().authReducer.token,
+      user: store.getState().authReducer.user
+    },
     chartReducer: store.getState().chartReducer
   });
 });

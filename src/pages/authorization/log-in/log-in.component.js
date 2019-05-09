@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
 
-import { logIn } from "../authorization.action";
+import { logIn, clearMessage } from "../authorization.action";
 import { requirePassword, email, requireEmail } from "./log-in.validation";
 
 import {
@@ -73,7 +73,10 @@ class LogIn extends Component {
             <CustomLink
               additionalClass="link--log-in"
               title="Sign up"
-              route={routes.signUp}
+              onClick={() => {
+                this.props.push(routes.signUp);
+                this.props.clearMessage();
+              }}
             />
           </div>
         </div>
@@ -94,5 +97,5 @@ LogIn = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { logIn, push }
+  { logIn, clearMessage, push }
 )(LogIn);
