@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import flowers from "../../constants/flowers";
 
-import { getType } from "./create-flower.action";
+import { setType } from "./create-flower.action";
 
 class CustomSelect extends Component {
   state = { selectActive: false };
@@ -25,7 +25,7 @@ class CustomSelect extends Component {
       soilHumidity: parseInt(option.defaultSoilHumidity)
     };
 
-    this.props.getType(defaults);
+    this.props.setType(defaults);
     this.setValue(value);
     this.closeOverlay();
   };
@@ -99,5 +99,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getType }
+  { setType }
 )(CustomSelect);
