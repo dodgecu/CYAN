@@ -14,8 +14,12 @@
 }
 
 .form__group {
-  padding: 40px 0;
   position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: 40px;
+  }
+
   &-title {
     font-size: 20px;
     font-weight: 600;
@@ -23,16 +27,17 @@
   }
   &-description {
     color: $description;
+    margin: 8px 0;
   }
   &--error {
     color: $danger;
-    position: absolute;
   }
 }
 
 .form__controls {
-  max-width: 95%;
+  max-width: 100%;
   margin: 0 auto;
+  padding: 0 10px;
 }
 
 .button__cancel {
@@ -60,9 +65,6 @@
   .create-flower {
     max-width: 50%;
     margin: 0 auto;
-  }
-  .form__group {
-    border-bottom: 1px solid $silver;
   }
   .form__controls {
     max-width: 100%;

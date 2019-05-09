@@ -43,7 +43,7 @@ class FlowerDetails extends Component {
   };
 
   redirect = () =>
-    this.props.push(routes.createFlower, {
+    this.props.push(routes.edit, {
       currentFlower: this.state.flower
     });
 

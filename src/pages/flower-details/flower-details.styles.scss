@@ -119,22 +119,12 @@
 
 @media screen and (min-width: 768px) {
   .flower-details {
-    display: flex;
-    padding: 0 50px;
+    max-width: 80%;
+    margin: 0 auto;
     &__main {
-      flex-basis: 50%;
-    }
-    &__desktop-view {
-      flex-basis: 50%;
-      text-align: right;
-      .scales__scales-block {
-        justify-content: flex-end;
-        &--soil,
-        &--airhumidity,
-        &--temperature,
-        &--light {
-          order: 1;
-        }
+      &--thumbnail {
+        max-width: 50%;
+        margin: 0 auto;
       }
     }
   }
