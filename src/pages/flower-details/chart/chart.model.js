@@ -135,6 +135,8 @@ ChartModel.prototype.addArea = function(data) {
   this.svg
     .data(this.data) //bind data
     .append("path")
+    .transition()
+    .duration(2400)
     .attr("d", area(this.data)) //Calls the area generator
     .attr("fill", `url(#${this.selector})`)
     .attr("clip-path", `url(#${this.selector}-clip)`);
@@ -143,6 +145,8 @@ ChartModel.prototype.addArea = function(data) {
   this.svg
     .data(this.data)
     .append("path")
+    .transition()
+    .duration(2400)
     .attr("class", `${this.selector}-chart__path`)
     .attr("stroke-width", "2")
     .attr("fill", "transparent")
@@ -152,7 +156,7 @@ ChartModel.prototype.addArea = function(data) {
   clipRect
     .transition()
     .duration(2000)
-    .ease(d3.easeLinear)
+    .ease(d3.easeSin)
     .attr("width", this.width);
 };
 
