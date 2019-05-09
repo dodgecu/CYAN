@@ -13,11 +13,16 @@ import {
   UPDATE_FAIL,
   LOADING,
   REGISTERED_FALSE,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  CLEAR_MESSAGE
 } from "./authorization.action-types";
 
 export const falseRegistered = () => dispatch => {
   dispatch({ type: REGISTERED_FALSE });
+};
+
+export const clearMessage = () => dispatch => {
+  dispatch({ type: CLEAR_MESSAGE });
 };
 
 export const register = ({ name, email, password }) => dispatch => {

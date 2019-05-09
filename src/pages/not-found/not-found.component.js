@@ -14,7 +14,7 @@ import CustomLink from "./../../common/components/custom-link/custom-link.compon
 //STYLES
 import "./not-found.styles.scss";
 
-function NotFound() {
+function NotFound(props) {
   return (
     <>
       <PageTitle title="Oops!" />
@@ -24,7 +24,12 @@ function NotFound() {
         <div className="not-found__description">
           Looks like this page is not exist
         </div>
-        <CustomLink title="Go home" route={routes.home} />
+        <CustomLink
+          title="Go home"
+          onClick={() => {
+            props.push(routes.logIn);
+          }}
+        />
       </div>
     </>
   );
