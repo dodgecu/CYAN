@@ -15,10 +15,10 @@ ChartModel.prototype.clear = function() {
 
 ChartModel.prototype.draw = function() {
   this.margin = {
-    top: 50,
+    top: 25,
     right: 50,
     bottom: 50,
-    left: 50
+    left: 25
   };
 
   this.width = 600 - this.margin.left - this.margin.right;
@@ -109,7 +109,6 @@ ChartModel.prototype.addAxes = function() {
 ChartModel.prototype.addArea = function(data) {
   this.data = data;
   const _this = this;
-  const animation = this.svg.transition().duration(2500);
   // line generator
 
   const line = d3
@@ -218,7 +217,12 @@ ChartModel.prototype.toolTip = function(data) {
           dataType[_this.selector]
         }`
     );
-
-    focus_g.attr("transform", `translate(-${tipRectWidth / 2}, -50)`);
+    if (d.hour === data[data.length - 1].hour) {
+      focus_g.attr("transform", `translate(-${tipRectWidth}, -50)`);
+    } else if (d.hour === data[0].hour) {
+      focus_g.attr("transform", `translate(0, -50)`);
+    } else {
+      focus_g.attr("transform", `translate(-${tipRectWidth / 2}, -50)`);
+    }
   }
 };

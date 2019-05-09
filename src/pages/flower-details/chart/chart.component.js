@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import moment from "moment";
 import { ChartModel } from "./chart.model";
 import { getDaySensorData } from "./chart.action";
+
+import NoDataChart from "./no-data-chart.component";
 
 import "./chart.styles.scss";
 
@@ -14,14 +16,17 @@ class Chart extends Component {
 
   fetchData(id = 1, fieldType = this.props.selector, time = 1556841600000) {
     this.props.getDaySensorData(1, fieldType, time).then(array => {
-      this.chart.init({
-        selector: this.props.selector,
-        data: array
-      });
-
-      this.chart.draw();
-      this.chart.addArea(array);
-      this.chart.toolTip(array);
+      if (array.length) {
+        this.chart.init({
+          selector: this.props.selector,
+          data: array
+        });
+        this.chart.draw();
+        this.chart.addArea(array);
+        this.chart.toolTip(array);
+      } else {
+        return false;
+      }
     });
   }
 
@@ -37,22 +42,31 @@ class Chart extends Component {
   }
 
   render() {
+    // const dateValue = moment(1556841600000).format('YYYY-MM-DD')
     return (
-      <div className={`${this.props.selector}-chart`}>
-        <input
-          ref={node => (this.datepicker = node)}
-          type="date"
-          name="date"
-          id="date"
-          onChange={this.pickDate.bind(this)}
-        />
-        <h2 className={`${this.props.selector}-chart__title`}>
-          {this.props.title}
-        </h2>
-        <div className="svg-box">
-          <svg className={`${this.props.selector}-chart__container`} />
+      <>
+        <div className={`${this.props.selector}-chart`}>
+          <input
+            ref={node => (this.datepicker = node)}
+            type="date"
+            name="date"
+            id="date"
+            className="chart-input"
+            onChange={this.pickDate.bind(this)}
+            // value={dateValue}
+          />
+          <h2 className={`${this.props.selector}-chart__title`}>
+            {this.props.title}
+          </h2>
+          <div className="svg-box">
+            {this.props[this.props.selector].length ? (
+              <svg className={`${this.props.selector}-chart__container`} />
+            ) : (
+              <NoDataChart selector={this.props.selector} />
+            )}
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

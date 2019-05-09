@@ -12,7 +12,7 @@ export const getDaySensorData = (
   time = 1556841600000
 ) => dispatch => {
   const url = `${backendUrl}/flower-sensor/${id}?type=${statisticType}&time=${time}`;
-  const dataType = statisticType;
+
   return axios
     .get(url)
     .then(sensorDayData => {
