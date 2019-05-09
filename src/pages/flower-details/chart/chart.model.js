@@ -22,9 +22,10 @@ ChartModel.prototype.draw = function() {
   };
 
   this.width = 600 - this.margin.left - this.margin.right;
-  this.height = 400 - this.margin.top - this.margin.bottom;
+  this.height = 250 - this.margin.top - this.margin.bottom;
   this.svg = d3
     .select(`.${this.selector}-chart__container`)
+    .attr("preserveAspectRatio", "none")
     .attr(
       "viewBox",
       `0 0  ${this.width + this.margin.left + this.margin.right} ${this.height +

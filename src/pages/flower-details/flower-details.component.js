@@ -8,7 +8,6 @@ import { fetchSensors } from "../../common/sensors/sensors.middleware";
 import { backendUrl } from "../../constants/backendUrl";
 import routes from "../../constants/routes";
 
-import Chart from "./chart/chart.component";
 import Header from "../../common/header/header.component";
 import PageTitle from "../../common/page-title/page-title.component";
 import { Button, TYPES } from "../../common/components/button/button.component";
