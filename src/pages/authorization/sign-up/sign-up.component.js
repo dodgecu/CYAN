@@ -11,6 +11,7 @@ import {
   email,
   requireEmail,
   maxLength15,
+  minLength6,
   passwordsMatch,
   repeatPassword
 } from "./sign-up.validation";
@@ -72,7 +73,7 @@ class SignUp extends Component {
               component={Input}
               label="Password"
               placeholder="Password"
-              validate={requirePassword}
+              validate={[requirePassword, minLength6]}
             />
             <Field
               name="repeat-password"

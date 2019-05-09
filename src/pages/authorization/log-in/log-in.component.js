@@ -25,7 +25,7 @@ class LogIn extends Component {
     this.props.logIn({ email, password });
   }
 
-  componentDidUpdate() {
+  componentWillUpdate() {
     if (this.props.isAuthenticated) {
       this.props.push(routes.dashboard);
     }
