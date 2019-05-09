@@ -10,6 +10,7 @@ import AmbientLight from "./create-flower-form-fields/ambient-light.component";
 import FlowerName from "./create-flower-form-fields/flower-name.component";
 import FlowerType from "./create-flower-form-fields/flower-type.component";
 import SoilHumidity from "./create-flower-form-fields/soil-humidity.component";
+import Delta from "./create-flower-form-fields/delta-params.component";
 import Package from "./create-flower-form-fields/package.component";
 
 import {
@@ -31,7 +32,8 @@ let createFlower = props => {
     airTemperature,
     airHumidity,
     light,
-    soilHumidity
+    soilHumidity,
+    delta
   } = props.initialValues;
 
   return (
@@ -43,6 +45,7 @@ let createFlower = props => {
         <AirTemp defaultVal={airTemperature} validForm={RenderRange} />
         <AmbientLight defaultVal={light} validForm={RenderRange} />
         <SoilHumidity defaultVal={soilHumidity} validForm={RenderRange} />
+        <Delta defaultVal={delta} validForm={RenderRange} />
         <Package validForm={RenderSelectDefault} />
         <Button title={"SAVE"} type="submit" buttonType={TYPES.PRIMARY} />
       </form>

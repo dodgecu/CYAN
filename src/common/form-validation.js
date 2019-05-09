@@ -39,6 +39,9 @@ const validate = field => {
   if (!field.light) {
     errors.light = "Please, specify light value";
   }
+  if (!field.delta) {
+    errors.delta = "Please, configure error margin";
+  }
 
   return errors;
 };
