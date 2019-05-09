@@ -109,8 +109,14 @@ ChartModel.prototype.addAxes = function() {
 ChartModel.prototype.addArea = function(data) {
   this.data = data;
   const _this = this;
-  // line generator
 
+  const clip = this.svg.append("clipPath").attr("id", `${this.selector}-clip`);
+  const clipRect = clip
+    .append("rect")
+    .attr("width", 0)
+    .attr("height", this.height);
+
+  // line generator
   const line = d3
     .line()
     .x(d => _this.xScale(d.hour))
@@ -121,7 +127,7 @@ ChartModel.prototype.addArea = function(data) {
   const area = d3
     .area()
     .x(d => _this.xScale(d.hour))
-    .y0(this.yScale(0))
+    .y0(this.height)
     .y1(d => _this.yScale(d.value))
     .curve(d3.curveMonotoneX); //apply smoothing to the line
 
@@ -130,7 +136,8 @@ ChartModel.prototype.addArea = function(data) {
     .data(this.data) //bind data
     .append("path")
     .attr("d", area(this.data)) //Calls the area generator
-    .attr("fill", `url(#${this.selector})`);
+    .attr("fill", `url(#${this.selector})`)
+    .attr("clip-path", `url(#${this.selector}-clip)`);
 
   // Append the path, bind the data, and call the line generator
   this.svg
@@ -139,7 +146,14 @@ ChartModel.prototype.addArea = function(data) {
     .attr("class", `${this.selector}-chart__path`)
     .attr("stroke-width", "2")
     .attr("fill", "transparent")
-    .attr("d", line(this.data));
+    .attr("d", line(this.data))
+    .attr("clip-path", `url(#${this.selector}-clip)`);
+
+  clipRect
+    .transition()
+    .duration(2000)
+    .ease(d3.easeLinear)
+    .attr("width", this.width);
 };
 
 ChartModel.prototype.toolTip = function(data) {
