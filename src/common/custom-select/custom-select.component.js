@@ -22,7 +22,8 @@ class CustomSelect extends Component {
       airTemperature: parseInt(option.defaultAirTemp),
       airHumidity: parseInt(option.defaultAirHumidity),
       light: parseInt(option.defaultLux),
-      soilHumidity: parseInt(option.defaultSoilHumidity)
+      soilHumidity: parseInt(option.defaultSoilHumidity),
+      delta: parseInt(option.delta)
     };
 
     this.props.setType(defaults);

@@ -99,6 +99,15 @@ class CreateFlower extends Component {
     this.props.resetState();
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.props.resetState();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     return (
       <>
