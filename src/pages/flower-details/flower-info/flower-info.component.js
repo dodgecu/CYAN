@@ -4,6 +4,7 @@ import DetailsMain from "./flower-info-components/flower-primary.component";
 import FlowerInformation from "./flower-info-components/flower-information.component";
 import Ranges from "./flower-info-components/flower-ranges.component";
 import Problems from "./flower-info-components/flower-problems.component";
+import Chart from "../chart/chart.component";
 
 const flowerInfo = props => {
   return (
@@ -26,6 +27,9 @@ const flowerInfo = props => {
           amblight={props.light}
         />
         <Problems isNeedy={props.issues} isConnected={props.connected} />
+        <Chart selector="water" title="Water chart" />
+        <Chart selector="temperature" title="Temperature chart" />
+        <Chart selector="air" title="Air humidity" />
       </div>
     </section>
   );

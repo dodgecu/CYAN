@@ -140,11 +140,6 @@ class FlowerDetails extends Component {
         <Header />
         <PageTitle title="Flower details" />
         {flowerInfo}
-        <section className="charts">
-          <Chart selector="water" title="Water chart" />
-          <Chart selector="temperature" title="Temperature chart" />
-          <Chart selector="air" title="Air humidity" />
-        </section>
         <Button
           title="Edit flower"
           type="submit"
