@@ -11,7 +11,7 @@ import routes from "../../../constants/routes";
 import "./sign-up-success.styles.scss";
 
 class SignUpSuccess extends Component {
-  componentDidMount() {
+  componentWillMount() {
     if (this.props.isRegistered) {
       this.props.falseRegistered();
     } else {
