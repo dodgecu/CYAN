@@ -15,7 +15,7 @@ const flowerPrimary = props => {
       <p className="flower-details__main--connection-status">
         {!props.isConnected ? (
           <>
-            <i className="material-icons">cell_wifi</i>
+            <i className="material-icons">warning</i>
             <span className="notconnected-message">
               There is no connection to the flower sensor!
             </span>
