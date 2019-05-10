@@ -5,13 +5,13 @@ import { push } from "connected-react-router";
 import Header from "../../../common/header/header.component";
 import CustomLink from "../../../common/components/custom-link/custom-link.component";
 
-import { falseRegistered } from "../authorization.action";
+import { falseRegistered, clearMessage } from "../authorization.action";
 import routes from "../../../constants/routes";
 
 import "./sign-up-success.styles.scss";
 
 class SignUpSuccess extends Component {
-  componentDidMount() {
+  componentWillMount() {
     if (this.props.isRegistered) {
       this.props.falseRegistered();
     } else {
@@ -33,6 +33,7 @@ class SignUpSuccess extends Component {
             <CustomLink
               title="Go to login"
               onClick={() => {
+                this.props.clearMessage();
                 this.props.push(routes.logIn);
               }}
             />
@@ -49,5 +50,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { push, falseRegistered }
+  { push, falseRegistered, clearMessage }
 )(SignUpSuccess);
