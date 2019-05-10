@@ -18,6 +18,7 @@ import Home from "./pages/home/home.component";
 import NotFound from "./pages/not-found/not-found.component";
 import SignUpSuccess from "./pages/authorization/sign-up-success/sign-up-success.component";
 import Spinner from "./common/components/spinner/spinner.component";
+import Landing from "./pages/landing/landing-page.component";
 
 //STYLES
 import "./App.scss";
@@ -29,6 +30,7 @@ class App extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Switch>
+            <Route exact path={routes.landing} component={Landing} />
             <Route exact path={routes.home} component={Home} />
             <Route exact path={routes.logIn} component={LogIn} />
             <Route exact path={routes.signUp} component={SignUp} />

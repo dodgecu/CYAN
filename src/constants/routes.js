@@ -6,7 +6,8 @@ const routes = {
   signUp: "/sign-up",
   userProfile: "/user-profile",
   dashboard: "/dashboard",
-  home: "/",
+  home: "/home",
+  landing: "/",
   notFound: "*",
   signUpSuccess: "/sign-up-success"
 };
