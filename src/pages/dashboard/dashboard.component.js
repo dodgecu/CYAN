@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 
 import "./dashboard.styles.scss";
+import { Button, TYPES } from "../../common/components/button/button.component";
 
 import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 import Header from "../../common/header/header.component";
@@ -76,6 +77,7 @@ class Dashboard extends React.Component {
   }
 
   renderThumbnails(data) {
+    console.log(data);
     return data.map(item => {
       const flowerId = parseInt(item.package_id);
       const active = this.props.sensors.filter(item => {
@@ -100,6 +102,7 @@ class Dashboard extends React.Component {
                 airHumidity={humidity}
                 ambientLight={temperature}
                 id={item._id}
+                picture={item.img_path}
               />
             </div>
           );
@@ -110,11 +113,12 @@ class Dashboard extends React.Component {
           <FlowerThumbnail
             name={item.name}
             type={item.type}
-            soilHumidity={item.soilHumidity}
+            soilMoisture={item.soilHumidity}
             airTemperature={item.airTemperature}
             airHumidity={item.airHumidity}
             ambientLight={item.light}
             id={item._id}
+            picture={item.img_path}
           />
         </div>
       );
@@ -163,7 +167,7 @@ class Dashboard extends React.Component {
                     <img
                       className="icon"
                       src={isAscendingSort ? ArrowUp : ArrowDown}
-                      alt=""
+                      alt="sort by alphabet"
                     />
                   </button>
                 </label>
@@ -175,7 +179,16 @@ class Dashboard extends React.Component {
               <div className="dashboard--sorting--problematical">
                 <label>
                   Problematical
-                  <input type="checkbox" />
+                  <button
+                    className="dashboard--sorting__button"
+                    // onClick={this.onSort}
+                  >
+                    <img
+                      className="icon"
+                      src={isAscendingSort ? ArrowUp : ArrowDown}
+                      alt="show problematical"
+                    />
+                  </button>
                 </label>
               </div>
             </div>
@@ -196,7 +209,16 @@ class Dashboard extends React.Component {
         </>
       );
     } else {
-      renderContent = "No flowers";
+      renderContent = (
+        <div className="empty-dashboard">
+          <p className="empty-dashboard__title">You have no flowers</p>
+          <div className="empty-dashboard--create">
+            <Link to="/create" className="create__link">
+              <Button buttonType={TYPES.PRIMARY} title="CREATE FLOWER" />
+            </Link>
+          </div>
+        </div>
+      );
     }
 
     return (

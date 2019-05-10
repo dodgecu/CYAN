@@ -4,7 +4,6 @@ import { push } from "connected-react-router";
 
 import routes from "./../../constants/routes";
 import "./flower-thumbnail.scss";
-import PlantImage from "../../assets/plant-image.png";
 
 function FlowerThumbnail(props) {
   const redirect = () => props.push(routes.flowerDetails, { flower: props.id });
@@ -16,40 +15,44 @@ function FlowerThumbnail(props) {
       </div>
       <div className="plant--info">
         <div className="plant">
-          <img className="plant__avatar" src={PlantImage} alt="plant" />
+          <img
+            className="plant__avatar"
+            src={require(`../../assets/${props.picture}`)}
+            alt="plant"
+          />
         </div>
         <div className="ranges">
-          <span className="ranges__title">Temperature</span>
-          <div className="range range--temperature">
+          <span className="ranges__title">Soil moisture</span>
+          <div className="range range--soil">
             <div
-              className="range--temperature__fill"
-              style={{ width: `${props.airTemperature}%` }}
+              className="range--soil__fill range--fill"
+              style={{ width: `${props.soilMoisture}%` }}
             />
-            <span className="percentage">{props.airTemperature}%</span>
+            <span className="percentage">{props.soilMoisture}%</span>
           </div>
-          <span className="ranges__title">Humidity</span>
+          <span className="ranges__title">Air humidity</span>
           <div className="range range--humidity">
             <div
-              className="range--humidity__fill"
+              className="range--humidity__fill range--fill"
               style={{ width: `${props.airHumidity}%` }}
             />
             <span className="percentage">{props.airHumidity}%</span>
           </div>
+          <span className="ranges__title">Air temperature</span>
+          <div className="range range--temperature">
+            <div
+              className="range--temperature__fill range--fill"
+              style={{ width: `${props.airTemperature}%` }}
+            />
+            <span className="percentage">{props.airTemperature}%</span>
+          </div>
           <span className="ranges__title">Ambient light</span>
           <div className="range range--light">
             <div
-              className="range--light__fill"
+              className="range--light__fill range--fill"
               style={{ width: `${props.ambientLight}%` }}
             />
             <span className="percentage">{props.ambientLight}%</span>
-          </div>
-          <span className="ranges__title">Soil humidity</span>
-          <div className="range range--soil">
-            <div
-              className="range--soil__fill"
-              style={{ width: `${props.soilHumidity}%` }}
-            />
-            <span className="percentage">{props.soilHumidity}%</span>
           </div>
         </div>
       </div>
