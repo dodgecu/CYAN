@@ -15,7 +15,7 @@ import routes from "../../constants/routes";
 import { backendUrl } from "../../constants/backendUrl";
 import "./create-flower.scss";
 
-import { Button } from "../../common/components/button/button.component";
+import { Button, TYPES } from "../../common/components/button/button.component";
 
 class CreateFlower extends Component {
   isEditPage = () => this.props.location.pathname === routes.edit;
@@ -133,6 +133,7 @@ class CreateFlower extends Component {
           customClass="button__cancel"
           type="text"
           title={"Cancel"}
+          buttonType={TYPES.DELETE}
         />
         <Footer />
       </>

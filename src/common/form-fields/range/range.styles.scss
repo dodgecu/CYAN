@@ -5,6 +5,7 @@
   &__grab {
     width: 10px;
     height: 10px;
+    margin-left: 10px;
     background-color: #d8d8d8;
     position: absolute;
     z-index: 2;
@@ -17,6 +18,7 @@
 
 .input-range {
   padding: 40px 0;
+  margin: 0 10px;
   &__label {
     white-space: unset;
     &--min,
