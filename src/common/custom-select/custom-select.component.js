@@ -67,7 +67,10 @@ class CustomSelect extends Component {
   render() {
     const { selectActive } = this.state;
     return (
-      <div className={`custom-select ${selectActive ? "open" : "closed"}`}>
+      <div
+        tabIndex={1}
+        className={`custom-select ${selectActive ? "open" : "closed"}`}
+      >
         <div className="custom-select__field">
           <div
             className="custom-select__placeholder"
