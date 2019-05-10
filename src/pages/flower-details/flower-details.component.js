@@ -66,6 +66,7 @@ class FlowerDetails extends Component {
         light,
         soilHumidity,
         created_at,
+        delta,
         img_path
       } = this.state.flower;
 
@@ -90,16 +91,16 @@ class FlowerDetails extends Component {
 
         const issues = [];
 
-        if (soilMoisture["Sensor data"] < soilHumidity) {
+        if (parseFloat(soilMoisture["Sensor data"]) - delta < soilHumidity) {
           issues.push("The flower is thirsty");
         }
-        if (humidity < airHumidity) {
+        if (parseFloat(humidity) - delta < airHumidity) {
           issues.push("Low level of humidity");
         }
-        if (light < flowerLight) {
+        if (parseFloat(light) - delta < flowerLight) {
           issues.push("The flower needs more light");
         }
-        if (temperature < airTemperature) {
+        if (parseFloat(temperature) - delta < airTemperature) {
           issues.push("The flower is cold");
         }
 

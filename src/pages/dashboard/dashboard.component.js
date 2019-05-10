@@ -130,70 +130,80 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    let renderContent;
     const { filter, flowers, isAscendingSort } = this.state;
     const data = flowers.filter(item =>
       item.name.toLowerCase().match(filter.toLowerCase())
     );
+    if (this.state.flowers.length) {
+      renderContent = (
+        <>
+          <section className="dashboard">
+            <div className="dashboard__search">
+              <label>Search:</label>
+              <input
+                className="dashboard__search--field"
+                type="text"
+                placeholder="Search"
+                value={filter}
+                onChange={this.onFilter}
+              />
+            </div>
+
+            <div className="dashboard--sorting">
+              <span>Sort by</span>
+
+              <div className="dashboard--sorting--alphabetical">
+                <label>
+                  Alphabetical
+                  <button
+                    className="dashboard--sorting__button"
+                    onClick={this.onSort}
+                  >
+                    <img
+                      className="icon"
+                      src={isAscendingSort ? ArrowUp : ArrowDown}
+                      alt=""
+                    />
+                  </button>
+                </label>
+              </div>
+            </div>
+            <div className="dashboard--sorting">
+              <span>Filter by</span>
+
+              <div className="dashboard--sorting--problematical">
+                <label>
+                  Problematical
+                  <input type="checkbox" />
+                </label>
+              </div>
+            </div>
+          </section>
+          <div className="dashboard--flower-list">
+            <h2>Flower list</h2>
+            {/*temporary*/}
+            <Link to="/create" className="dashboard__link">
+              CREATE FLOWER
+            </Link>
+            {/*temporary*/}
+            <div className="dashboard--thumbnail">
+              {data.length
+                ? this.renderThumbnails(data)
+                : this.renderFallbackMessage()}
+            </div>
+          </div>
+        </>
+      );
+    } else {
+      renderContent = "No flowers";
+    }
 
     return (
       <div className="dashboard--page">
         <PageTitle title="Dashboard" />
         <Header />
-        <section className="dashboard">
-          <div className="dashboard__search">
-            <label>Search:</label>
-            <input
-              className="dashboard__search--field"
-              type="text"
-              placeholder="Search"
-              value={filter}
-              onChange={this.onFilter}
-            />
-          </div>
-
-          <div className="dashboard--sorting">
-            <span>Sort by</span>
-
-            <div className="dashboard--sorting--alphabetical">
-              <label>
-                Alphabetical
-                <button
-                  className="dashboard--sorting__button"
-                  onClick={this.onSort}
-                >
-                  <img
-                    className="icon"
-                    src={isAscendingSort ? ArrowUp : ArrowDown}
-                    alt=""
-                  />
-                </button>
-              </label>
-            </div>
-          </div>
-          <div className="dashboard--sorting">
-            <span>Filter by</span>
-
-            <div className="dashboard--sorting--problematical">
-              <label>
-                Problematical
-                <input type="checkbox" />
-              </label>
-            </div>
-          </div>
-        </section>
-        <div className="dashboard--flower-list">
-          <h2>Flower list</h2>
-          {/*temporary*/}
-          <Link to="/create-update" className="dashboard__link">
-            CREATE FLOWER
-          </Link>
-          {/*temporary*/}
-          <div className="dashboard--thumbnail">
-            {data.length
-              ? this.renderThumbnails(data)
-              : this.renderFallbackMessage()}
-          </div>
-        </div>
+        {renderContent}
         <Footer />
       </div>
     );
@@ -207,4 +217,3 @@ export default connect(
   mapStateToProps,
   { fetchSensors }
 )(Dashboard);
-
