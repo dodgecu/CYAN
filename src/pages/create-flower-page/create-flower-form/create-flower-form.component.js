@@ -10,6 +10,7 @@ import AmbientLight from "./create-flower-form-fields/ambient-light.component";
 import FlowerName from "./create-flower-form-fields/flower-name.component";
 import FlowerType from "./create-flower-form-fields/flower-type.component";
 import SoilHumidity from "./create-flower-form-fields/soil-humidity.component";
+import Delta from "./create-flower-form-fields/delta-params.component";
 import Package from "./create-flower-form-fields/package.component";
 
 import {
@@ -25,35 +26,15 @@ const {
   RenderSelectDefault
 } = ValidateFields;
 
-let valuesToEdit = null;
-
 let createFlower = props => {
   const { handleSubmit, change } = props;
   const {
     airTemperature,
     airHumidity,
     light,
-    soilHumidity
+    soilHumidity,
+    delta
   } = props.initialValues;
-
-  if (props.currentFlower !== null) {
-    const {
-      airHumidity,
-      airTemperature,
-      light,
-      name,
-      type,
-      soilHumidity
-    } = props.currentFlower;
-    valuesToEdit = {
-      airHumidity: airHumidity,
-      airTemperature: airTemperature,
-      light: light,
-      name: name,
-      type: type,
-      soilHumidity: soilHumidity
-    };
-  }
 
   return (
     <section className="create-flower">
@@ -64,6 +45,7 @@ let createFlower = props => {
         <AirTemp defaultVal={airTemperature} validForm={RenderRange} />
         <AmbientLight defaultVal={light} validForm={RenderRange} />
         <SoilHumidity defaultVal={soilHumidity} validForm={RenderRange} />
+        <Delta defaultVal={delta} validForm={RenderRange} />
         <Package validForm={RenderSelectDefault} />
         <Button title={"SAVE"} type="submit" buttonType={TYPES.PRIMARY} />
       </form>
@@ -80,12 +62,12 @@ let createFlower = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, own) => {
   return {
     ...state.form,
     initialValues:
-      valuesToEdit !== null && !state.flowerType.type.type
-        ? valuesToEdit
+      own.currentFlower !== null && !state.flowerType.type.type
+        ? own.currentFlower
         : state.flowerType.type,
     type: state.flowerType
   };
@@ -94,8 +76,7 @@ const mapStateToProps = state => {
 createFlower = reduxForm({
   form: "create-flower-form",
   enableReinitialize: true,
-  validate,
-  destroyOnUnmount: false
+  validate
 })(createFlower);
 
 createFlower = connect(mapStateToProps)(createFlower);

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import flowers from "../../constants/flowers";
 
-import { getType } from "./create-flower.action";
+import { setType } from "./create-flower.action";
 
 class CustomSelect extends Component {
   state = { selectActive: false };
@@ -22,10 +22,11 @@ class CustomSelect extends Component {
       airTemperature: parseInt(option.defaultAirTemp),
       airHumidity: parseInt(option.defaultAirHumidity),
       light: parseInt(option.defaultLux),
-      soilHumidity: parseInt(option.defaultSoilHumidity)
+      soilHumidity: parseInt(option.defaultSoilHumidity),
+      delta: parseInt(option.delta)
     };
 
-    this.props.getType(defaults);
+    this.props.setType(defaults);
     this.setValue(value);
     this.closeOverlay();
   };
@@ -99,5 +100,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getType }
+  { setType }
 )(CustomSelect);

@@ -23,13 +23,13 @@
     &--option {
       display: flex;
       align-items: center;
-      padding: 0 10px;
+      padding: 0 25px;
       cursor: pointer;
       &:hover {
         background-color: #f6f6f6;
       }
       &:not(:last-child) {
-        border-bottom: 1px solid $input-placeholder;
+        border-bottom: 1px solid $input-bg;
       }
     }
 

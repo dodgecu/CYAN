@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
+import { resetState } from "../../common/custom-select/create-flower.action";
 
 import FlowerForm from "./create-flower-form/create-flower-form.component";
 import flowers from "../../constants/flowers";
@@ -17,7 +18,7 @@ import "./create-flower.scss";
 import { Button } from "../../common/components/button/button.component";
 
 class CreateFlower extends Component {
-  isEditPage = () => typeof this.props.location.state !== "undefined";
+  isEditPage = () => this.props.location.pathname === routes.edit;
 
   deleteFlower = () => {
     axios
@@ -47,11 +48,7 @@ class CreateFlower extends Component {
     };
     axios
       .put(`${backendUrl}/api/users`, JSON.stringify(userRecord), config)
-      .then(result => {
-        setTimeout(() => {
-          this.props.history.push(routes.dashboard);
-        }, 1000);
-      });
+      .then(res => this.props.history.push(routes.dashboard));
   };
 
   submitFlower = flower => {
@@ -66,7 +63,7 @@ class CreateFlower extends Component {
         }`,
         updateData
       )
-      .then(res => setTimeout(() => this.props.history.goBack(), 1000))
+      .then(res => this.props.history.goBack())
       .catch(err => err);
   };
 
@@ -97,6 +94,19 @@ class CreateFlower extends Component {
       this.updateFlower(flowerData);
     }
   };
+
+  componentWillUnmount() {
+    this.props.resetState();
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.props.resetState();
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   render() {
     return (
@@ -136,5 +146,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { push }
+  { push, resetState }
 )(CreateFlower);

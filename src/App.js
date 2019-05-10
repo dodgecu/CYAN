@@ -44,9 +44,10 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path={routes.createFlower}
+              path={[routes.createFlower, routes.edit]}
               component={CreateFlower}
             />
+
             <Route
               exact
               path={routes.signUpSuccess}

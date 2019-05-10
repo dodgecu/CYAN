@@ -15,16 +15,17 @@ ChartModel.prototype.clear = function() {
 
 ChartModel.prototype.draw = function() {
   this.margin = {
-    top: 50,
+    top: 25,
     right: 50,
     bottom: 50,
-    left: 50
+    left: 25
   };
 
   this.width = 600 - this.margin.left - this.margin.right;
-  this.height = 400 - this.margin.top - this.margin.bottom;
+  this.height = 250 - this.margin.top - this.margin.bottom;
   this.svg = d3
     .select(`.${this.selector}-chart__container`)
+    .attr("preserveAspectRatio", "none")
     .attr(
       "viewBox",
       `0 0  ${this.width + this.margin.left + this.margin.right} ${this.height +
@@ -109,9 +110,14 @@ ChartModel.prototype.addAxes = function() {
 ChartModel.prototype.addArea = function(data) {
   this.data = data;
   const _this = this;
-  const animation = this.svg.transition().duration(2500);
-  // line generator
 
+  const clip = this.svg.append("clipPath").attr("id", `${this.selector}-clip`);
+  const clipRect = clip
+    .append("rect")
+    .attr("width", 0)
+    .attr("height", this.height);
+
+  // line generator
   const line = d3
     .line()
     .x(d => _this.xScale(d.hour))
@@ -122,7 +128,7 @@ ChartModel.prototype.addArea = function(data) {
   const area = d3
     .area()
     .x(d => _this.xScale(d.hour))
-    .y0(this.yScale(0))
+    .y0(this.height)
     .y1(d => _this.yScale(d.value))
     .curve(d3.curveMonotoneX); //apply smoothing to the line
 
@@ -130,17 +136,29 @@ ChartModel.prototype.addArea = function(data) {
   this.svg
     .data(this.data) //bind data
     .append("path")
+    .transition()
+    .duration(2400)
     .attr("d", area(this.data)) //Calls the area generator
-    .attr("fill", `url(#${this.selector})`);
+    .attr("fill", `url(#${this.selector})`)
+    .attr("clip-path", `url(#${this.selector}-clip)`);
 
   // Append the path, bind the data, and call the line generator
   this.svg
     .data(this.data)
     .append("path")
+    .transition()
+    .duration(2400)
     .attr("class", `${this.selector}-chart__path`)
     .attr("stroke-width", "2")
     .attr("fill", "transparent")
-    .attr("d", line(this.data));
+    .attr("d", line(this.data))
+    .attr("clip-path", `url(#${this.selector}-clip)`);
+
+  clipRect
+    .transition()
+    .duration(2000)
+    .ease(d3.easeSin)
+    .attr("width", this.width);
 };
 
 ChartModel.prototype.toolTip = function(data) {
@@ -218,7 +236,12 @@ ChartModel.prototype.toolTip = function(data) {
           dataType[_this.selector]
         }`
     );
-
-    focus_g.attr("transform", `translate(-${tipRectWidth / 2}, -50)`);
+    if (d.hour === data[data.length - 1].hour) {
+      focus_g.attr("transform", `translate(-${tipRectWidth}, -50)`);
+    } else if (d.hour === data[0].hour) {
+      focus_g.attr("transform", `translate(0, -50)`);
+    } else {
+      focus_g.attr("transform", `translate(-${tipRectWidth / 2}, -50)`);
+    }
   }
 };

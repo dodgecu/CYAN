@@ -6,7 +6,8 @@ const flowers = [
     defaultLux: "60",
     defaultAirTemp: "23",
     defaultAirHumidity: "29",
-    defaultSoilHumidity: "56"
+    defaultSoilHumidity: "56",
+    delta: "5"
   },
   {
     id: 2,
@@ -15,7 +16,8 @@ const flowers = [
     defaultLux: "50",
     defaultAirTemp: "18",
     defaultAirHumidity: "45",
-    defaultSoilHumidity: "52"
+    defaultSoilHumidity: "52",
+    delta: "5"
   },
   {
     id: 3,
@@ -24,7 +26,8 @@ const flowers = [
     defaultLux: "34",
     defaultAirTemp: "28",
     defaultAirHumidity: "43",
-    defaultSoilHumidity: "71"
+    defaultSoilHumidity: "71",
+    delta: "5"
   },
   {
     id: 4,
@@ -33,7 +36,8 @@ const flowers = [
     defaultLux: "14",
     defaultAirTemp: "19",
     defaultAirHumidity: "33",
-    defaultSoilHumidity: "55"
+    defaultSoilHumidity: "55",
+    delta: "5"
   },
   {
     id: 5,
@@ -42,7 +46,8 @@ const flowers = [
     defaultLux: "16",
     defaultAirTemp: "24",
     defaultAirHumidity: "31",
-    defaultSoilHumidity: "10"
+    defaultSoilHumidity: "10",
+    delta: "5"
   },
   {
     id: 6,
@@ -51,7 +56,8 @@ const flowers = [
     defaultLux: "86",
     defaultAirTemp: "25",
     defaultAirHumidity: "89",
-    defaultSoilHumidity: "52"
+    defaultSoilHumidity: "52",
+    delta: "5"
   },
   {
     id: 7,
@@ -60,7 +66,8 @@ const flowers = [
     defaultLux: "56",
     defaultAirTemp: "33",
     defaultAirHumidity: "76",
-    defaultSoilHumidity: "81"
+    defaultSoilHumidity: "81",
+    delta: "5"
   },
   {
     id: 8,
@@ -69,7 +76,8 @@ const flowers = [
     defaultLux: "16",
     defaultAirTemp: "43",
     defaultAirHumidity: "59",
-    defaultSoilHumidity: "36"
+    defaultSoilHumidity: "36",
+    delta: "5"
   }
 ];
 
