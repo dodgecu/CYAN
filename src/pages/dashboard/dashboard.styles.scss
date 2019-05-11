@@ -75,6 +75,11 @@
       .icon {
         max-width: 10px;
 
+        &--down {
+          filter: invert(56%) sepia(96%) saturate(612%) hue-rotate(356deg)
+            brightness(101%) contrast(91%);
+        }
+
         &:hover {
           background: none;
         }
