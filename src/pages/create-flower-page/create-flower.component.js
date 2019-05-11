@@ -17,7 +17,7 @@ import "./create-flower.scss";
 
 import { Button, TYPES } from "../../common/components/button/button.component";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 class CreateFlower extends Component {

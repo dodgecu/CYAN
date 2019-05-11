@@ -28,7 +28,7 @@ class Dashboard extends React.Component {
       sortBy: "name",
       isAscendingSort: true
     };
-
+    this.issues = {};
     this.onFilter = this.onFilter.bind(this);
     this.onSort = this.onSort.bind(this);
     this.onSelect = this.onSelect.bind(this);
@@ -76,6 +76,8 @@ class Dashboard extends React.Component {
     });
   }
 
+  sortByProblems = () => {};
+
   renderThumbnails(data) {
     return data.map(item => {
       const flowerId = parseInt(item.package_id);
@@ -85,28 +87,48 @@ class Dashboard extends React.Component {
         }
         return item;
       });
+
       if (active.length > 0) {
         if (active[0].pack !== undefined) {
           const {
-            sensors: { humidity, temperature, soilMoisture }
+            sensors: { humidity, temperature, soilMoisture, light }
           } = active[0].pack;
+
+          if (
+            parseFloat(soilMoisture["Sensor data"]) + item.delta <
+            item.soilHumidity
+          ) {
+            this.issues["name"] = item.name;
+          }
+          if (parseFloat(humidity) + item.delta < item.airHumidity) {
+            this.issues["name"] = item.name;
+          }
+          if (parseFloat(light) + item.delta < item.light) {
+            this.issues["name"] = item.name;
+          }
+          if (parseFloat(temperature) + item.delta < item.airTemperature) {
+            this.issues["name"] = item.name;
+          }
 
           return (
             <div className="dashboard--thumbnail__item" key={item._id}>
               <FlowerThumbnail
                 name={item.name}
                 type={item.type}
-                soilHumidity={soilMoisture["Sensor data"]}
+                soilMoisture={soilMoisture["Sensor data"]}
                 airTemperature={temperature}
                 airHumidity={humidity}
-                ambientLight={temperature}
+                ambientLight={light}
                 id={item._id}
                 picture={item.img_path}
+                disconnected={false}
+                issues={this.issues.name === item.name ? true : false}
               />
             </div>
           );
         }
       }
+
       return (
         <div className="dashboard--thumbnail__item" key={item._id}>
           <FlowerThumbnail
@@ -118,6 +140,8 @@ class Dashboard extends React.Component {
             ambientLight={item.light}
             id={item._id}
             picture={item.img_path}
+            disconnected={true}
+            issues={false}
           />
         </div>
       );
@@ -138,6 +162,7 @@ class Dashboard extends React.Component {
     const data = flowers.filter(item =>
       item.name.toLowerCase().match(filter.toLowerCase())
     );
+
     if (this.state.flowers.length) {
       renderContent = (
         <>
@@ -180,7 +205,7 @@ class Dashboard extends React.Component {
                   Problematical
                   <button
                     className="dashboard--sorting__button"
-                    // onClick={this.onSort}
+                    onClick={this.sortByProblems}
                   >
                     <img
                       className="icon"
@@ -194,11 +219,9 @@ class Dashboard extends React.Component {
           </section>
           <div className="dashboard--flower-list">
             <h2>Flower list</h2>
-            {/*temporary*/}
             <Link to="/create" className="dashboard__link">
               CREATE FLOWER
             </Link>
-            {/*temporary*/}
             <div className="dashboard--thumbnail">
               {data.length
                 ? this.renderThumbnails(data)

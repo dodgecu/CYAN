@@ -91,16 +91,16 @@ class FlowerDetails extends Component {
 
         const issues = [];
 
-        if (parseFloat(soilMoisture["Sensor data"]) - delta < soilHumidity) {
+        if (parseFloat(soilMoisture["Sensor data"]) + delta < soilHumidity) {
           issues.push("The flower is thirsty");
         }
-        if (parseFloat(humidity) - delta < airHumidity) {
+        if (parseFloat(humidity) + delta < airHumidity) {
           issues.push("Low level of humidity");
         }
-        if (parseFloat(light) - delta < flowerLight) {
+        if (parseFloat(light) + delta < flowerLight) {
           issues.push("The flower needs more light");
         }
-        if (parseFloat(temperature) - delta < airTemperature) {
+        if (parseFloat(temperature) + delta < airTemperature) {
           issues.push("The flower is cold");
         }
 

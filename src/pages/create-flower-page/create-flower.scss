@@ -69,3 +69,18 @@
     max-width: 100%;
   }
 }
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    width: 100%;
+  }
+  .form__controls {
+    max-width: 95%;
+    margin: 0 auto;
+  }
+  .input-range {
+    margin: 0;
+  }
+  .default-val__grab {
+    margin-left: 0;
+  }
+}
