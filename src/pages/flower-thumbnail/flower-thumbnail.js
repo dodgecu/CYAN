@@ -10,16 +10,15 @@ function FlowerThumbnail(props) {
   return (
     <div className="thumbnail">
       <div className="thumbnail--flower">
-        <h2 className="thumbnail__name">{props.name}</h2>
-        {props.disconnected ? (
-          <>
-            <i className="material-icons">warning</i>
-            <span className="notconnected-message">
-              There is no connection to the flower sensor!
-            </span>
-          </>
-        ) : null}
-        <i className="material-icons">{props.issues ? "warning" : null}</i>
+        <div className="title">
+          <h2 className="title__name">{props.name}</h2>
+          {props.disconnected ? (
+            <>
+              <i className="title__icon material-icons">warning</i>
+            </>
+          ) : null}
+          <i className="material-icons">{props.issues ? "warning" : null}</i>
+        </div>
         <p className="thumbnail__type">{props.type}</p>
       </div>
       <div className="plant--info">

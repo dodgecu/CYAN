@@ -3,6 +3,7 @@
 .dashboard--page {
   max-width: 100%;
   font-family: 'Roboto', sans-serif;
+  color: $font-black;
 }
 
 .empty-dashboard {
@@ -41,13 +42,13 @@
 
   &__link {
     text-decoration: none;
-    color: #13ea6e;
+    color: $focus;
     font-size: 0.8rem;
     font-weight: 700;
     display: inline-block;
     width: 100%;
     text-align: right;
-    padding: 10px 0;
+    padding: 10px;
   }
 
   &--sorting {
@@ -67,7 +68,7 @@
       margin: 10px 0;
       align-self: flex-start;
       background: transparent;
-      color: #ffffff;
+      color: $white;
       cursor: pointer;
       outline: none;
       position: relative;
