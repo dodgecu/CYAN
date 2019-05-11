@@ -13,6 +13,7 @@ import {
 import Input from "../../../common/components/input/input.component";
 
 import { required, passwordsMatch } from "../../../common/form-validation";
+import { minLength6 } from "./user-profile.validation";
 
 class UpdatePassword extends Component {
   onSubmit(inputValue) {
@@ -26,12 +27,9 @@ class UpdatePassword extends Component {
       <div className="authorization--form">
         <h2 className="authorization--form__title">Password reset</h2>
         <form
-          onChange={handleSubmit(
-            value =>
-              this.onSubmit.bind(this)({ password: value.password }) && (
-                <span>j</span>
-              )
-          )}
+          onSubmit={handleSubmit(value => {
+            this.onSubmit.bind(this)({ password: value.password });
+          })}
         >
           <Field
             name="password"
@@ -39,6 +37,7 @@ class UpdatePassword extends Component {
             component={Input}
             label="Password"
             placeholder="Password"
+            validate={minLength6}
           />
           <Field
             name="Repeat password"
