@@ -20,8 +20,6 @@ class UpdateName extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-    console.log(this.props.initialValues);
-    const defaultName = "user";
     return (
       <>
         <div className="authorization--form">
