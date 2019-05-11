@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
+import store from "../../../store";
 
 import { updateUser } from "../authorization.action";
 import "./user-profile.scss";
@@ -21,8 +22,16 @@ class UserProfile extends Component {
         <Header />
         <div className="authorization authorization--update">
           <h1>Account settings</h1>
-          <UpdateName />
-          <UpdateEmail />
+          <UpdateName
+            initialValues={{
+              name: store.getState().authReducer.user.name || "hello"
+            }}
+          />
+          <UpdateEmail
+            initialValues={{
+              email: store.getState().authReducer.user.email || "hello"
+            }}
+          />
           <UpdatePassword />
           <DeleteProfile />
         </div>
