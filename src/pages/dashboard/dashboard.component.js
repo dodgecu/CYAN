@@ -154,7 +154,7 @@ class Dashboard extends React.Component {
             </div>
 
             <div className="dashboard--sorting">
-              <span>Sort by</span>
+              <span className="dashboard--sorting__title">Sort by</span>
 
               <div className="dashboard--sorting--alphabetical">
                 <label>
@@ -175,7 +175,7 @@ class Dashboard extends React.Component {
               </div>
             </div>
             <div className="dashboard--sorting">
-              <span>Filter by</span>
+              <span className="dashboard--sorting__title">Filter by</span>
 
               <div className="dashboard--sorting--problematical">
                 <label>
