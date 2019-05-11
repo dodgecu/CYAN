@@ -81,6 +81,7 @@ export const deleteUser = () => dispatch => {
 };
 
 export const updateUser = property => dispatch => {
+  let body = null;
   dispatch({ type: LOADING });
   const url = `${backendUrl}/api/auth/user/${Object.keys(property)}`;
 
@@ -91,12 +92,18 @@ export const updateUser = property => dispatch => {
     }
   };
 
-  const body = JSON.stringify(property);
+  if (Object.keys(property)[0] === "password") {
+    property.password = md5(property.password);
+  }
+
+  body = JSON.stringify(property);
 
   axios
     .put(url, body, config)
     .then(res => dispatch({ type: UPDATE_SUCCESS, payload: res.data }))
-    .catch(err => dispatch({ type: UPDATE_FAIL, payload: err.response }));
+    .catch(err =>
+      dispatch({ type: UPDATE_FAIL, payload: err.response.message })
+    );
 };
 
 export const logOut = () => dispatch => {

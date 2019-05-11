@@ -80,7 +80,6 @@ export default function(state = initialState, action) {
         isLoading: false
       };
     case UPDATE_FAIL:
-      localStorage.removeItem("token");
       return {
         ...state,
         message: action.payload.message,

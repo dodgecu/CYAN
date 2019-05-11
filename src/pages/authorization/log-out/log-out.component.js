@@ -13,6 +13,8 @@ import "./log-out.styles.scss";
 
 class LogOut extends Component {
   onLogoutClick() {
+    debugger;
+    this.props.push("/");
     this.props.logOut();
   }
 
