@@ -45,10 +45,7 @@ class UpdateEmail extends Component {
 }
 
 const mapStateToProps = state => ({
-  message: state.authReducer.message,
-  initialValues: {
-    email: state.authReducer.user.email
-  }
+  message: state.authReducer.message
 });
 
 UpdateEmail = reduxForm({
