@@ -164,7 +164,9 @@ class Dashboard extends React.Component {
                     onClick={this.onSort}
                   >
                     <img
-                      className="icon"
+                      className={
+                        isAscendingSort ? "icon icon--up" : "icon icon--down"
+                      }
                       src={isAscendingSort ? ArrowUp : ArrowDown}
                       alt="sort by alphabet"
                     />
@@ -184,7 +186,7 @@ class Dashboard extends React.Component {
                   >
                     <img
                       className="icon"
-                      src={isAscendingSort ? ArrowUp : ArrowDown}
+                      src={ArrowUp}
                       alt="show problematical"
                     />
                   </button>
