@@ -20,7 +20,8 @@ class UpdateName extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-
+    console.log(this.props.initialValues);
+    const defaultName = "user";
     return (
       <>
         <div className="authorization--form">
@@ -46,10 +47,10 @@ class UpdateName extends Component {
 }
 
 const mapStateToProps = state => ({
-  message: state.authReducer.message,
-  initialValues: {
+  message: state.authReducer.message
+  /*   initialValues: {
     name: state.authReducer.user.name
-  }
+  } */
 });
 
 UpdateName = reduxForm({
