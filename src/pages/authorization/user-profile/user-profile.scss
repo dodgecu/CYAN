@@ -19,7 +19,8 @@
     &--primary {
       background: $focus;
 
-      &:disabled {
+      &:disabled,
+      &:focus {
         background-color: $silver;
       }
     }

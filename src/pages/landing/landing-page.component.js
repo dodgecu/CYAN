@@ -8,9 +8,9 @@ const landing = () => {
     <>
       <header className="landing-header">
         <div className="landing-header__head-logo">
-          <h1 className="landing-header__head-logo--title">Cyander</h1>
+          <h1 className="landing-header__head-logo--title">f[love].it</h1>
           <p className="landing-header__head-logo--tagline">
-            My first online garden app
+            Your first online garden app
           </p>
         </div>
         <blockquote className="landing-header__quote">
