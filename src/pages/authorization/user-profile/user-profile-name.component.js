@@ -53,7 +53,8 @@ const mapStateToProps = state => ({
 });
 
 UpdateName = reduxForm({
-  form: "update-name"
+  form: "update-name",
+  enableReinitialize: true
 })(UpdateName);
 
 export default connect(

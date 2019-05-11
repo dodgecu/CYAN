@@ -19,27 +19,26 @@
     color: #333333;
   }
   &__type {
-    margin: 5px 0;
+    font-size: 12px;
   }
 }
 
 .plant--info {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-evenly;
-  max-width: 360px;
+  margin: 20px 0;
 }
 
 .ranges {
   width: 100%;
 
   .percentage {
-    font-size: 0.5rem;
+    font-size: 12px;
     padding-left: 5px;
   }
 
   &__title {
-    font-size: 0.5rem;
+    font-size: 12px;
   }
 
   .range {
@@ -47,8 +46,8 @@
     align-items: center;
 
     &--fill {
-      height: 3px;
-      border-radius: 4px;
+      height: 5px;
+      border-radius: 5px;
     }
 
     &--temperature__fill {
@@ -76,10 +75,10 @@
 
 .details {
   text-decoration: none;
-  color: #235ef5;
-  font-size: 0.7rem;
+  color: $linkColor;
   cursor: pointer;
   position: absolute;
   bottom: 10px;
-  left: 10px;
+  margin: 10px 0;
+  font-size: 14px;
 }

@@ -35,6 +35,7 @@ class UpdateEmail extends Component {
             component={Input}
             label="Email"
             validate={email}
+            initialValues={email}
           />
           <Button title="UPDATE" type="submit" buttonType={TYPES.PRIMARY} />
         </form>
