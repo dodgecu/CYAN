@@ -17,8 +17,35 @@ import "./create-flower.scss";
 
 import { Button, TYPES } from "../../common/components/button/button.component";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 class CreateFlower extends Component {
+  componentWillUnmount() {
+    this.props.resetState();
+  }
+
+  componentDidMount() {
+    toast.configure({
+      autoClose: 4000,
+      progressStyle: {
+        backgroundImage: "linear-gradient(to right, #46a25f, #15d94a)"
+      }
+    });
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.props.resetState();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   isEditPage = () => this.props.location.pathname === routes.edit;
+
+  notify = message => toast(message);
 
   deleteFlower = () => {
     axios
@@ -27,7 +54,10 @@ class CreateFlower extends Component {
           this.props.location.state.currentFlower._id
         }`
       )
-      .then(res => this.props.history.push(routes.dashboard))
+      .then(res => {
+        this.props.history.push(routes.dashboard);
+        this.notify(`${res.data.name} has been successfully removed!`);
+      })
       .catch(err => err);
   };
 
@@ -63,7 +93,10 @@ class CreateFlower extends Component {
         }`,
         updateData
       )
-      .then(res => this.props.history.goBack())
+      .then(res => {
+        this.props.history.goBack();
+        this.notify(`${res.data.name} has been successfully updated!`);
+      })
       .catch(err => err);
   };
 
@@ -85,6 +118,7 @@ class CreateFlower extends Component {
 
     if (!this.isEditPage()) {
       this.submitFlower(flowerParams).then(res => {
+        this.notify(`${res.data.name} has been successfully created!`);
         this.recordUserFlower({
           flowerRecord: res.data._id,
           userRecord: userId
@@ -94,19 +128,6 @@ class CreateFlower extends Component {
       this.updateFlower(flowerData);
     }
   };
-
-  componentWillUnmount() {
-    this.props.resetState();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.location.pathname !== this.props.location.pathname) {
-      this.props.resetState();
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   render() {
     return (
