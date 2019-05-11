@@ -41,7 +41,9 @@ export const register = ({ name, email, password }) => dispatch => {
   axios
     .post(url, body, config)
     .then(res => dispatch({ type: REGISTRATION_SUCCESS, payload: res.data }))
-    .catch(err => dispatch({ type: REGISTRATION_FAIL, payload: err.response }));
+    .catch(err =>
+      dispatch({ type: REGISTRATION_FAIL, payload: err.response.data.message })
+    );
 };
 
 export const logIn = ({ email, password }) => dispatch => {
@@ -60,10 +62,13 @@ export const logIn = ({ email, password }) => dispatch => {
   axios
     .post(url, body, config)
     .then(res => dispatch({ type: LOGIN_SUCCESS, payload: res.data }))
-    .catch(err => dispatch({ type: LOGIN_FAIL, payload: err.response }));
+    .catch(err =>
+      dispatch({ type: LOGIN_FAIL, payload: err.response.data.message })
+    );
 };
 
 export const deleteUser = () => dispatch => {
+  debugger;
   dispatch({ type: LOADING });
   const url = `${backendUrl}/api/auth/user`;
 
@@ -77,7 +82,9 @@ export const deleteUser = () => dispatch => {
   axios
     .delete(url, config)
     .then(res => dispatch({ type: DELETE_SUCCESS, payload: res.data }))
-    .catch(err => dispatch({ type: DELETE_FAIL, payload: err.response }));
+    .catch(err =>
+      dispatch({ type: DELETE_FAIL, payload: err.response.data.message })
+    );
 };
 
 export const updateUser = property => dispatch => {
@@ -102,7 +109,7 @@ export const updateUser = property => dispatch => {
     .put(url, body, config)
     .then(res => dispatch({ type: UPDATE_SUCCESS, payload: res.data }))
     .catch(err =>
-      dispatch({ type: UPDATE_FAIL, payload: err.response.message })
+      dispatch({ type: UPDATE_FAIL, payload: err.response.data.message })
     );
 };
 

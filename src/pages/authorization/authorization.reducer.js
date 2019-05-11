@@ -34,7 +34,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        message: action.payload.data.message
+        message: action.payload
       };
     case LOADING:
       return {
@@ -55,22 +55,23 @@ export default function(state = initialState, action) {
         user: null,
         isAuthenticated: false,
         isLoading: false,
-        message: action.payload.data.message
+        message: action.payload
       };
     case DELETE_SUCCESS:
       localStorage.removeItem("token");
       return {
         ...state,
-        message: action.payload.message,
+        message: action.payload,
         user: null,
         token: null,
+        isAuthenticated: false,
         isDeleted: true,
         isLoading: false
       };
     case DELETE_FAIL:
       return {
         ...state,
-        message: action.payload.message,
+        message: action.payload,
         isDeleted: false
       };
     case UPDATE_SUCCESS:
@@ -82,7 +83,7 @@ export default function(state = initialState, action) {
     case UPDATE_FAIL:
       return {
         ...state,
-        message: action.payload.message,
+        message: action.payload,
         isLoading: false
       };
     case REGISTERED_FALSE:
