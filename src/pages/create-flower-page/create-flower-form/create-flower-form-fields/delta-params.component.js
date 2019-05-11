@@ -9,7 +9,6 @@ const delta = props => {
       minValue={0}
       maxValue={100}
       unit="%"
-      id="margin"
       label="Margin of error"
       id="error-margin"
       name="delta"

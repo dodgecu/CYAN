@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 
 import "./dashboard.styles.scss";
+import { Button, TYPES } from "../../common/components/button/button.component";
 
 import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 import Header from "../../common/header/header.component";
@@ -100,6 +101,7 @@ class Dashboard extends React.Component {
                 airHumidity={humidity}
                 ambientLight={temperature}
                 id={item._id}
+                picture={item.img_path}
               />
             </div>
           );
@@ -110,11 +112,12 @@ class Dashboard extends React.Component {
           <FlowerThumbnail
             name={item.name}
             type={item.type}
-            soilHumidity={item.soilHumidity}
+            soilMoisture={item.soilHumidity}
             airTemperature={item.airTemperature}
             airHumidity={item.airHumidity}
             ambientLight={item.light}
             id={item._id}
+            picture={item.img_path}
           />
         </div>
       );
@@ -130,70 +133,98 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    let renderContent;
     const { filter, flowers, isAscendingSort } = this.state;
     const data = flowers.filter(item =>
       item.name.toLowerCase().match(filter.toLowerCase())
     );
+    if (this.state.flowers.length) {
+      renderContent = (
+        <>
+          <section className="dashboard">
+            <div className="dashboard__search">
+              <label>Search:</label>
+              <input
+                className="dashboard__search--field"
+                type="text"
+                placeholder="Search"
+                value={filter}
+                onChange={this.onFilter}
+              />
+            </div>
+
+            <div className="dashboard--sorting">
+              <span>Sort by</span>
+
+              <div className="dashboard--sorting--alphabetical">
+                <label>
+                  Alphabetical
+                  <button
+                    className="dashboard--sorting__button"
+                    onClick={this.onSort}
+                  >
+                    <img
+                      className="icon"
+                      src={isAscendingSort ? ArrowUp : ArrowDown}
+                      alt="sort by alphabet"
+                    />
+                  </button>
+                </label>
+              </div>
+            </div>
+            <div className="dashboard--sorting">
+              <span>Filter by</span>
+
+              <div className="dashboard--sorting--problematical">
+                <label>
+                  Problematical
+                  <button
+                    className="dashboard--sorting__button"
+                    // onClick={this.onSort}
+                  >
+                    <img
+                      className="icon"
+                      src={isAscendingSort ? ArrowUp : ArrowDown}
+                      alt="show problematical"
+                    />
+                  </button>
+                </label>
+              </div>
+            </div>
+          </section>
+          <div className="dashboard--flower-list">
+            <h2>Flower list</h2>
+            {/*temporary*/}
+            <Link to="/create" className="dashboard__link">
+              CREATE FLOWER
+            </Link>
+            {/*temporary*/}
+            <div className="dashboard--thumbnail">
+              {data.length
+                ? this.renderThumbnails(data)
+                : this.renderFallbackMessage()}
+            </div>
+          </div>
+        </>
+      );
+    } else {
+      renderContent = (
+        <div className="empty-dashboard">
+          <p className="empty-dashboard__title">You have no flowers</p>
+          <div className="empty-dashboard--create">
+            <Link to="/create" className="create__link">
+              <Button buttonType={TYPES.PRIMARY} title="CREATE FLOWER" />
+            </Link>
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div className="dashboard--page">
         <PageTitle title="Dashboard" />
         <Header />
-        <section className="dashboard">
-          <div className="dashboard__search">
-            <label>Search:</label>
-            <input
-              className="dashboard__search--field"
-              type="text"
-              placeholder="Search"
-              value={filter}
-              onChange={this.onFilter}
-            />
-          </div>
-
-          <div className="dashboard--sorting">
-            <span>Sort by</span>
-
-            <div className="dashboard--sorting--alphabetical">
-              <label>
-                Alphabetical
-                <button
-                  className="dashboard--sorting__button"
-                  onClick={this.onSort}
-                >
-                  <img
-                    className="icon"
-                    src={isAscendingSort ? ArrowUp : ArrowDown}
-                    alt=""
-                  />
-                </button>
-              </label>
-            </div>
-          </div>
-          <div className="dashboard--sorting">
-            <span>Filter by</span>
-
-            <div className="dashboard--sorting--problematical">
-              <label>
-                Problematical
-                <input type="checkbox" />
-              </label>
-            </div>
-          </div>
-        </section>
-        <div className="dashboard--flower-list">
-          <h2>Flower list</h2>
-          {/*temporary*/}
-          <Link to="/create-update" className="dashboard__link">
-            CREATE FLOWER
-          </Link>
-          {/*temporary*/}
-          <div className="dashboard--thumbnail">
-            {data.length
-              ? this.renderThumbnails(data)
-              : this.renderFallbackMessage()}
-          </div>
-        </div>
+        {renderContent}
         <Footer />
       </div>
     );
@@ -207,4 +238,3 @@ export default connect(
   mapStateToProps,
   { fetchSensors }
 )(Dashboard);
-
