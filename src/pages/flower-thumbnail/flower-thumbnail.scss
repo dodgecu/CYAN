@@ -3,7 +3,10 @@
 .thumbnail {
   padding: 20px;
   font-family: Roboto, sans-serif;
-  color: #666666;
+  display: flex;
+  flex-direction: column;
+  max-width: 360px;
+  position: relative;
 
   &--flower {
     display: flex;
@@ -76,4 +79,7 @@
   color: #235ef5;
   font-size: 0.7rem;
   cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
 }
