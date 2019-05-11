@@ -77,7 +77,6 @@ class Dashboard extends React.Component {
   }
 
   renderThumbnails(data) {
-    console.log(data);
     return data.map(item => {
       const flowerId = parseInt(item.package_id);
       const active = this.props.sensors.filter(item => {
