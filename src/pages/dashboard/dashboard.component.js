@@ -6,6 +6,7 @@ import axios from "axios";
 
 import "./dashboard.styles.scss";
 import { Button, TYPES } from "../../common/components/button/button.component";
+import { renderSensorData } from "./dashboard-sensors.validate";
 
 import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 import Header from "../../common/header/header.component";
@@ -79,69 +80,37 @@ class Dashboard extends React.Component {
   sortByProblems = () => {};
 
   renderThumbnails(data) {
-    return data.map(item => {
-      const flowerId = parseInt(item.package_id);
-      const active = this.props.sensors.filter(item => {
-        if (item.pack !== undefined) {
-          return item.pack.package_id === flowerId;
-        }
-        return item;
-      });
-
-      if (active.length > 0) {
-        if (active[0].pack !== undefined) {
-          const {
-            sensors: { humidity, temperature, soilMoisture, light }
-          } = active[0].pack;
-
-          if (
-            parseFloat(soilMoisture["Sensor data"]) + item.delta <
-            item.soilHumidity
-          ) {
-            this.issues["name"] = item.name;
-          }
-          if (parseFloat(humidity) + item.delta < item.airHumidity) {
-            this.issues["name"] = item.name;
-          }
-          if (parseFloat(light) + item.delta < item.light) {
-            this.issues["name"] = item.name;
-          }
-          if (parseFloat(temperature) + item.delta < item.airTemperature) {
-            this.issues["name"] = item.name;
-          }
-
-          return (
-            <div className="dashboard--thumbnail__item" key={item._id}>
-              <FlowerThumbnail
-                name={item.name}
-                type={item.type}
-                soilMoisture={soilMoisture["Sensor data"]}
-                airTemperature={temperature}
-                airHumidity={humidity}
-                ambientLight={light}
-                id={item._id}
-                picture={item.img_path}
-                disconnected={false}
-                issues={this.issues.name === item.name ? true : false}
-              />
-            </div>
-          );
-        }
-      }
-
+    return data.map(flower => {
+      const sensorData = renderSensorData(
+        this.props.sensors,
+        flower.package_id,
+        this.issues
+      );
       return (
-        <div className="dashboard--thumbnail__item" key={item._id}>
+        <div className="dashboard--thumbnail__item" key={flower._id}>
           <FlowerThumbnail
-            name={item.name}
-            type={item.type}
-            soilMoisture={item.soilHumidity}
-            airTemperature={item.airTemperature}
-            airHumidity={item.airHumidity}
-            ambientLight={item.light}
-            id={item._id}
-            picture={item.img_path}
-            disconnected={true}
-            issues={false}
+            name={flower.name}
+            type={flower.type}
+            soilMoisture={
+              sensorData.sensorSoilMoisture === null
+                ? 0
+                : sensorData.sensorSoilMoisture
+            }
+            airTemperature={
+              sensorData.sensorTemperature === null
+                ? 0
+                : sensorData.sensorTemperature
+            }
+            airHumidity={
+              sensorData.sensorHumidity === null ? 0 : sensorData.sensorHumidity
+            }
+            ambientLight={
+              sensorData.sensorLight === null ? 0 : sensorData.sensorLight
+            }
+            id={flower._id}
+            picture={flower.img_path}
+            disconnected={sensorData.notConnected ? true : false}
+            issues={true}
           />
         </div>
       );

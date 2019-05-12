@@ -9,14 +9,21 @@ class Package extends Component {
     this.props.fetchSensors();
   }
 
-  render() {
-    let sensorAvailable = true;
-
-    this.props.sensors.map(sensor =>
-      Object.keys(sensor).length === 0
-        ? (sensorAvailable = false)
-        : (sensorAvailable = true)
+  availableSensors = data =>
+    data.every(
+      data => Object.entries(data).length !== 0 && data.constructor === Object
     );
+
+  render() {
+    const sensors = sensor => {
+      return sensor.dh22Err ||
+        sensor.soilErr ||
+        sensor.socketErr ||
+        !this.availableSensors(sensor)
+        ? false
+        : true;
+    };
+
     return (
       <Field
         id="package"
@@ -24,24 +31,26 @@ class Package extends Component {
         label="Select sensor"
         className="form__constrols--sensor"
         description={"Select sensors you have attached to your flower"}
-        disabled={!sensorAvailable ? true : false}
+        disabled={!sensors(this.props.sensors) ? true : false}
         component={this.props.validForm}
       >
-        {this.props.sensors.map((item, i) => {
-          return item.pack === undefined ? (
-            <option className="no-sensor" key={i} value="">
-              No sensors
-            </option>
-          ) : (
-            <option
-              key={item.pack.name}
-              value={item.pack.package_id}
-              className="sensor"
-            >
-              {item.pack.name}
-            </option>
-          );
-        })}
+        {sensors(this.props.sensors) ? (
+          this.props.sensors.map(sensor => {
+            return (
+              <option
+                key={sensor.pack.name}
+                value={sensor.pack.package_id}
+                className="sensor"
+              >
+                {sensor.pack.name}
+              </option>
+            );
+          })
+        ) : (
+          <option className="no-sensor" key={"no-sensor"} value="">
+            No sensors
+          </option>
+        )}
       </Field>
     );
   }
