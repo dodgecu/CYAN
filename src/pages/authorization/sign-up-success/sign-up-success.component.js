@@ -15,7 +15,7 @@ class SignUpSuccess extends Component {
     if (this.props.isRegistered) {
       this.props.falseRegistered();
     } else {
-      this.props.push(routes.home);
+      this.props.push(routes.landing);
     }
   }
 
