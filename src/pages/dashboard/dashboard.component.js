@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
       sortBy: "name",
       isAscendingSort: true
     };
-    this.issues = {};
+    this.issues = [];
     this.onFilter = this.onFilter.bind(this);
     this.onSort = this.onSort.bind(this);
     this.onSelect = this.onSelect.bind(this);
@@ -77,15 +77,72 @@ class Dashboard extends React.Component {
     });
   }
 
-  sortByProblems = () => {};
+  sortByProblems = () => {
+    if (this.issues.length) {
+      const flower = this.issues
+        .map(flow => flow.id)
+        .reduce((obj, current) => {
+          obj[current] ? obj[current]++ : (obj[current] = 2);
+          return obj;
+        }, {});
+
+      const order = Object.keys(flower).sort((a, b) => flower[b] - flower[a]);
+
+      this.setState(({ flowers, isAscendingSort }) => {
+        const itemsToFilter = flowers.filter(
+          flower => flower.package_id !== ""
+        );
+        const rest = flowers.filter(flower => flower.package_id === "");
+
+        if (isAscendingSort) {
+          itemsToFilter.sort(
+            (a, b) => order.indexOf(a._id) - order.indexOf(b._id)
+          );
+        } else {
+          itemsToFilter.sort(
+            (a, b) => order.indexOf(b._id) - order.indexOf(a._id)
+          );
+        }
+        const filtered = [...itemsToFilter, ...rest];
+
+        return { flowers: filtered, isAscendingSort: !isAscendingSort };
+      });
+    }
+  };
 
   renderThumbnails(data) {
-    return data.map(flower => {
+    this.issues.length = 0;
+    return data.map((flower, i) => {
       const sensorData = renderSensorData(
         this.props.sensors,
-        flower.package_id,
-        this.issues
+        flower.package_id
       );
+
+      const {
+        airHumidity,
+        airTemperature,
+        soilHumidity,
+        delta,
+        light
+      } = flower;
+      if (!sensorData.notConnected) {
+        if (sensorData.sensorHumidity + delta < airHumidity) {
+          this.issues.push({ id: flower._id, problematic: true });
+        }
+        if (sensorData.sensorTemperature + delta < airTemperature) {
+          this.issues.push({ id: flower._id, problematic: true });
+        }
+        if (sensorData.sensorSoilMoisture + delta < soilHumidity) {
+          this.issues.push({ id: flower._id, problematic: true });
+        }
+        if (sensorData.sensorLight + delta < light) {
+          this.issues.push({ id: flower._id, problematic: true });
+        }
+      }
+      this.issues.push({ id: flower._id, problematic: false });
+
+      const [currentFlower] = this.issues.filter(id => id.id === flower._id);
+
       return (
         <div className="dashboard--thumbnail__item" key={flower._id}>
           <FlowerThumbnail
@@ -110,7 +167,7 @@ class Dashboard extends React.Component {
             id={flower._id}
             picture={flower.img_path}
             disconnected={sensorData.notConnected ? true : false}
-            issues={true}
+            issues={currentFlower.problematic ? true : false}
           />
         </div>
       );

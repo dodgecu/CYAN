@@ -24,15 +24,10 @@ const nodata = () => {
 function renderSensorData(sensors, flower) {
   if (checkFlower(flower)) {
     if (checkSensors(sensors)) {
-      const active = sensors.filter(
+      const [pack] = sensors.filter(
         sensor => sensor.pack.package_id === parseInt(flower)
       );
-      const {
-        humidity,
-        light,
-        temperature,
-        soilMoisture
-      } = active[0].pack.sensors;
+      const { humidity, light, temperature, soilMoisture } = pack.pack.sensors;
       return {
         sensorHumidity: parseFloat(humidity),
         sensorLight: parseFloat(light),
