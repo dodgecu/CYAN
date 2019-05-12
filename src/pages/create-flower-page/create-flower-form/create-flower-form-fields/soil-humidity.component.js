@@ -9,6 +9,7 @@ const soilHumidity = props => {
       minValue={0}
       maxValue={100}
       defaultVal={props.defaultVal}
+      tooltip={"Recommended soil moisture for this type of flower"}
       unit="RH"
       id="soilHumidity"
       name="soilHumidity"

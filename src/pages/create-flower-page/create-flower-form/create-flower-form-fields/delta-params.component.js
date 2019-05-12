@@ -14,6 +14,7 @@ const delta = props => {
       name="delta"
       className="form__controls--select"
       defaultVal={props.defaultVal}
+      tooltip={"Recommended margin of error for this type of flower"}
       component={props.validForm}
     />
   );

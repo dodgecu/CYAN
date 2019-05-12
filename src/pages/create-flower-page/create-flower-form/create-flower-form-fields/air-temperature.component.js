@@ -9,6 +9,7 @@ const airTemp = props => {
       minValue={0}
       maxValue={100}
       defaultVal={props.defaultVal}
+      tooltip={"Recommended air temperature for this type of flower"}
       unit="C°"
       id="airTemperature"
       name="airTemperature"

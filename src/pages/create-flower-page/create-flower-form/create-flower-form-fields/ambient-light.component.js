@@ -9,6 +9,7 @@ const ambientLight = props => {
       minValue={0}
       maxValue={100}
       defaultVal={props.defaultVal}
+      tooltip={"Recommended light for this type of flower"}
       unit="lux"
       id="light"
       name="light"
