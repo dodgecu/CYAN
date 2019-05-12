@@ -18,7 +18,7 @@ ChartModel.prototype.draw = function() {
     top: 25,
     right: 50,
     bottom: 50,
-    left: 25
+    left: 50
   };
 
   this.width = 600 - this.margin.left - this.margin.right;
@@ -77,6 +77,11 @@ ChartModel.prototype.createScales = function() {
 };
 
 ChartModel.prototype.addAxes = function() {
+  const yAxisLabelText = {
+    water: "Soil moisture",
+    temperature: "Temperature",
+    air: "Air humidity"
+  };
   this.svg
     .append("g")
     .attr("class", "axis axis--x")
@@ -105,6 +110,31 @@ ChartModel.prototype.addAxes = function() {
     )
     .select(".domain")
     .remove();
+
+  //Append label for x axis
+  this.svg
+    .append("text")
+    .attr(
+      "transform",
+      `translate(${this.width / 2}, ${this.height + this.margin.top})`
+    )
+    .style("text-anchor", "middle")
+    .style("fill", "#333")
+    .style("font-size", "0.8rem")
+    .attr("dy", "1em")
+    .text("Time (hours)");
+
+  //Append label for y axis
+  this.svg
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - this.margin.left)
+    .attr("x", 0 - this.height / 2)
+    .attr("dy", "1em")
+    .style("font-size", "0.8rem")
+    .style("text-anchor", "middle")
+    .style("fill", "#333")
+    .text(yAxisLabelText[this.selector]);
 };
 
 ChartModel.prototype.addArea = function(data) {
@@ -199,7 +229,7 @@ ChartModel.prototype.toolTip = function(data) {
     .attr("rx", "5")
     .attr("rx", "5");
 
-  const tipRectWidth = tipRect.node().getBBox().width;
+  const tipRectWidth = tipRect.node().getBBox().width; //check for error
 
   const tipText = focus_g
     .append("text")

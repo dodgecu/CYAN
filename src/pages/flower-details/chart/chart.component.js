@@ -45,6 +45,9 @@ class Chart extends Component {
     return (
       <>
         <div className={`${this.props.selector}-chart`}>
+          <h2 className={`${this.props.selector}-chart__title`}>
+            {this.props.title}
+          </h2>
           <input
             ref={node => (this.datepicker = node)}
             type="date"
@@ -53,9 +56,6 @@ class Chart extends Component {
             className="chart-input"
             onChange={this.pickDate.bind(this)}
           />
-          <h2 className={`${this.props.selector}-chart__title`}>
-            {this.props.title}
-          </h2>
           <div className="svg-box">
             {this.props[this.props.selector].length ? (
               <svg className={`${this.props.selector}-chart__container`} />
