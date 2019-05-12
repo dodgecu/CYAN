@@ -25,7 +25,7 @@ class FlowerDetails extends Component {
     flower: {}
   };
 
-  componentWillMount() {
+  componentDidMount() {
     if (typeof this.props.location.state !== "undefined") {
       axios
         .get(`${backendUrl}/flower-id?id=${this.props.location.state.flower}`)
