@@ -11,7 +11,7 @@ import {
 } from "../../../common/components/button/button.component";
 import Input from "../../../common/components/input/input.component";
 
-import { maxLength15 } from "../../../common/form-validation";
+import { maxLength15, required } from "../../../common/form-validation";
 
 class UpdateName extends Component {
   onSubmit(inputValue) {
@@ -19,7 +19,8 @@ class UpdateName extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, invalid, submitting, pristine } = this.props;
+
     return (
       <>
         <div className="authorization--form">
@@ -34,9 +35,14 @@ class UpdateName extends Component {
               type="text"
               component={Input}
               label="Username"
-              validate={maxLength15}
+              validate={[maxLength15, required]}
             />
-            <Button title="UPDATE" type="submit" buttonType={TYPES.PRIMARY} />
+            <Button
+              title="UPDATE"
+              type="submit"
+              buttonType={TYPES.PRIMARY}
+              disabled={submitting || pristine || invalid}
+            />
           </form>
         </div>
       </>
@@ -46,14 +52,10 @@ class UpdateName extends Component {
 
 const mapStateToProps = state => ({
   message: state.authReducer.message
-  /*   initialValues: {
-    name: state.authReducer.user.name
-  } */
 });
 
 UpdateName = reduxForm({
-  form: "update-name",
-  enableReinitialize: true
+  form: "update-name"
 })(UpdateName);
 
 export default connect(

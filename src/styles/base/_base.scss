@@ -29,3 +29,12 @@ body {
     text-align: center;
   }
 }
+
+.Toastify__toast.Toastify__toast--default {
+  color: $font-black;
+  color: #333;
+  border: 5px solid $focus;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}

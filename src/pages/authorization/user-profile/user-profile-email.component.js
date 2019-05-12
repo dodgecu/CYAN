@@ -12,15 +12,28 @@ import {
 } from "../../../common/components/button/button.component";
 import Input from "../../../common/components/input/input.component";
 
-import { email } from "../../../common/form-validation";
+import { email, required } from "../../../common/form-validation";
 
 class UpdateEmail extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      errors: false
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const that = this;
+    if (nextProps.errors) {
+      that.setState({ errors: true });
+    }
+  }
   onSubmit(inputValue) {
     this.props.updateUser(inputValue);
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, submitting, pristine, invalid } = this.props;
     return (
       <div className="authorization--form">
         <h2 className="authorization--form__title">Change email</h2>
@@ -34,10 +47,15 @@ class UpdateEmail extends Component {
             type="email"
             component={Input}
             label="Email"
-            validate={email}
+            validate={[email, required]}
             initialValues={email}
           />
-          <Button title="UPDATE" type="submit" buttonType={TYPES.PRIMARY} />
+          <Button
+            title="UPDATE"
+            type="submit"
+            buttonType={TYPES.PRIMARY}
+            disabled={this.state.errors || submitting || pristine || invalid}
+          />
         </form>
       </div>
     );

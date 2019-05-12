@@ -7,6 +7,10 @@ import axios from "axios";
 import { fetchSensors } from "../../common/sensors/sensors.middleware";
 import { backendUrl } from "../../constants/backendUrl";
 import routes from "../../constants/routes";
+import {
+  fetchDataFromSensors,
+  validIncomingObj
+} from "./flower-details-sensor.validate";
 
 import Header from "../../common/header/header.component";
 import PageTitle from "../../common/page-title/page-title.component";
@@ -28,18 +32,14 @@ class FlowerDetails extends Component {
         .then(flower => {
           const [current_flower] = flower.data;
           this.setState({ flower: current_flower });
+          //this.flower = current_flower
         })
         .catch(err => err);
-
       this.props.fetchSensors();
     } else {
       this.props.history.push(routes.dashboard);
     }
   }
-
-  validFlowerData = data => {
-    return Object.entries(data).length !== 0 && data.constructor === Object;
-  };
 
   redirect = () =>
     this.props.push(routes.edit, {
@@ -47,92 +47,60 @@ class FlowerDetails extends Component {
     });
 
   render() {
+    const liveData = fetchDataFromSensors(
+      this.props.sensors,
+      this.state.flower
+    );
+    const issues = [];
     let flowerInfo;
 
-    const availableSensors = obj => {
-      if (obj.dh22Err || obj.soilErr || obj.socketErr) {
-        return false;
-      } else {
-        return obj.every(obj => this.validFlowerData(obj));
-      }
-    };
-
-    if (this.validFlowerData(this.state.flower)) {
+    if (validIncomingObj(liveData.currentFlower)) {
       const {
-        name,
-        type,
-        airTemperature,
-        airHumidity,
-        light,
-        soilHumidity,
-        created_at,
-        delta,
-        img_path
-      } = this.state.flower;
-
-      const flowerLight = light;
-
-      if (
-        availableSensors(this.props.sensors) &&
-        this.state.flower.package_id !== ""
-      ) {
-        const flowerId = parseInt(this.state.flower.package_id);
-
-        const [pack] = this.props.sensors.filter(item => {
-          return item.pack.package_id === flowerId;
-        });
-
-        const {
-          humidity,
+        connected,
+        sensorHumidity,
+        sensorLight,
+        sensorTemperature,
+        sensorSoilmoisture,
+        currentFlower: {
+          name,
+          type,
+          airTemperature,
+          airHumidity,
           light,
-          soilMoisture,
-          temperature
-        } = pack.pack.sensors;
+          soilHumidity,
+          created_at,
+          delta,
+          img_path
+        }
+      } = liveData;
 
-        const issues = [];
-
-        if (parseFloat(soilMoisture["Sensor data"]) + delta < soilHumidity) {
-          issues.push("The flower is thirsty");
-        }
-        if (parseFloat(humidity) + delta < airHumidity) {
-          issues.push("Low level of humidity");
-        }
-        if (parseFloat(light) + delta < flowerLight) {
-          issues.push("The flower needs more light");
-        }
-        if (parseFloat(temperature) + delta < airTemperature) {
-          issues.push("The flower is cold");
-        }
-
-        flowerInfo = (
-          <FLowerInfo
-            flowerName={name}
-            thumb={img_path}
-            type={type}
-            soil={soilMoisture["Sensor data"]}
-            temperature={temperature}
-            humidity={humidity}
-            light={light}
-            created_at={created_at}
-            connected={true}
-            issues={issues}
-          />
-        );
-      } else {
-        flowerInfo = (
-          <FLowerInfo
-            flowerName={name}
-            thumb={img_path}
-            type={type}
-            soil={soilHumidity}
-            temperature={airTemperature}
-            humidity={airHumidity}
-            light={light}
-            created_at={created_at}
-            connected={false}
-          />
-        );
+      if (sensorSoilmoisture + delta < soilHumidity) {
+        issues.push("The flower is thirsty");
       }
+      if (sensorHumidity + delta < airHumidity) {
+        issues.push("Low level of humidity");
+      }
+      if (sensorLight + delta < light) {
+        issues.push("The flower needs more light");
+      }
+      if (sensorTemperature + delta < airTemperature) {
+        issues.push("The flower is cold");
+      }
+
+      flowerInfo = (
+        <FLowerInfo
+          flowerName={name}
+          thumb={img_path}
+          type={type}
+          soil={sensorSoilmoisture === null ? 0 : sensorSoilmoisture}
+          temperature={sensorTemperature === null ? 0 : sensorTemperature}
+          humidity={sensorHumidity === null ? 0 : sensorHumidity}
+          light={sensorLight === null ? 0 : sensorLight}
+          created_at={created_at}
+          connected={connected ? true : false}
+          issues={connected ? issues : []}
+        />
+      );
     }
 
     return (
