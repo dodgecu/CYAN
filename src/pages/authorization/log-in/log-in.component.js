@@ -33,6 +33,7 @@ class LogIn extends Component {
 
   componentDidUpdate() {
     if (this.props.isAuthenticated) {
+      this.props.clearMessage();
       this.props.push(routes.dashboard);
     }
   }
