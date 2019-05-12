@@ -25,7 +25,7 @@ const flowerInfo = props => {
       <Problems isNeedy={props.issues} isConnected={props.connected} />
       <Chart selector="water" title="Water chart" />
       <Chart selector="temperature" title="Temperature chart" />
-      <Chart selector="air" title="Air humidity" />
+      <Chart selector="air" title="Air chart" />
     </section>
   );
 };

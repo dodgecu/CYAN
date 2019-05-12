@@ -11,6 +11,7 @@
   border-radius: 5px;
   text-align: center;
   padding: 5px;
+  margin-top: 15px;
 }
 
 h2[class$='chart__title'] {
@@ -143,5 +144,5 @@ h2[class$='chart__title'] {
   margin: 0;
   text-align: center;
   font-size: 1.2rem;
-  color: $danger;
+  color: $chartWarningText;
 }
