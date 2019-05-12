@@ -1,4 +1,5 @@
 import React from "react";
+import ReactTooltip from "react-tooltip";
 
 const flowerInformation = props => {
   return (
@@ -8,6 +9,7 @@ const flowerInformation = props => {
         <span className="scales__tooltip">Soil moisture</span>
         <div className="scales__scales-block">
           <div
+            data-tip="Current soil moisture of your plant"
             className="scales__scales-block--soil"
             style={{ width: `${props.soilMoisture}%` }}
           />
@@ -18,6 +20,7 @@ const flowerInformation = props => {
         <span className="scales__tooltip">Air humidity</span>
         <div className="scales__scales-block">
           <div
+            data-tip="Plant environment humidity level"
             className="scales__scales-block--airhumidity"
             style={{ width: `${props.airHumidity}%` }}
           />
@@ -28,6 +31,7 @@ const flowerInformation = props => {
         <span className="scales__tooltip">Air temperature</span>
         <div className="scales__scales-block">
           <div
+            data-tip="Plant environment air temperature"
             className="scales__scales-block--temperature"
             style={{ width: `${props.temp}%` }}
           />
@@ -36,12 +40,14 @@ const flowerInformation = props => {
         <span className="scales__tooltip">Ambient light</span>
         <div className="scales__scales-block">
           <div
+            data-tip="Current amount of ambient light"
             className="scales__scales-block--light"
             style={{ width: `${props.amblight}%` }}
           />
           <span className="scales__scales-block--value">{props.amblight}%</span>
         </div>
       </div>
+      <ReactTooltip />
     </article>
   );
 };

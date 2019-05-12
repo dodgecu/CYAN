@@ -9,6 +9,7 @@ const airHumidity = props => {
       minValue={0}
       maxValue={100}
       defaultVal={props.defaultVal}
+      tooltip={"Recommended relative humidity for this type of flower"}
       unit="RH"
       id="airHumidity"
       name="airHumidity"

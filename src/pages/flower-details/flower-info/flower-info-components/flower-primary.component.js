@@ -1,11 +1,15 @@
 import React from "react";
+import ReactTooltip from "react-tooltip";
 
 const flowerPrimary = props => {
   return (
     <article className="flower-details__main">
       <h2 className="flower-details__name">
         {props.name}
-        <i className="flower-details__main--issue material-icons">
+        <i
+          data-tip="Please, check problems area for more details"
+          className="flower-details__main--issue material-icons"
+        >
           {props.isNeedy !== undefined && props.isNeedy.length
             ? "warning"
             : null}
@@ -15,7 +19,12 @@ const flowerPrimary = props => {
       <p className="flower-details__main--connection-status">
         {!props.isConnected ? (
           <>
-            <i className="material-icons">warning</i>
+            <i
+              data-tip="Connection with sensor not established"
+              className="material-icons"
+            >
+              warning
+            </i>
             <span className="notconnected-message">
               There is no connection to the flower sensor!
             </span>
@@ -29,6 +38,7 @@ const flowerPrimary = props => {
           alt=""
         />
       </figure>
+      <ReactTooltip />
     </article>
   );
 };

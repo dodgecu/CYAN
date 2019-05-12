@@ -1,6 +1,7 @@
 import React from "react";
 
 import Range from "react-input-range";
+import ReactTooltip from "react-tooltip";
 
 import "react-input-range/lib/css/index.css";
 import "./range.styles.scss";
@@ -28,6 +29,7 @@ const range = inputsRenderer(
             return tooltip;
           }}
           defaultVal={description.defaultVal}
+          tooltip={description.tooltip}
           maxValue={description.maxValue}
           minValue={description.minValue}
           step={description.step}
@@ -39,10 +41,12 @@ const range = inputsRenderer(
         />
         <div className="default-val">
           <span
+            data-tip={description.tooltip}
             className="default-val__grab"
             style={{ left: `${description.defaultVal}%` }}
           />
         </div>
+        <ReactTooltip effect="float" place="bottom" />
       </div>
     );
   }
