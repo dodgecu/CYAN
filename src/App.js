@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
-import ProtectedRoute from "./protected.route";
+import { ProtectedRouter, GuestRouter } from "./protected.route";
 import ReactDOM from "react-dom";
 
 import routes from "./constants/routes";
@@ -30,32 +30,51 @@ class App extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route exact path={routes.landing} component={Landing} />
-            <Route exact path={routes.home} component={Home} />
-            <Route exact path={routes.logIn} component={LogIn} />
-            <Route exact path={routes.signUp} component={SignUp} />
-            <ProtectedRoute
+            <GuestRouter
+              exact
+              protect="guest"
+              path={routes.landing}
+              component={Landing}
+            />
+            <GuestRouter
+              exact
+              protect="guest"
+              path={routes.home}
+              component={Home}
+            />
+            <GuestRouter
+              exact
+              protect="guest"
+              path={routes.logIn}
+              component={LogIn}
+            />
+            <GuestRouter
+              exact
+              protect="guest"
+              path={routes.signUp}
+              component={SignUp}
+            />
+            <ProtectedRouter
               exact
               path={routes.flowerDetails}
               component={FlowerDetails}
             />
-            <ProtectedRoute
+            <ProtectedRouter
               exact
               path={routes.dashboard}
               component={Dashboard}
             />
-            <ProtectedRoute
+            <ProtectedRouter
               exact
               path={[routes.createFlower, routes.edit]}
               component={CreateFlower}
             />
-
             <Route
               exact
               path={routes.signUpSuccess}
               component={SignUpSuccess}
             />
-            <ProtectedRoute
+            <ProtectedRouter
               exact
               path={routes.userProfile}
               component={UserProfile}

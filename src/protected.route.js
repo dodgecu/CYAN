@@ -1,10 +1,11 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import routes from "./constants/routes";
 
 import store from "./store";
 
-function ProtectedRouter({ protect, component: Component, ...rest }) {
-  const protection = protect ? protect : store.getState().authReducer.token;
+export function ProtectedRouter({ protect, component: Component, ...rest }) {
+  const protection = store.getState().authReducer.token;
 
   return (
     <Route
@@ -13,11 +14,26 @@ function ProtectedRouter({ protect, component: Component, ...rest }) {
         if (protection) {
           return <Component {...props} />;
         } else {
-          return <Redirect to="/" />;
+          return <Redirect to={routes.landing} />;
         }
       }}
     />
   );
 }
 
-export default ProtectedRouter;
+export function GuestRouter({ component: Component, ...rest }) {
+  const protection = !store.getState().authReducer.token;
+
+  return (
+    <Route
+      {...rest}
+      render={props => {
+        if (protection) {
+          return <Component {...props} />;
+        } else {
+          return <Redirect to={routes.dashboard} />;
+        }
+      }}
+    />
+  );
+}
