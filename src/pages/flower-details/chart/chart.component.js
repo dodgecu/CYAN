@@ -15,7 +15,6 @@ class Chart extends Component {
   }
 
   fetchData(id = 1, fieldType = this.props.selector, time = 1556841600000) {
-    //change time when will be data
     this.props.getDaySensorData(1, fieldType, time).then(array => {
       if (array.length) {
         this.chart.init({
@@ -43,7 +42,6 @@ class Chart extends Component {
   }
 
   render() {
-    // const dateValue = moment().format('YYYY-MM-DD') //use this when will be the data
     return (
       <>
         <div className={`${this.props.selector}-chart`}>
@@ -54,7 +52,6 @@ class Chart extends Component {
             id="date"
             className="chart-input"
             onChange={this.pickDate.bind(this)}
-            // value={dateValue}
           />
           <h2 className={`${this.props.selector}-chart__title`}>
             {this.props.title}
