@@ -68,7 +68,6 @@ export const logIn = ({ email, password }) => dispatch => {
 };
 
 export const deleteUser = () => dispatch => {
-  debugger;
   dispatch({ type: LOADING });
   const url = `${backendUrl}/api/auth/user`;
 
