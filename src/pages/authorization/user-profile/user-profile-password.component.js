@@ -12,8 +12,12 @@ import {
 } from "../../../common/components/button/button.component";
 import Input from "../../../common/components/input/input.component";
 
-import { required, passwordsMatch } from "../../../common/form-validation";
-import { minLength6 } from "./user-profile.validation";
+import {
+  minLength6,
+  requirePassword,
+  repeatPassword,
+  passwordsMatch
+} from "./user-profile.validation";
 
 class UpdatePassword extends Component {
   onSubmit(inputValue) {
@@ -37,7 +41,7 @@ class UpdatePassword extends Component {
             component={Input}
             label="Password"
             placeholder="Password"
-            validate={minLength6}
+            validate={[requirePassword, minLength6]}
           />
           <Field
             name="Repeat password"
@@ -45,7 +49,7 @@ class UpdatePassword extends Component {
             component={Input}
             label="Repeat password"
             placeholder="Repeat password"
-            validate={[required, passwordsMatch]}
+            validate={[repeatPassword, passwordsMatch]}
           />
           <Button
             title="UPDATE"
@@ -53,6 +57,9 @@ class UpdatePassword extends Component {
             buttonType={TYPES.PRIMARY}
             disabled={submitting || pristine || invalid}
           />
+          {this.props.message ? (
+            <div className="error-message">{this.props.message}</div>
+          ) : null}
         </form>
       </div>
     );

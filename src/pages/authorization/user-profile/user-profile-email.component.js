@@ -12,7 +12,7 @@ import {
 } from "../../../common/components/button/button.component";
 import Input from "../../../common/components/input/input.component";
 
-import { email, required } from "../../../common/form-validation";
+import { email, requireEmail } from "./user-profile.validation";
 
 class UpdateEmail extends Component {
   constructor(props) {
@@ -47,8 +47,7 @@ class UpdateEmail extends Component {
             type="email"
             component={Input}
             label="Email"
-            validate={[email, required]}
-            initialValues={email}
+            validate={[email, requireEmail]}
           />
           <Button
             title="UPDATE"
@@ -56,6 +55,9 @@ class UpdateEmail extends Component {
             buttonType={TYPES.PRIMARY}
             disabled={this.state.errors || submitting || pristine || invalid}
           />
+          {this.props.message ? (
+            <div className="error-message">{this.props.message}</div>
+          ) : null}
         </form>
       </div>
     );

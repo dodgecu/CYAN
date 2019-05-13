@@ -11,7 +11,7 @@ import {
 } from "../../../common/components/button/button.component";
 import Input from "../../../common/components/input/input.component";
 
-import { maxLength15, required } from "../../../common/form-validation";
+import { maxLength15, requireUserName } from "./user-profile.validation";
 
 class UpdateName extends Component {
   onSubmit(inputValue) {
@@ -35,7 +35,7 @@ class UpdateName extends Component {
               type="text"
               component={Input}
               label="Username"
-              validate={[maxLength15, required]}
+              validate={[maxLength15, requireUserName]}
             />
             <Button
               title="UPDATE"
@@ -43,6 +43,9 @@ class UpdateName extends Component {
               buttonType={TYPES.PRIMARY}
               disabled={submitting || pristine || invalid}
             />
+            {this.props.message ? (
+              <div className="error-message">{this.props.message}</div>
+            ) : null}
           </form>
         </div>
       </>
