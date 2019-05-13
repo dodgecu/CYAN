@@ -14,7 +14,13 @@ class Chart extends Component {
     this.chart = new ChartModel();
   }
 
-  fetchData(id = 1, fieldType = this.props.selector, time = 1556841600000) {
+  fetchData(
+    id = 1,
+    fieldType = this.props.selector,
+    time = moment()
+      .startOf("day")
+      .valueOf() - 86400000
+  ) {
     this.props.getDaySensorData(1, fieldType, time).then(array => {
       if (array.length) {
         this.chart.init({
@@ -35,7 +41,7 @@ class Chart extends Component {
   }
 
   pickDate() {
-    const time = new Date(this.datepicker.value).getTime();
+    const time = moment(this.datepicker.value).valueOf();
     const id = 1;
     this.chart.clear();
     this.fetchData(id, this.props.selector, time);

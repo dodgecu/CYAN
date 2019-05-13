@@ -29,6 +29,7 @@ export default function(state = initialState, action) {
           air: action.payload.data
         };
       }
+      break;
     case FAIL_GET_DAY_SENSOR_DATA:
       return {
         ...state,

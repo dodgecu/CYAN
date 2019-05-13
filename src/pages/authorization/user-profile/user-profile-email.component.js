@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
 
-import { updateUser } from "../authorization.action";
+import { updateUser, clearMessage } from "../authorization.action";
 import "./user-profile.scss";
 
 import {
@@ -12,7 +12,7 @@ import {
 } from "../../../common/components/button/button.component";
 import Input from "../../../common/components/input/input.component";
 
-import { email, required } from "../../../common/form-validation";
+import { email, requireEmail } from "./user-profile.validation";
 
 class UpdateEmail extends Component {
   constructor(props) {
@@ -29,6 +29,7 @@ class UpdateEmail extends Component {
     }
   }
   onSubmit(inputValue) {
+    this.props.clearMessage();
     this.props.updateUser(inputValue);
   }
 
@@ -47,8 +48,7 @@ class UpdateEmail extends Component {
             type="email"
             component={Input}
             label="Email"
-            validate={[email, required]}
-            initialValues={email}
+            validate={[email, requireEmail]}
           />
           <Button
             title="UPDATE"
@@ -56,6 +56,10 @@ class UpdateEmail extends Component {
             buttonType={TYPES.PRIMARY}
             disabled={this.state.errors || submitting || pristine || invalid}
           />
+          {this.props.message === "User with such email already exist" ||
+          this.props.message === "Cannot change email" ? (
+            <div className="error-message">{this.props.message}</div>
+          ) : null}
         </form>
       </div>
     );
@@ -72,5 +76,5 @@ UpdateEmail = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { updateUser, push }
+  { updateUser, push, clearMessage }
 )(UpdateEmail);

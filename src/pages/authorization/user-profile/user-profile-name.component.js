@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 
-import { updateUser } from "../authorization.action";
+import { updateUser, clearMessage } from "../authorization.action";
 import "./user-profile.scss";
 
 import {
@@ -11,10 +11,11 @@ import {
 } from "../../../common/components/button/button.component";
 import Input from "../../../common/components/input/input.component";
 
-import { maxLength15, required } from "../../../common/form-validation";
+import { maxLength15, requireUserName } from "./user-profile.validation";
 
 class UpdateName extends Component {
   onSubmit(inputValue) {
+    this.props.clearMessage();
     this.props.updateUser(inputValue);
   }
 
@@ -35,7 +36,7 @@ class UpdateName extends Component {
               type="text"
               component={Input}
               label="Username"
-              validate={[maxLength15, required]}
+              validate={[maxLength15, requireUserName]}
             />
             <Button
               title="UPDATE"
@@ -43,6 +44,9 @@ class UpdateName extends Component {
               buttonType={TYPES.PRIMARY}
               disabled={submitting || pristine || invalid}
             />
+            {this.props.message === "Cannot change name" ? (
+              <div className="error-message">{this.props.message}</div>
+            ) : null}
           </form>
         </div>
       </>
@@ -60,5 +64,5 @@ UpdateName = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { updateUser }
+  { updateUser, clearMessage }
 )(UpdateName);

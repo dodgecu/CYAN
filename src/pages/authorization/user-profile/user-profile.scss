@@ -33,6 +33,14 @@
 .authorization--update {
   display: flex;
   flex-direction: column;
+
+  .authorization--form {
+    position: relative;
+    .error-message {
+      bottom: 38px;
+      width: 100%
+    }
+  }
 }
 
 .form-control__error {

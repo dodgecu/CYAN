@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
 
-import { updateUser } from "../authorization.action";
+import { updateUser, clearMessage } from "../authorization.action";
 import "./user-profile.scss";
 
 import {
@@ -12,16 +12,21 @@ import {
 } from "../../../common/components/button/button.component";
 import Input from "../../../common/components/input/input.component";
 
-import { required, passwordsMatch } from "../../../common/form-validation";
-import { minLength6 } from "./user-profile.validation";
+import {
+  minLength6,
+  requirePassword,
+  repeatPassword,
+  passwordsMatch
+} from "./user-profile.validation";
 
 class UpdatePassword extends Component {
   onSubmit(inputValue) {
+    this.props.clearMessage();
     this.props.updateUser(inputValue);
   }
 
   render() {
-    const { handleSubmit, submitting, pristine, invalid } = this.props;
+    const { handleSubmit, submitting, pristine, invalid, reset } = this.props;
 
     return (
       <div className="authorization--form">
@@ -29,6 +34,7 @@ class UpdatePassword extends Component {
         <form
           onSubmit={handleSubmit(value => {
             this.onSubmit.bind(this)({ password: value.password });
+            reset();
           })}
         >
           <Field
@@ -37,7 +43,7 @@ class UpdatePassword extends Component {
             component={Input}
             label="Password"
             placeholder="Password"
-            validate={minLength6}
+            validate={[requirePassword, minLength6]}
           />
           <Field
             name="Repeat password"
@@ -45,7 +51,7 @@ class UpdatePassword extends Component {
             component={Input}
             label="Repeat password"
             placeholder="Repeat password"
-            validate={[required, passwordsMatch]}
+            validate={[repeatPassword, passwordsMatch]}
           />
           <Button
             title="UPDATE"
@@ -53,6 +59,9 @@ class UpdatePassword extends Component {
             buttonType={TYPES.PRIMARY}
             disabled={submitting || pristine || invalid}
           />
+          {this.props.message === "Cannot change password" ? (
+            <div className="error-message">{this.props.message}</div>
+          ) : null}
         </form>
       </div>
     );
@@ -69,5 +78,5 @@ UpdatePassword = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { updateUser, push }
+  { updateUser, push, clearMessage }
 )(UpdatePassword);
