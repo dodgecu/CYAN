@@ -15,7 +15,7 @@ ChartModel.prototype.clear = function() {
 
 ChartModel.prototype.draw = function() {
   this.margin = {
-    top: 25,
+    top: 50,
     right: 50,
     bottom: 50,
     left: 50
@@ -82,6 +82,8 @@ ChartModel.prototype.addAxes = function() {
     temperature: "Temperature",
     air: "Air humidity"
   };
+
+  // Call the x axis in a group tag
   this.svg
     .append("g")
     .attr("class", "axis axis--x")
@@ -114,10 +116,7 @@ ChartModel.prototype.addAxes = function() {
   //Append label for x axis
   this.svg
     .append("text")
-    .attr(
-      "transform",
-      `translate(${this.width / 2}, ${this.height + this.margin.top})`
-    )
+    .attr("transform", `translate(${this.width / 2}, ${this.height + 25})`)
     .style("text-anchor", "middle")
     .style("fill", "#333")
     .style("font-size", "0.8rem")
