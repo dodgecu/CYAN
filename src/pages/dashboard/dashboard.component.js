@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import ReactTooltip from "react-tooltip";
 
 import axios from "axios";
 
@@ -27,7 +28,8 @@ class Dashboard extends React.Component {
       filter: "",
       flowers: [],
       sortBy: "name",
-      isAscendingSort: true
+      isAscendingSort: true,
+      isProblematicSort: true
     };
     this.issues = [];
     this.onFilter = this.onFilter.bind(this);
@@ -88,13 +90,13 @@ class Dashboard extends React.Component {
 
       const order = Object.keys(flower).sort((a, b) => flower[b] - flower[a]);
 
-      this.setState(({ flowers, isAscendingSort }) => {
+      this.setState(({ flowers, isProblematicSort }) => {
         const itemsToFilter = flowers.filter(
           flower => flower.package_id !== ""
         );
         const rest = flowers.filter(flower => flower.package_id === "");
 
-        if (isAscendingSort) {
+        if (isProblematicSort) {
           itemsToFilter.sort(
             (a, b) => order.indexOf(a._id) - order.indexOf(b._id)
           );
@@ -105,7 +107,7 @@ class Dashboard extends React.Component {
         }
         const filtered = [...itemsToFilter, ...rest];
 
-        return { flowers: filtered, isAscendingSort: !isAscendingSort };
+        return { flowers: filtered, isProblematicSort: !isProblematicSort };
       });
     }
   };
@@ -184,7 +186,7 @@ class Dashboard extends React.Component {
 
   render() {
     let renderContent;
-    const { filter, flowers, isAscendingSort } = this.state;
+    const { filter, flowers, isAscendingSort, isProblematicSort } = this.state;
     const data = flowers.filter(item =>
       item.name.toLowerCase().match(filter.toLowerCase())
     );
@@ -196,6 +198,7 @@ class Dashboard extends React.Component {
             <div className="dashboard__search">
               <label>Search:</label>
               <input
+                data-tip="Search for flowers..."
                 className="dashboard__search--field"
                 type="text"
                 placeholder="Search"
@@ -208,12 +211,9 @@ class Dashboard extends React.Component {
               <span className="dashboard--sorting__title">Sort by</span>
 
               <div className="dashboard--sorting--alphabetical">
-                <label>
+                <label onClick={this.onSort} data-tip="Sort flowers by name">
                   Alphabetical
-                  <button
-                    className="dashboard--sorting__button"
-                    onClick={this.onSort}
-                  >
+                  <button className="dashboard--sorting__button">
                     <img
                       className={
                         isAscendingSort ? "icon icon--up" : "icon icon--down"
@@ -229,15 +229,17 @@ class Dashboard extends React.Component {
               <span className="dashboard--sorting__title">Filter by</span>
 
               <div className="dashboard--sorting--problematical">
-                <label>
+                <label
+                  onClick={this.sortByProblems}
+                  data-tip="Filter flowers by problems"
+                >
                   Problematical
-                  <button
-                    className="dashboard--sorting__button"
-                    onClick={this.sortByProblems}
-                  >
+                  <button className="dashboard--sorting__button">
                     <img
-                      className="icon"
-                      src={ArrowUp}
+                      className={
+                        isProblematicSort ? "icon icon--up" : "icon icon--down"
+                      }
+                      src={isProblematicSort ? ArrowUp : ArrowDown}
                       alt="show problematical"
                     />
                   </button>
@@ -277,6 +279,7 @@ class Dashboard extends React.Component {
         <Header />
         {renderContent}
         <Footer />
+        <ReactTooltip />
       </div>
     );
   }

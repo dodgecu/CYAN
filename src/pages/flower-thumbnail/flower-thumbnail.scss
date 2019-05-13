@@ -5,8 +5,9 @@
   font-family: Roboto, sans-serif;
   display: flex;
   flex-direction: column;
-  max-width: 360px;
   position: relative;
+  height: 100%;
+  justify-content: space-evenly;
 
   &--flower {
     display: flex;
@@ -30,7 +31,13 @@
   }
   &__icon {
     font-size: 24px;
-    color: $connect-error;
+    &--issue {
+      color: $danger;
+    }
+    &--disconnect {
+      color: $connect-error;
+      opacity: 0.7;
+    }
   }
 }
 

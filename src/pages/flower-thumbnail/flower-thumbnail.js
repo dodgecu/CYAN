@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
+import ReactTooltip from "react-tooltip";
 
 import routes from "./../../constants/routes";
 import "./flower-thumbnail.scss";
@@ -14,10 +15,24 @@ function FlowerThumbnail(props) {
           <h2 className="title__name">{props.name}</h2>
           {props.disconnected ? (
             <>
-              <i className="title__icon material-icons">warning</i>
+              <i
+                className="title__icon--disconnect material-icons"
+                data-tip="Connection with sensor not established"
+              >
+                error
+              </i>
             </>
           ) : null}
-          <i className="material-icons">{props.issues ? "warning" : null}</i>
+          {props.issues ? (
+            <>
+              <i
+                className="title__icon--issue issues material-icons"
+                data-tip="Please, check problems area for more details"
+              >
+                warning
+              </i>
+            </>
+          ) : null}
         </div>
         <p className="thumbnail__type">{props.type}</p>
       </div>
@@ -33,6 +48,7 @@ function FlowerThumbnail(props) {
           <span className="ranges__title">Soil moisture</span>
           <div className="range range--soil">
             <div
+              data-tip="Current soil moisture of your plant"
               className="range--soil__fill range--fill"
               style={{ width: `${props.soilMoisture}%` }}
             />
@@ -41,6 +57,7 @@ function FlowerThumbnail(props) {
           <span className="ranges__title">Air humidity</span>
           <div className="range range--humidity">
             <div
+              data-tip="Plant environment humidity level"
               className="range--humidity__fill range--fill"
               style={{ width: `${props.airHumidity}%` }}
             />
@@ -49,6 +66,7 @@ function FlowerThumbnail(props) {
           <span className="ranges__title">Air temperature</span>
           <div className="range range--temperature">
             <div
+              data-tip="Plant environment air temperature"
               className="range--temperature__fill range--fill"
               style={{ width: `${props.airTemperature}%` }}
             />
@@ -57,6 +75,7 @@ function FlowerThumbnail(props) {
           <span className="ranges__title">Ambient light</span>
           <div className="range range--light">
             <div
+              data-tip="Current amount of ambient light"
               className="range--light__fill range--fill"
               style={{ width: `${props.ambientLight}%` }}
             />
@@ -67,6 +86,7 @@ function FlowerThumbnail(props) {
       <span className="details" onClick={() => redirect()}>
         View details
       </span>
+      <ReactTooltip />
     </div>
   );
 }
