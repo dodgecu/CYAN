@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
 
-import { updateUser } from "../authorization.action";
+import { updateUser, clearMessage } from "../authorization.action";
 import "./user-profile.scss";
 
 import {
@@ -21,6 +21,7 @@ import {
 
 class UpdatePassword extends Component {
   onSubmit(inputValue) {
+    this.props.clearMessage();
     this.props.updateUser(inputValue);
   }
 
@@ -57,7 +58,7 @@ class UpdatePassword extends Component {
             buttonType={TYPES.PRIMARY}
             disabled={submitting || pristine || invalid}
           />
-          {this.props.message ? (
+          {this.props.message === "Cannot change password" ? (
             <div className="error-message">{this.props.message}</div>
           ) : null}
         </form>
@@ -76,5 +77,5 @@ UpdatePassword = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { updateUser, push }
+  { updateUser, push, clearMessage }
 )(UpdatePassword);

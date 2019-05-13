@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
 
-import { updateUser } from "../authorization.action";
+import { updateUser, clearMessage } from "../authorization.action";
 import "./user-profile.scss";
 
 import {
@@ -29,6 +29,7 @@ class UpdateEmail extends Component {
     }
   }
   onSubmit(inputValue) {
+    this.props.clearMessage();
     this.props.updateUser(inputValue);
   }
 
@@ -55,7 +56,8 @@ class UpdateEmail extends Component {
             buttonType={TYPES.PRIMARY}
             disabled={this.state.errors || submitting || pristine || invalid}
           />
-          {this.props.message ? (
+          {this.props.message === "User with such email already exist" ||
+          this.props.message === "Cannot change email" ? (
             <div className="error-message">{this.props.message}</div>
           ) : null}
         </form>
@@ -74,5 +76,5 @@ UpdateEmail = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { updateUser, push }
+  { updateUser, push, clearMessage }
 )(UpdateEmail);
