@@ -26,7 +26,7 @@ class UpdatePassword extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting, pristine, invalid } = this.props;
+    const { handleSubmit, submitting, pristine, invalid, reset } = this.props;
 
     return (
       <div className="authorization--form">
@@ -34,6 +34,7 @@ class UpdatePassword extends Component {
         <form
           onSubmit={handleSubmit(value => {
             this.onSubmit.bind(this)({ password: value.password });
+            reset();
           })}
         >
           <Field
