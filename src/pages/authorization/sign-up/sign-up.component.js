@@ -35,6 +35,10 @@ class SignUp extends Component {
     this.props.register({ name, email, password });
   }
 
+  componentWillMount() {
+    this.props.clearMessage();
+  }
+
   componentDidUpdate() {
     if (this.props.isRegistered) {
       this.props.push(routes.signUpSuccess);
