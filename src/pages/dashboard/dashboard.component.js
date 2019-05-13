@@ -168,8 +168,8 @@ class Dashboard extends React.Component {
             }
             id={flower._id}
             picture={flower.img_path}
-            disconnected={sensorData.notConnected ? true : false}
-            issues={currentFlower.problematic ? true : false}
+            disconnected={(sensorData.notConnected = true)}
+            issues={(currentFlower.problematic = true)}
           />
         </div>
       );
@@ -196,12 +196,12 @@ class Dashboard extends React.Component {
         <>
           <section className="dashboard">
             <div className="dashboard__search">
-              <label>Search:</label>
+              <label className="dashboard__search__title">Search</label>
               <input
                 data-tip="Search for flowers..."
                 className="dashboard__search--field"
                 type="text"
-                placeholder="Search"
+                placeholder="Flower name..."
                 value={filter}
                 onChange={this.onFilter}
               />
@@ -229,20 +229,15 @@ class Dashboard extends React.Component {
               <span className="dashboard--sorting__title">Filter by</span>
 
               <div className="dashboard--sorting--problematical">
-                <label
-                  onClick={this.sortByProblems}
-                  data-tip="Filter flowers by problems"
-                >
-                  Problematical
-                  <button className="dashboard--sorting__button">
-                    <img
-                      className={
-                        isProblematicSort ? "icon icon--up" : "icon icon--down"
-                      }
-                      src={isProblematicSort ? ArrowUp : ArrowDown}
-                      alt="show problematical"
-                    />
-                  </button>
+                <label>
+                  <span>Problematical</span>
+
+                  <input type="checkbox" onClick={this.sortByProblems} />
+                </label>
+                <label>
+                  <span>Disconnected</span>
+
+                  <input type="checkbox" onClick={this.sortByProblems} />
                 </label>
               </div>
             </div>

@@ -17,6 +17,17 @@ import {
   CLEAR_MESSAGE
 } from "./authorization.action-types";
 
+import { toast } from "react-toastify";
+
+const notify = message => toast(message);
+
+toast.configure({
+  autoClose: 4000,
+  progressStyle: {
+    backgroundImage: "linear-gradient(to right, #46a25f, #15d94a)"
+  }
+});
+
 export const falseRegistered = () => dispatch => {
   dispatch({ type: REGISTERED_FALSE });
 };
@@ -68,7 +79,7 @@ export const logIn = ({ email, password }) => dispatch => {
 };
 
 export const deleteUser = () => dispatch => {
-  dispatch({ type: LOADING });
+  dispatch({ type: LOADING }, notify("Deleted successfully!"));
   const url = `${backendUrl}/api/auth/user`;
 
   const config = {
@@ -91,6 +102,8 @@ export const updateUser = property => dispatch => {
   dispatch({ type: LOADING });
   const url = `${backendUrl}/api/auth/user/${Object.keys(property)}`;
 
+  const notify = message => toast(message);
+
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -106,7 +119,10 @@ export const updateUser = property => dispatch => {
 
   axios
     .put(url, body, config)
-    .then(res => dispatch({ type: UPDATE_SUCCESS, payload: res.data }))
+    .then(
+      res => dispatch({ type: UPDATE_SUCCESS, payload: res.data }),
+      notify("Updated successfully!")
+    )
     .catch(err =>
       dispatch({ type: UPDATE_FAIL, payload: err.response.data.message })
     );

@@ -23,7 +23,9 @@ class DeleteProfile extends Component {
         <Button
           title="DELETE"
           onClick={() => {
-            window.confirm("Are you sure?") && this.props.deleteUser();
+            window.confirm(
+              "Are you sure you want to permanently delete your account?"
+            ) && this.props.deleteUser();
           }}
           buttonType={TYPES.DELETE}
         />
