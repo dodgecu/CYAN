@@ -51,12 +51,13 @@ export const register = ({ name, email, password }) => dispatch => {
   password = md5(password);
   const body = JSON.stringify({ name, email, password });
 
-  axios
+  return axios
     .post(url, body, config)
     .then(res => dispatch({ type: REGISTRATION_SUCCESS, payload: res.data }))
-    .catch(err =>
-      dispatch({ type: REGISTRATION_FAIL, payload: err.response.data.message })
-    );
+    .catch(err => {
+      dispatch({ type: REGISTRATION_FAIL, payload: err.response.data.message });
+      throw new SubmissionError({ _error: err.response.data.message });
+    });
 };
 
 export const logIn = ({ email, password }) => dispatch => {
