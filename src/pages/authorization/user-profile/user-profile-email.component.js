@@ -13,6 +13,7 @@ import {
 import Input from "../../../common/components/input/input.component";
 
 import { email, requireEmail } from "./user-profile.validation";
+import asyncValidate from "./user-profile.async-validation";
 
 class UpdateEmail extends Component {
   constructor(props) {
@@ -71,7 +72,9 @@ const mapStateToProps = state => ({
 });
 
 UpdateEmail = reduxForm({
-  form: "update-email"
+  form: "update-email",
+  asyncValidate,
+  asyncBlurFields: ["email"]
 })(UpdateEmail);
 
 export default connect(
