@@ -29,6 +29,10 @@
     display: flex;
     flex-direction: column;
 
+    &__title {
+      font-weight: 600;
+    }
+
     &--field {
       border: 1px solid $silver;
       border-radius: 3px;
@@ -76,7 +80,8 @@
       .icon {
         max-width: 10px;
 
-        &--down {
+        &--down,
+        &--up {
           filter: invert(56%) sepia(96%) saturate(612%) hue-rotate(356deg)
             brightness(101%) contrast(91%);
         }

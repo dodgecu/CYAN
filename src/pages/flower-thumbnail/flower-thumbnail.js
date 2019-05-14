@@ -27,7 +27,7 @@ function FlowerThumbnail(props) {
             <>
               <i
                 className="title__icon--issue issues material-icons"
-                data-tip="Please, check problems area for more details"
+                data-tip="Flower has some issues. Click on details for more info!"
               >
                 warning
               </i>

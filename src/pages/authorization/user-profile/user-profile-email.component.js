@@ -34,7 +34,7 @@ class UpdateEmail extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting, pristine, invalid } = this.props;
+    const { handleSubmit, submitting, invalid } = this.props;
     return (
       <div className="authorization--form">
         <h2 className="authorization--form__title">Change email</h2>
@@ -54,7 +54,7 @@ class UpdateEmail extends Component {
             title="UPDATE"
             type="submit"
             buttonType={TYPES.PRIMARY}
-            disabled={this.state.errors || submitting || pristine || invalid}
+            disabled={this.state.errors || submitting || invalid}
           />
           {this.props.message === "User with such email already exist" ||
           this.props.message === "Cannot change email" ? (
