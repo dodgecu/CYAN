@@ -20,7 +20,7 @@ class UpdateName extends Component {
   }
 
   render() {
-    const { handleSubmit, invalid, submitting, pristine } = this.props;
+    const { handleSubmit, invalid, submitting } = this.props;
 
     return (
       <>
@@ -42,7 +42,7 @@ class UpdateName extends Component {
               title="UPDATE"
               type="submit"
               buttonType={TYPES.PRIMARY}
-              disabled={submitting || pristine || invalid}
+              disabled={submitting || invalid}
             />
             {this.props.message === "Cannot change name" ? (
               <div className="error-message">{this.props.message}</div>
