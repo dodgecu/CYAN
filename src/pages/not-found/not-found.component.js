@@ -18,7 +18,7 @@ function NotFound(props) {
   return (
     <>
       <PageTitle title="Oops!" />
-      <Header />
+      <header className="header" />
       <div className="not-found">
         <img src={page404} alt="page404" />
         <div className="not-found__description">
