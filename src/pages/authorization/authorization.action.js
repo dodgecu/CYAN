@@ -87,6 +87,7 @@ export const deleteUser = () => dispatch => {
 };
 
 export const updateUser = property => dispatch => {
+  debugger;
   let body = null;
   dispatch({ type: LOADING });
   const url = `${backendUrl}/api/auth/user/${Object.keys(property)}`;
