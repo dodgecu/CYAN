@@ -216,7 +216,7 @@ class Dashboard extends React.Component {
                   <button className="dashboard--sorting__button">
                     <img
                       className={
-                        isAscendingSort ? "icon icon--up" : "icon--down"
+                        isAscendingSort ? "icon icon--up" : "icon icon--down"
                       }
                       src={isAscendingSort ? ArrowUp : ArrowDown}
                       alt="sort by alphabet"
