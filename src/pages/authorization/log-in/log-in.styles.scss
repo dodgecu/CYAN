@@ -27,3 +27,9 @@
   transform: translateX(-50%);
   color: $danger;
 }
+
+.authorization--log-in {
+  .error-message {
+    width: 100%;
+  }
+}

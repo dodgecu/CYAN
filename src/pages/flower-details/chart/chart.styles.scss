@@ -65,12 +65,13 @@ h2[class$='chart__title'] {
 .air-tip,
 .temperature-tip {
   &__rect {
-    width: 150px;
+    width: 140px;
     height: 30px;
   }
 
   &__text {
     stroke-width: 0;
+    font-size: 0.9rem;
   }
 }
 .temperature-chart {
