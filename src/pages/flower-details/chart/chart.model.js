@@ -34,6 +34,7 @@ ChartModel.prototype.draw = function() {
     )
     .append("g")
     .attr("transform", `translate(${this.margin.left}, ${this.margin.top})`);
+
   this.createGradient();
   this.createScales();
   this.addAxes();
@@ -223,14 +224,14 @@ ChartModel.prototype.toolTip = function(data) {
 
   const focus_g = focus.append("g").attr("class", `${this.selector}-tip`);
 
-  const tipRect = focus_g
+  focus_g
     .append("rect")
     .attr("class", `${this.selector}-tip__rect`)
     .attr("fill", "#5E5E5E")
     .attr("rx", "5")
     .attr("rx", "5");
 
-  const tipRectWidth = tipRect.node().getBBox().width; //check for error
+  const tipRectWidth = 140;
 
   const tipText = focus_g
     .append("text")
