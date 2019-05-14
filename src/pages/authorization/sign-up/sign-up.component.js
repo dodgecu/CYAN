@@ -3,8 +3,12 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
 
-import { register, clearMessage } from "../authorization.action";
-import { falseRegistered } from "../authorization.action";
+import {
+  register,
+  clearMessage,
+  falseRegistered
+} from "../authorization.action";
+
 import {
   requirePassword,
   requireUserName,
@@ -15,6 +19,8 @@ import {
   passwordsMatch,
   repeatPassword
 } from "./sign-up.validation";
+
+import asyncValidate from "./sign-up.async-validation";
 
 import {
   Button,
@@ -121,7 +127,9 @@ const mapStateToProps = state => ({
 });
 
 SignUp = reduxForm({
-  form: "signUp"
+  form: "signUp",
+  asyncValidate,
+  asyncBlurFields: ["email"]
 })(SignUp);
 
 export default connect(
