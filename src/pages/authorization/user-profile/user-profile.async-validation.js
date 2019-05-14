@@ -13,7 +13,7 @@ const asyncValidate = value => {
 
   const body = JSON.stringify(value);
   const request = axios.post(url, body, config);
-  debugger;
+
   return request
     .then(res => Promise.resolve({ email: res.data.message }))
     .catch(err => {
