@@ -31,6 +31,7 @@
 
     &__title {
       font-weight: 600;
+      font-size: 14px;
     }
 
     &--field {
@@ -60,6 +61,18 @@
     flex-direction: column;
     padding: 10px 0;
     font-size: 14px;
+
+    &--filter {
+      display: flex;
+      margin: 20px 0;
+
+      &--problematical,
+      &--disconnected {
+        display: flex;
+        align-items: center;
+        margin-right: 5px;
+      }
+    }
 
     &__title {
       font-weight: 600;
@@ -116,5 +129,19 @@
 
 .dashboard--flower-list {
   box-sizing: border-box;
-  padding: 20px;
+  margin: 10px;
+
+  &__title {
+    display: inline-block;
+    margin: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .dashboard__link {
+    text-align: center;
+    margin: 10px;
+    font-size: 14px;
+    cursor: pointer;
+  }
 }

@@ -216,7 +216,7 @@ class Dashboard extends React.Component {
                   <button className="dashboard--sorting__button">
                     <img
                       className={
-                        isAscendingSort ? "icon icon--up" : "icon icon--down"
+                        isAscendingSort ? "icon icon--up" : "icon--down"
                       }
                       src={isAscendingSort ? ArrowUp : ArrowDown}
                       alt="sort by alphabet"
@@ -228,22 +228,21 @@ class Dashboard extends React.Component {
             <div className="dashboard--sorting">
               <span className="dashboard--sorting__title">Filter by</span>
 
-              <div className="dashboard--sorting--problematical">
-                <label>
+              <div className="dashboard--sorting--filter">
+                <label className="dashboard--sorting--filter--problematical">
                   <span>Problematical</span>
 
                   <input type="checkbox" onClick={this.sortByProblems} />
                 </label>
-                <label>
+                <label className="dashboard--sorting--filter--disconnected">
                   <span>Disconnected</span>
-
                   <input type="checkbox" onClick={this.sortByProblems} />
                 </label>
               </div>
             </div>
           </section>
           <div className="dashboard--flower-list">
-            <h2>Flower list</h2>
+            <h2 className="dashboard--flower-list__title">Flower list</h2>
             <Link to="/create" className="dashboard__link">
               CREATE FLOWER
             </Link>
