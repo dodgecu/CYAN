@@ -28,7 +28,7 @@ class Dashboard extends React.Component {
       filter: "",
       flowers: [],
       disconnectedFlowers: [],
-      isFiltered: false,
+      isFilteredbyConnection: false,
       sortBy: "name",
       isAscendingSort: true,
       isProblematicSort: true
@@ -49,13 +49,8 @@ class Dashboard extends React.Component {
     axios
       .get(`${backendUrl}/user-flowers?id=${curretnUser}`)
       .then(flower => {
-        // flower.data.forEach(current => {
         this.setState(state => {
-          //     // const flowers = state.flowers.push(current);
-          //     // const filteredFlowers = flowers;
-          //     // return { flowers, filteredFlowers };
-          //   });
-          return { flowers: flower.data, filteredFlowers: flower.data };
+          return { flowers: flower.data, disconnectedFlowers: flower.data };
         });
       })
       .catch(err => err);
@@ -84,12 +79,23 @@ class Dashboard extends React.Component {
   }
 
   disconnectedFilter = () => {
-    this.setState(({ disconnectedFlowers, flowers, isFiltered }) => {
-      const itemsToFilter = isFiltered
-        ? flowers.filter(flower => flower.package_id === "")
-        : flowers;
-      return { disconnectedFlowers: [...itemsToFilter], isFiltered };
-    });
+    this.setState(
+      ({ disconnectedFlowers, flowers, isFilteredbyConnection }) => {
+        isFilteredbyConnection = !isFilteredbyConnection;
+        const itemsToFilter = isFilteredbyConnection
+          ? flowers.filter(flower => flower.package_id === "")
+          : flowers;
+        console.info(
+          itemsToFilter.length,
+          flowers.length,
+          isFilteredbyConnection
+        );
+        return {
+          disconnectedFlowers: [...itemsToFilter],
+          isFilteredbyConnection
+        };
+      }
+    );
   };
 
   // sortByProblems = () => {
@@ -183,7 +189,7 @@ class Dashboard extends React.Component {
             }
             id={flower._id}
             picture={flower.img_path}
-            disconnected={sensorData.notConnected ? false : true}
+            disconnected={sensorData.notConnected ? true : false}
             issues={currentFlower.problematic ? true : false}
           />
         </div>
@@ -201,7 +207,7 @@ class Dashboard extends React.Component {
 
   render() {
     let renderContent;
-    const { filter, flowers, isAscendingSort, isFiltered } = this.state;
+    const { filter, flowers, isAscendingSort } = this.state;
     const data = flowers.filter(item =>
       item.name.toLowerCase().match(filter.toLowerCase())
     );
@@ -263,7 +269,7 @@ class Dashboard extends React.Component {
             </Link>
             <div className="dashboard--thumbnail">
               {data.length && this.state.disconnectedFlowers !== 0
-                ? this.renderThumbnails(this.state.filteredFlowers)
+                ? this.renderThumbnails(this.state.disconnectedFlowers)
                 : this.renderFallbackMessage()}
             </div>
           </div>
