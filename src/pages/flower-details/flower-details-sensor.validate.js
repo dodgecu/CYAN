@@ -5,11 +5,7 @@ const validateFlower = flower =>
   isNaN(parseInt(flower.package_id)) ? false : validIncomingObj(flower);
 
 const validateSensors = sensors => {
-  if (sensors.dh22Err || sensors.soilErr || sensors.socketErr) {
-    return false;
-  } else {
-    return sensors.every(sensor => validIncomingObj(sensor));
-  }
+  return sensors.dh22Err || sensors.soilErr || sensors.socketErr ? false : true;
 };
 
 const noData = flow => {
@@ -23,27 +19,32 @@ const noData = flow => {
   };
 };
 
+let current = null;
 const fetchDataFromSensors = (sensors, flower) => {
   if (validateFlower(flower)) {
     if (validateSensors(sensors)) {
-      const [pack] = sensors.filter(
-        sensor => sensor.pack.package_id === parseInt(flower.package_id)
-      );
-      const { humidity, light, soilMoisture, temperature } = pack.pack.sensors;
-      return {
-        currentFlower: flower,
-        sensorHumidity: parseFloat(humidity),
-        sensorLight: parseFloat(light),
-        sensorSoilmoisture: parseFloat(soilMoisture["Sensor data"]),
-        sensorTemperature: parseFloat(temperature),
-        connected: true
-      };
-    } else {
-      return noData(flower);
+      for (let sensor of sensors) {
+        if (validIncomingObj(sensor)) {
+          if (sensor.pack.package_id === parseInt(flower.package_id)) {
+            current = sensor.pack;
+          }
+        }
+      }
+
+      if (current !== null) {
+        const { humidity, light, soilMoisture, temperature } = current.sensors;
+        return {
+          currentFlower: flower,
+          sensorHumidity: parseFloat(humidity),
+          sensorLight: parseFloat(light),
+          sensorSoilmoisture: parseFloat(soilMoisture["Sensor data"]),
+          sensorTemperature: parseFloat(temperature),
+          connected: true
+        };
+      }
     }
-  } else {
-    return noData(flower);
   }
+  return noData(flower);
 };
 
 export { fetchDataFromSensors, validIncomingObj };
