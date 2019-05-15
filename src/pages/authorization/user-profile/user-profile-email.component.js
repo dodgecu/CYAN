@@ -51,7 +51,7 @@ class UpdateEmail extends Component {
             label="Email"
             validate={[email, requireEmail]}
           />
-          {error && <span>{error}</span>}
+          {error && <div className="error-message">{error}</div>}
           <Button
             title="UPDATE"
             type="submit"

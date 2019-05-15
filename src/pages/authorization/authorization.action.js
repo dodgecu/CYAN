@@ -109,8 +109,8 @@ export const updateUser = property => dispatch => {
   let notify = message => toast(message);
   const objectKey = Object.keys(property)[0];
   const errorMessage = {
-    email: "You try to change email to email you already have",
-    name: "You try to change email to email you already have"
+    email: "That email is already taken by you",
+    name: "That name is already taken by you"
   };
 
   const config = {
