@@ -5,25 +5,43 @@ import { connect } from "react-redux";
 import { fetchSensors } from "../../../../common/sensors/sensors.middleware";
 
 class Package extends Component {
+  constructor(props) {
+    super(props);
+    this.activeSensors = [];
+  }
   componentDidMount() {
     this.props.fetchSensors();
   }
 
-  availableSensors = data =>
-    data.every(
-      data => Object.entries(data).length !== 0 && data.constructor === Object
-    );
+  validate = sensors => {
+    return sensors.dh22Err || sensors.soilErr || sensors.socketErr
+      ? false
+      : true;
+  };
+
+  validateSensors = sensors => {
+    if (this.validate(sensors)) {
+      return sensors.every(
+        sensor =>
+          Object.entries(sensor).length !== 0 && sensor.constructor === Object
+      );
+    }
+  };
+
+  shouldComponentUpdate() {
+    if (this.validateSensors(this.props.sensors)) {
+      this.activeSensors.length = 0;
+      for (let sensor of this.props.sensors) {
+        this.activeSensors.push(sensor);
+      }
+
+      return true;
+    }
+
+    return false;
+  }
 
   render() {
-    const sensors = sensor => {
-      return sensor.dh22Err ||
-        sensor.soilErr ||
-        sensor.socketErr ||
-        !this.availableSensors(sensor)
-        ? false
-        : true;
-    };
-
     return (
       <Field
         id="package"
@@ -31,11 +49,11 @@ class Package extends Component {
         label="Select sensor"
         className="form__constrols--sensor"
         description={"Select sensors you have attached to your flower"}
-        disabled={!sensors(this.props.sensors) ? true : false}
+        disabled={!this.validate(this.props.sensors) ? true : false}
         component={this.props.validForm}
       >
-        {sensors(this.props.sensors) ? (
-          this.props.sensors.map(sensor => {
+        {this.validate(this.props.sensors) && this.activeSensors.length ? (
+          this.activeSensors.map(sensor => {
             return (
               <option
                 key={sensor.pack.name}
