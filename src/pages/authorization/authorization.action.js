@@ -125,7 +125,7 @@ export const updateUser = property => dispatch => {
   }
 
   body = JSON.stringify(property);
-  debugger;
+
   return axios
     .put(url, body, config)
     .then(res => {
@@ -134,7 +134,7 @@ export const updateUser = property => dispatch => {
     })
     .catch(err => {
       dispatch({ type: UPDATE_FAIL, payload: err.response.data.message });
-      if (objectKey === Object.keys(errorMessage)) {
+      if (Object.keys(errorMessage).find(el => el === objectKey)) {
         throw new SubmissionError({ _error: errorMessage[objectKey] });
       }
     });
