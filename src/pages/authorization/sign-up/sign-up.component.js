@@ -38,11 +38,7 @@ import "./sign-up.styles.scss";
 
 class SignUp extends Component {
   onSubmit({ name, email, password }) {
-    this.props.register({ name, email, password });
-  }
-
-  componentWillMount() {
-    this.props.clearMessage();
+    return this.props.register({ name, email, password });
   }
 
   componentDidUpdate() {
@@ -52,7 +48,7 @@ class SignUp extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting, valid } = this.props;
+    const { error, handleSubmit, submitting, valid } = this.props;
 
     return (
       <>
@@ -93,9 +89,7 @@ class SignUp extends Component {
               placeholder="Repeat password"
               validate={[repeatPassword, passwordsMatch]}
             />
-            {this.props.message ? (
-              <div className="error-message">{this.props.message}</div>
-            ) : null}
+            {error && <div className="error-message">{error}</div>}
             <Button
               title="SIGN UP"
               type="submit"
@@ -122,7 +116,6 @@ class SignUp extends Component {
 
 const mapStateToProps = state => ({
   isRegistered: state.authReducer.isRegistered,
-  message: state.authReducer.message,
   isLoading: state.authReducer.isLoading
 });
 

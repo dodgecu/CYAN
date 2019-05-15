@@ -114,6 +114,7 @@ class FlowerDetails extends Component {
           buttonType={TYPES.EDIT}
           onClick={() => this.redirect()}
         />
+        {console.log(this.props)}
         <Footer />
       </>
     );

@@ -22,25 +22,17 @@ import "./log-in.styles.scss";
 
 class LogIn extends Component {
   onSubmit({ email, password }) {
-    this.props.logIn({ email, password });
-  }
-
-  componentWillMount() {
-    this.props.clearMessage();
-    if (this.props.isAuthenticated) {
-      this.props.push(routes.dashboard);
-    }
+    return this.props.logIn({ email, password });
   }
 
   componentDidUpdate() {
     if (this.props.isAuthenticated) {
-      this.props.clearMessage();
       this.props.push(routes.dashboard);
     }
   }
 
   render() {
-    const { handleSubmit, submitting, valid } = this.props;
+    const { error, handleSubmit, submitting, valid } = this.props;
 
     return (
       <>
@@ -65,10 +57,7 @@ class LogIn extends Component {
               placeholder="Password"
               validate={requirePassword}
             />
-            {this.props.message ? (
-              <div className="error-message">{this.props.message}</div>
-            ) : null}
-
+            {error && <div className="error-message">{error}</div>}
             <Button
               title="SIGN IN"
               type="submit"
@@ -95,7 +84,6 @@ class LogIn extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.authReducer.isAuthenticated,
-  message: state.authReducer.message,
   isLoading: state.authReducer.isLoading
 });
 

@@ -57,10 +57,6 @@ class UpdateEmail extends Component {
             buttonType={TYPES.PRIMARY}
             disabled={this.state.errors || submitting || invalid}
           />
-          {this.props.message === "User with such email already exist" ||
-          this.props.message === "Cannot change email" ? (
-            <div className="error-message">{this.props.message}</div>
-          ) : null}
         </form>
       </div>
     );
