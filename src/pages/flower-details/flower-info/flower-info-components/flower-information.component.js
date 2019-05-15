@@ -1,4 +1,5 @@
 import React from "react";
+import ReactTooltip from "react-tooltip";
 
 const flowerInformation = props => {
   const months = [
@@ -35,10 +36,14 @@ const flowerInformation = props => {
           Birthday:
         </span>
         {date}
-        <span className="flower-details__information__info--totaldays">
+        <span
+          className="flower-details__information__info--totaldays"
+          data-tip="Flower lifespan"
+        >
           ({Math.floor(dayCount / 86400000)} days)
         </span>
       </p>
+      <ReactTooltip />
     </article>
   );
 };

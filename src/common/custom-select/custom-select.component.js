@@ -14,7 +14,7 @@ class CustomSelect extends Component {
   openOverlay = () => this.setState({ selectActive: true });
 
   selectValueHandler = value => () => {
-    const option = flowers.filter(flower => flower.name === value)[0];
+    const [option] = flowers.filter(flower => flower.name === value);
 
     const defaults = {
       name: this.props.form["create-flower-form"].values.name,
@@ -34,7 +34,13 @@ class CustomSelect extends Component {
   renderSelectedHandler = () => {
     const { options, value } = this.props;
     const found = options.find(option => option.name === value);
-    return found ? found.name : "Select flower type";
+    return found ? (
+      found.name
+    ) : (
+      <span className="custom-select__value--placeholder">
+        Select flower type
+      </span>
+    );
   };
 
   renderOptionsHandler = () => {
@@ -73,11 +79,11 @@ class CustomSelect extends Component {
       >
         <div className="custom-select__field">
           <div
-            className="custom-select__placeholder"
+            className="custom-select__value"
             onClick={selectActive ? this.closeOverlay : this.openOverlay}
           >
             {this.renderSelectedHandler()}
-            <span className="custom-select__placeholder--arrow">
+            <span className="custom-select__value--arrow">
               {selectActive ? "▴" : "▾"}
             </span>
           </div>

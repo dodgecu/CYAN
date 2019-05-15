@@ -48,11 +48,14 @@
       }
     }
   }
-  &__placeholder {
+  &__value {
     font-size: 14px;
-    color: $input-placeholder;
+    color: $authorizationLabel;
     display: flex;
     cursor: pointer;
+    &--placeholder {
+      color: $input-placeholder;
+    }
     &--arrow {
       float: right;
       color: $cancel-btn;
