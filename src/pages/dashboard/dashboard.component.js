@@ -27,6 +27,8 @@ class Dashboard extends React.Component {
     this.state = {
       filter: "",
       flowers: [],
+      disconnectedFlowers: [],
+      isFiltered: false,
       sortBy: "name",
       isAscendingSort: true,
       isProblematicSort: true
@@ -47,11 +49,13 @@ class Dashboard extends React.Component {
     axios
       .get(`${backendUrl}/user-flowers?id=${curretnUser}`)
       .then(flower => {
-        flower.data.forEach(current => {
-          this.setState(state => {
-            const flowers = state.flowers.push(current);
-            return flowers;
-          });
+        // flower.data.forEach(current => {
+        this.setState(state => {
+          //     // const flowers = state.flowers.push(current);
+          //     // const filteredFlowers = flowers;
+          //     // return { flowers, filteredFlowers };
+          //   });
+          return { flowers: flower.data, filteredFlowers: flower.data };
         });
       })
       .catch(err => err);
@@ -79,38 +83,47 @@ class Dashboard extends React.Component {
     });
   }
 
-  sortByProblems = () => {
-    if (this.issues.length) {
-      const flower = this.issues
-        .map(flow => flow.id)
-        .reduce((obj, current) => {
-          obj[current] ? obj[current]++ : (obj[current] = 2);
-          return obj;
-        }, {});
-
-      const order = Object.keys(flower).sort((a, b) => flower[b] - flower[a]);
-
-      this.setState(({ flowers, isProblematicSort }) => {
-        const itemsToFilter = flowers.filter(
-          flower => flower.package_id !== ""
-        );
-        const rest = flowers.filter(flower => flower.package_id === "");
-
-        if (isProblematicSort) {
-          itemsToFilter.sort(
-            (a, b) => order.indexOf(a._id) - order.indexOf(b._id)
-          );
-        } else {
-          itemsToFilter.sort(
-            (a, b) => order.indexOf(b._id) - order.indexOf(a._id)
-          );
-        }
-        const filtered = [...itemsToFilter, ...rest];
-
-        return { flowers: filtered, isProblematicSort: !isProblematicSort };
-      });
-    }
+  disconnectedFilter = () => {
+    this.setState(({ disconnectedFlowers, flowers, isFiltered }) => {
+      const itemsToFilter = isFiltered
+        ? flowers.filter(flower => flower.package_id === "")
+        : flowers;
+      return { disconnectedFlowers: [...itemsToFilter], isFiltered };
+    });
   };
+
+  // sortByProblems = () => {
+  //   if (this.issues.length) {
+  //     const flower = this.issues
+  //       .map(flow => flow.id)
+  //       .reduce((obj, current) => {
+  //         obj[current] ? obj[current]++ : (obj[current] = 2);
+  //         return obj;
+  //       }, {});
+
+  //     const order = Object.keys(flower).sort((a, b) => flower[b] - flower[a]);
+
+  //     this.setState(({ flowers, isProblematicSort }) => {
+  //       const itemsToFilter = flowers.filter(
+  //         flower => flower.package_id !== ''
+  //       );
+  //       const rest = flowers.filter(flower => flower.package_id === '');
+
+  //       if (isProblematicSort) {
+  //         itemsToFilter.sort(
+  //           (a, b) => order.indexOf(a._id) - order.indexOf(b._id)
+  //         );
+  //       } else {
+  //         itemsToFilter.sort(
+  //           (a, b) => order.indexOf(b._id) - order.indexOf(a._id)
+  //         );
+  //       }
+  //       const filtered = [...itemsToFilter, ...rest];
+
+  //       return { flowers: filtered, isProblematicSort: !isProblematicSort };
+  //     });
+  //   }
+  // };
 
   renderThumbnails(data) {
     this.issues.length = 0;
@@ -145,6 +158,8 @@ class Dashboard extends React.Component {
 
       const [currentFlower] = this.issues.filter(id => id.id === flower._id);
 
+      console.log(this.state.flowers);
+
       return (
         <div className="dashboard--thumbnail__item" key={flower._id}>
           <FlowerThumbnail
@@ -168,8 +183,8 @@ class Dashboard extends React.Component {
             }
             id={flower._id}
             picture={flower.img_path}
-            disconnected={(sensorData.notConnected = true)}
-            issues={(currentFlower.problematic = true)}
+            disconnected={sensorData.notConnected ? false : true}
+            issues={currentFlower.problematic ? true : false}
           />
         </div>
       );
@@ -186,7 +201,7 @@ class Dashboard extends React.Component {
 
   render() {
     let renderContent;
-    const { filter, flowers, isAscendingSort, isProblematicSort } = this.state;
+    const { filter, flowers, isAscendingSort, isFiltered } = this.state;
     const data = flowers.filter(item =>
       item.name.toLowerCase().match(filter.toLowerCase())
     );
@@ -232,11 +247,11 @@ class Dashboard extends React.Component {
                 <label className="dashboard--sorting--filter--problematical">
                   <span>Problematical</span>
 
-                  <input type="checkbox" onClick={this.sortByProblems} />
+                  <input type="checkbox" onClick={this.onFilter} />
                 </label>
                 <label className="dashboard--sorting--filter--disconnected">
                   <span>Disconnected</span>
-                  <input type="checkbox" onClick={this.sortByProblems} />
+                  <input type="checkbox" onClick={this.disconnectedFilter} />
                 </label>
               </div>
             </div>
@@ -247,8 +262,8 @@ class Dashboard extends React.Component {
               CREATE FLOWER
             </Link>
             <div className="dashboard--thumbnail">
-              {data.length
-                ? this.renderThumbnails(data)
+              {data.length && this.state.disconnectedFlowers !== 0
+                ? this.renderThumbnails(this.state.filteredFlowers)
                 : this.renderFallbackMessage()}
             </div>
           </div>
