@@ -106,7 +106,12 @@ export const updateUser = property => dispatch => {
   dispatch({ type: LOADING });
   const url = `${backendUrl}/api/auth/user/${Object.keys(property)}`;
 
-  const notify = message => toast(message);
+  let notify = message => toast(message);
+  const objectKey = Object.keys(property)[0];
+  const errorMessage = {
+    email: "You try to change email to email you already have",
+    name: "You try to change email to email you already have"
+  };
 
   const config = {
     headers: {
@@ -120,16 +125,19 @@ export const updateUser = property => dispatch => {
   }
 
   body = JSON.stringify(property);
-
-  axios
+  debugger;
+  return axios
     .put(url, body, config)
-    .then(
-      res => dispatch({ type: UPDATE_SUCCESS, payload: res.data }),
-      notify("Updated successfully!")
-    )
-    .catch(err =>
-      dispatch({ type: UPDATE_FAIL, payload: err.response.data.message })
-    );
+    .then(res => {
+      dispatch({ type: UPDATE_SUCCESS, payload: res.data });
+      notify("Updated successfully!");
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_FAIL, payload: err.response.data.message });
+      if (objectKey === Object.keys(errorMessage)) {
+        throw new SubmissionError({ _error: errorMessage[objectKey] });
+      }
+    });
 };
 
 export const logOut = () => dispatch => {

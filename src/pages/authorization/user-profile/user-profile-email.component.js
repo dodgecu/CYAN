@@ -31,11 +31,11 @@ class UpdateEmail extends Component {
   }
   onSubmit(inputValue) {
     this.props.clearMessage();
-    this.props.updateUser(inputValue);
+    return this.props.updateUser(inputValue);
   }
 
   render() {
-    const { handleSubmit, submitting, invalid } = this.props;
+    const { error, handleSubmit, submitting, invalid } = this.props;
     return (
       <div className="authorization--form">
         <h2 className="authorization--form__title">Change email</h2>
@@ -51,6 +51,7 @@ class UpdateEmail extends Component {
             label="Email"
             validate={[email, requireEmail]}
           />
+          {error && <span>{error}</span>}
           <Button
             title="UPDATE"
             type="submit"
