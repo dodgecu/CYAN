@@ -32,7 +32,6 @@ class FlowerDetails extends Component {
         .then(flower => {
           const [current_flower] = flower.data;
           this.setState({ flower: current_flower });
-          //this.flower = current_flower
         })
         .catch(err => err);
       this.props.fetchSensors();
@@ -51,6 +50,7 @@ class FlowerDetails extends Component {
       this.props.sensors,
       this.state.flower
     );
+
     const issues = [];
     let flowerInfo;
 
