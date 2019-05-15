@@ -137,13 +137,22 @@ h2[class$='chart__title'] {
   padding: 50px 20px;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
+  background: rgb(231, 231, 231)
 }
 
 .error-chart__title {
+  display: flex;
+  align-items: center;
   margin: 0;
-  text-align: center;
   font-size: 1.2rem;
-  color: $chartWarningText;
+  color: #666;
+/*   color: $chartWarningText; */
+
+  .material-icons--warning {
+    font-size: 2rem;
+    margin-right: 10px;
+  }
 }
