@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { fetchSensors } from "../../common/sensors/sensors.middleware";
-
 import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 
 class Sensors extends Component {
@@ -44,6 +43,8 @@ class Sensors extends Component {
   }
 
   render() {
+    const { issues } = this.props;
+
     const {
       flower: {
         package_id,
@@ -68,6 +69,23 @@ class Sensors extends Component {
         const {
           sensors: { humidity, temperature, soilMoisture }
         } = active.pack;
+
+        if (parseFloat(humidity) + delta < airHumidity) {
+          issues.push({ id: _id, problematic: true });
+        }
+        if (parseFloat(temperature) + delta < airTemperature) {
+          issues.push({ id: _id, problematic: true });
+        }
+        if (parseFloat(soilMoisture["Sensor data"]) + delta < soilHumidity) {
+          issues.push({ id: _id, problematic: true });
+        }
+        if (parseFloat(active.pack.sensors.light) + delta < light) {
+          issues.push({ id: _id, problematic: true });
+        }
+        issues.push({ id: _id, problematic: false });
+
+        const [currentFlower] = issues.filter(id => id.id === _id);
+
         return (
           <div className="dashboard--thumbnail__item">
             <FlowerThumbnail
@@ -80,29 +98,12 @@ class Sensors extends Component {
               picture={img_path}
               id={_id}
               disconnected={false}
+              issues={currentFlower.problematic}
             />
           </div>
         );
       }
     }
-
-    // if (sensorData.connected) {
-    //   if (sensorData.sensorHumidity + delta < airHumidity) {
-    //     this.issues.push({ id: flower._id, problematic: true });
-    //   }
-    //   if (sensorData.sensorTemperature + delta < airTemperature) {
-    //     this.issues.push({ id: flower._id, problematic: true });
-    //   }
-    //   if (sensorData.sensorSoilMoisture + delta < soilHumidity) {
-    //     this.issues.push({ id: flower._id, problematic: true });
-    //   }
-    //   if (sensorData.sensorLight + delta < light) {
-    //     this.issues.push({ id: flower._id, problematic: true });
-    //   }
-    // }
-    // this.issues.push({ id: flower._id, problematic: false });
-
-    // const [currentFlower] = this.issues.filter(id => id.id === flower._id);
 
     return (
       <div className="dashboard--thumbnail__item">
@@ -122,7 +123,8 @@ class Sensors extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state, own) => {
+  own.issues.length = 0;
   return state.sensors;
 };
 export default connect(
