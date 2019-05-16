@@ -7,7 +7,6 @@ import axios from "axios";
 
 import "./dashboard.styles.scss";
 import { Button, TYPES } from "../../common/components/button/button.component";
-import { renderSensorData } from "./dashboard-sensors.validate";
 
 import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 import Header from "../../common/header/header.component";
@@ -15,6 +14,7 @@ import Footer from "../../common/footer/footer.component";
 import PageTitle from "../../common/page-title/page-title.component";
 
 import { fetchSensors } from "../../common/sensors/sensors.middleware";
+import { renderSensorData, checkSensors } from "./dashboard-sensors.validate";
 
 import { backendUrl } from "../../constants/backendUrl";
 
@@ -31,6 +31,7 @@ class Dashboard extends React.Component {
       isAscendingSort: true,
       isProblematicSort: true
     };
+    this.activeSensors = [];
     this.issues = [];
     this.onFilter = this.onFilter.bind(this);
     this.onSort = this.onSort.bind(this);
@@ -112,11 +113,33 @@ class Dashboard extends React.Component {
     }
   };
 
+  shouldComponentUpdate() {
+    this.activeSensors.length = 0;
+    const { sensors } = this.props;
+    if (sensors.dh22Err || sensors.soilErr || sensors.socketErr) {
+      this.activeSensors.push(sensors);
+      return true;
+    }
+    if (
+      sensors.every(
+        sensor =>
+          Object.entries(sensor).length !== 0 && sensor.constructor === Object
+      )
+    ) {
+      for (let sensor of sensors) {
+        this.activeSensors.push(sensor);
+      }
+      return true;
+    }
+
+    return false;
+  }
+
   renderThumbnails(data) {
     this.issues.length = 0;
     return data.map((flower, i) => {
       const sensorData = renderSensorData(
-        this.props.sensors,
+        this.activeSensors,
         flower.package_id
       );
 
@@ -127,7 +150,7 @@ class Dashboard extends React.Component {
         delta,
         light
       } = flower;
-      if (!sensorData.notConnected) {
+      if (sensorData.connected) {
         if (sensorData.sensorHumidity + delta < airHumidity) {
           this.issues.push({ id: flower._id, problematic: true });
         }
@@ -150,26 +173,14 @@ class Dashboard extends React.Component {
           <FlowerThumbnail
             name={flower.name}
             type={flower.type}
-            soilMoisture={
-              sensorData.sensorSoilMoisture === null
-                ? 0
-                : sensorData.sensorSoilMoisture
-            }
-            airTemperature={
-              sensorData.sensorTemperature === null
-                ? 0
-                : sensorData.sensorTemperature
-            }
-            airHumidity={
-              sensorData.sensorHumidity === null ? 0 : sensorData.sensorHumidity
-            }
-            ambientLight={
-              sensorData.sensorLight === null ? 0 : sensorData.sensorLight
-            }
+            soilMoisture={sensorData.sensorSoilMoisture}
+            airTemperature={sensorData.sensorTemperature}
+            airHumidity={sensorData.sensorHumidity}
+            ambientLight={sensorData.sensorLight}
             id={flower._id}
             picture={flower.img_path}
-            disconnected={(sensorData.notConnected = true)}
-            issues={(currentFlower.problematic = true)}
+            disconnected={!sensorData.connected}
+            issues={currentFlower.problematic}
           />
         </div>
       );

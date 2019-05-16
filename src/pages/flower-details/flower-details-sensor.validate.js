@@ -8,18 +8,7 @@ const validateSensors = sensors => {
   return sensors.dh22Err || sensors.soilErr || sensors.socketErr ? false : true;
 };
 
-const noData = flow => {
-  return {
-    sensorHumidity: null,
-    sensorLight: null,
-    sensorSoilmoisture: null,
-    sensorTemperature: null,
-    currentFlower: flow,
-    connected: false
-  };
-};
-
-let current = null;
+let current = {};
 const fetchDataFromSensors = (sensors, flower) => {
   if (validateFlower(flower)) {
     if (validateSensors(sensors)) {
@@ -31,7 +20,7 @@ const fetchDataFromSensors = (sensors, flower) => {
         }
       }
 
-      if (current !== null) {
+      if (validIncomingObj(current)) {
         const { humidity, light, soilMoisture, temperature } = current.sensors;
         return {
           currentFlower: flower,
@@ -44,7 +33,14 @@ const fetchDataFromSensors = (sensors, flower) => {
       }
     }
   }
-  return noData(flower);
+  return {
+    sensorHumidity: 0,
+    sensorLight: 0,
+    sensorSoilmoisture: 0,
+    sensorTemperature: 0,
+    currentFlower: flower,
+    connected: false
+  };
 };
 
 export { fetchDataFromSensors, validIncomingObj };

@@ -5,6 +5,7 @@ const dataReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_MAIN":
       let newState = initialState;
+
       return {
         ...state,
         sensors:
