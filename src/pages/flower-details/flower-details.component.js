@@ -92,10 +92,10 @@ class FlowerDetails extends Component {
           flowerName={name}
           thumb={img_path}
           type={type}
-          soil={sensorSoilmoisture === null ? 0 : sensorSoilmoisture}
-          temperature={sensorTemperature === null ? 0 : sensorTemperature}
-          humidity={sensorHumidity === null ? 0 : sensorHumidity}
-          light={sensorLight === null ? 0 : sensorLight}
+          soil={sensorSoilmoisture}
+          temperature={sensorTemperature}
+          humidity={sensorHumidity}
+          light={sensorLight}
           created_at={created_at}
           connected={connected ? true : false}
           issues={connected ? issues : []}

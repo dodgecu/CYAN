@@ -1,20 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+
 import ReactTooltip from "react-tooltip";
 
 import axios from "axios";
 
 import "./dashboard.styles.scss";
 import { Button, TYPES } from "../../common/components/button/button.component";
-import { renderSensorData } from "./dashboard-sensors.validate";
 
-import FlowerThumbnail from "../flower-thumbnail/flower-thumbnail";
 import Header from "../../common/header/header.component";
 import Footer from "../../common/footer/footer.component";
 import PageTitle from "../../common/page-title/page-title.component";
 
-import { fetchSensors } from "../../common/sensors/sensors.middleware";
+import Sensors from "./sensors.component";
 
 import { backendUrl } from "../../constants/backendUrl";
 
@@ -29,8 +27,11 @@ class Dashboard extends React.Component {
       flowers: [],
       sortBy: "name",
       isAscendingSort: true,
-      isProblematicSort: true
+      isProblematicSort: true,
+      filterDisconnected: true,
+      isConnected: false
     };
+    this.flower = [];
     this.issues = [];
     this.onFilter = this.onFilter.bind(this);
     this.onSort = this.onSort.bind(this);
@@ -40,7 +41,6 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchSensors();
     const curretnUser = JSON.parse(`${localStorage.getItem("state")}`)
       .authReducer.user.id;
 
@@ -48,8 +48,10 @@ class Dashboard extends React.Component {
       .get(`${backendUrl}/user-flowers?id=${curretnUser}`)
       .then(flower => {
         flower.data.forEach(current => {
+          this.flower.push(current);
           this.setState(state => {
             const flowers = state.flowers.push(current);
+
             return flowers;
           });
         });
@@ -79,100 +81,60 @@ class Dashboard extends React.Component {
     });
   }
 
+  sortConnected = () => {
+    this.setState(({ flowers, isConnected }) => {
+      const active = flowers.filter(flower => flower.package_id !== "");
+
+      return {
+        flowers: !isConnected && active.length ? [...active] : this.flower,
+        isConnected: !isConnected
+      };
+    });
+  };
+
+  sortDisconnected = () => {
+    this.setState(({ flowers, filterDisconnected }) => {
+      const disconnected = flowers.filter(flower => flower.package_id === "");
+
+      return {
+        flowers:
+          filterDisconnected && disconnected.length
+            ? [...disconnected]
+            : this.flower,
+        filterDisconnected: !filterDisconnected
+      };
+    });
+  };
+
   sortByProblems = () => {
-    if (this.issues.length) {
-      const flower = this.issues
-        .map(flow => flow.id)
-        .reduce((obj, current) => {
-          obj[current] ? obj[current]++ : (obj[current] = 2);
-          return obj;
-        }, {});
+    const flower = this.issues
+      .map(flow => flow.id)
+      .reduce((obj, current) => {
+        obj[current] ? obj[current]++ : (obj[current] = 2);
+        return obj;
+      }, {});
 
-      const order = Object.keys(flower).sort((a, b) => flower[b] - flower[a]);
-
-      this.setState(({ flowers, isProblematicSort }) => {
-        const itemsToFilter = flowers.filter(
-          flower => flower.package_id !== ""
+    const order = Object.keys(flower).sort((a, b) => flower[b] - flower[a]);
+    this.setState(({ flowers, isProblematicSort }) => {
+      const itemsToFilter = flowers.filter(flower => flower.package_id !== "");
+      const rest = flowers.filter(flower => flower.package_id === "");
+      if (isProblematicSort) {
+        itemsToFilter.sort(
+          (a, b) => order.indexOf(a._id) - order.indexOf(b._id)
         );
-        const rest = flowers.filter(flower => flower.package_id === "");
-
-        if (isProblematicSort) {
-          itemsToFilter.sort(
-            (a, b) => order.indexOf(a._id) - order.indexOf(b._id)
-          );
-        } else {
-          itemsToFilter.sort(
-            (a, b) => order.indexOf(b._id) - order.indexOf(a._id)
-          );
-        }
-        const filtered = [...itemsToFilter, ...rest];
-
-        return { flowers: filtered, isProblematicSort: !isProblematicSort };
-      });
-    }
+      } else {
+        itemsToFilter.sort(
+          (a, b) => order.indexOf(b._id) - order.indexOf(a._id)
+        );
+      }
+      const filtered = [...itemsToFilter, ...rest];
+      return { flowers: filtered, isProblematicSort: !isProblematicSort };
+    });
   };
 
   renderThumbnails(data) {
-    this.issues.length = 0;
-    return data.map((flower, i) => {
-      const sensorData = renderSensorData(
-        this.props.sensors,
-        flower.package_id
-      );
-
-      const {
-        airHumidity,
-        airTemperature,
-        soilHumidity,
-        delta,
-        light
-      } = flower;
-      if (!sensorData.notConnected) {
-        if (sensorData.sensorHumidity + delta < airHumidity) {
-          this.issues.push({ id: flower._id, problematic: true });
-        }
-        if (sensorData.sensorTemperature + delta < airTemperature) {
-          this.issues.push({ id: flower._id, problematic: true });
-        }
-        if (sensorData.sensorSoilMoisture + delta < soilHumidity) {
-          this.issues.push({ id: flower._id, problematic: true });
-        }
-        if (sensorData.sensorLight + delta < light) {
-          this.issues.push({ id: flower._id, problematic: true });
-        }
-      }
-      this.issues.push({ id: flower._id, problematic: false });
-
-      const [currentFlower] = this.issues.filter(id => id.id === flower._id);
-
-      return (
-        <div className="dashboard--thumbnail__item" key={flower._id}>
-          <FlowerThumbnail
-            name={flower.name}
-            type={flower.type}
-            soilMoisture={
-              sensorData.sensorSoilMoisture === null
-                ? 0
-                : sensorData.sensorSoilMoisture
-            }
-            airTemperature={
-              sensorData.sensorTemperature === null
-                ? 0
-                : sensorData.sensorTemperature
-            }
-            airHumidity={
-              sensorData.sensorHumidity === null ? 0 : sensorData.sensorHumidity
-            }
-            ambientLight={
-              sensorData.sensorLight === null ? 0 : sensorData.sensorLight
-            }
-            id={flower._id}
-            picture={flower.img_path}
-            disconnected={(sensorData.notConnected = true)}
-            issues={(currentFlower.problematic = true)}
-          />
-        </div>
-      );
+    return data.map(flower => {
+      return <Sensors flower={flower} key={flower._id} issues={this.issues} />;
     });
   }
 
@@ -186,7 +148,7 @@ class Dashboard extends React.Component {
 
   render() {
     let renderContent;
-    const { filter, flowers, isAscendingSort, isProblematicSort } = this.state;
+    const { filter, flowers, isAscendingSort } = this.state;
     const data = flowers.filter(item =>
       item.name.toLowerCase().match(filter.toLowerCase())
     );
@@ -230,13 +192,27 @@ class Dashboard extends React.Component {
 
               <div className="dashboard--sorting--filter">
                 <label className="dashboard--sorting--filter--problematical">
-                  <span>Problematical</span>
+                  <span>Connected</span>
 
-                  <input type="checkbox" onClick={this.sortByProblems} />
+                  <input type="checkbox" onClick={this.sortConnected} />
                 </label>
-                <label className="dashboard--sorting--filter--disconnected">
+                {this.state.isConnected ? (
+                  <label
+                    className="dashboard--sorting--filter--disconnected"
+                    htmlFor="problems"
+                  >
+                    <span>Toggle Gravity</span>
+                    <input
+                      type="checkbox"
+                      id="problems"
+                      onClick={this.sortByProblems}
+                    />
+                  </label>
+                ) : null}
+                <label className="dashboard--sorting--filter--problematical">
                   <span>Disconnected</span>
-                  <input type="checkbox" onClick={this.sortByProblems} />
+
+                  <input type="checkbox" onClick={this.sortDisconnected} />
                 </label>
               </div>
             </div>
@@ -279,10 +255,4 @@ class Dashboard extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return state.sensors;
-};
-export default connect(
-  mapStateToProps,
-  { fetchSensors }
-)(Dashboard);
+export default Dashboard;
