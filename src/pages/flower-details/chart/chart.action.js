@@ -6,11 +6,7 @@ import {
   FAIL_GET_DAY_SENSOR_DATA
 } from "./chart.action-types";
 
-export const getDaySensorData = (
-  id,
-  statisticType,
-  time = 1556841600000
-) => dispatch => {
+export const getDaySensorData = (id, statisticType, time) => dispatch => {
   const url = `${backendUrl}/flower-sensor/${id}?type=${statisticType}&time=${time}`;
 
   return axios

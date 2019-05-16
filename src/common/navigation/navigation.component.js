@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { push } from "connected-react-router";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 import "./navigation.scss";
 
@@ -10,11 +11,6 @@ class Sidebar extends Component {
     this.state = {
       isOpen: false
     };
-  }
-
-  navigate(route) {
-    this.props.push(route);
-    this.openMenuHandler();
   }
 
   openMenuHandler() {
@@ -33,13 +29,15 @@ class Sidebar extends Component {
         <ul className="navigation__links">
           {this.props.links.map(link => {
             return (
-              <li
+              <NavLink
+                exact
                 key={link.id}
                 className={`navigation__links--link ${link.className}`}
-                onClick={this.navigate.bind(this, link.path)}
+                to={link.path}
+                onClick={this.openMenuHandler.bind(this)}
               >
                 {link.title}
-              </li>
+              </NavLink>
             );
           })}
         </ul>

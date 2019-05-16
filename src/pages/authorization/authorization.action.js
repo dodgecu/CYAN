@@ -1,5 +1,7 @@
 import axios from "axios";
 import md5 from "md5";
+import { SubmissionError } from "redux-form";
+
 import { backendUrl } from "./../../constants/backendUrl";
 
 import {
@@ -49,12 +51,13 @@ export const register = ({ name, email, password }) => dispatch => {
   password = md5(password);
   const body = JSON.stringify({ name, email, password });
 
-  axios
+  return axios
     .post(url, body, config)
     .then(res => dispatch({ type: REGISTRATION_SUCCESS, payload: res.data }))
-    .catch(err =>
-      dispatch({ type: REGISTRATION_FAIL, payload: err.response.data.message })
-    );
+    .catch(err => {
+      dispatch({ type: REGISTRATION_FAIL, payload: err.response.data.message });
+      throw new SubmissionError({ _error: err.response.data.message });
+    });
 };
 
 export const logIn = ({ email, password }) => dispatch => {
@@ -70,12 +73,13 @@ export const logIn = ({ email, password }) => dispatch => {
   password = md5(password);
   const body = JSON.stringify({ email, password });
 
-  axios
+  return axios
     .post(url, body, config)
     .then(res => dispatch({ type: LOGIN_SUCCESS, payload: res.data }))
-    .catch(err =>
-      dispatch({ type: LOGIN_FAIL, payload: err.response.data.message })
-    );
+    .catch(err => {
+      dispatch({ type: LOGIN_FAIL, payload: err.response.data.message });
+      throw new SubmissionError({ _error: err.response.data.message });
+    });
 };
 
 export const deleteUser = () => dispatch => {
@@ -102,7 +106,12 @@ export const updateUser = property => dispatch => {
   dispatch({ type: LOADING });
   const url = `${backendUrl}/api/auth/user/${Object.keys(property)}`;
 
-  const notify = message => toast(message);
+  let notify = message => toast(message);
+  const objectKey = Object.keys(property)[0];
+  const errorMessage = {
+    email: "That email is already taken by you",
+    name: "That name is already taken by you"
+  };
 
   const config = {
     headers: {
@@ -117,15 +126,18 @@ export const updateUser = property => dispatch => {
 
   body = JSON.stringify(property);
 
-  axios
+  return axios
     .put(url, body, config)
-    .then(
-      res => dispatch({ type: UPDATE_SUCCESS, payload: res.data }),
-      notify("Updated successfully!")
-    )
-    .catch(err =>
-      dispatch({ type: UPDATE_FAIL, payload: err.response.data.message })
-    );
+    .then(res => {
+      dispatch({ type: UPDATE_SUCCESS, payload: res.data });
+      notify("Updated successfully!");
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_FAIL, payload: err.response.data.message });
+      if (Object.keys(errorMessage).find(el => el === objectKey)) {
+        throw new SubmissionError({ _error: errorMessage[objectKey] });
+      }
+    });
 };
 
 export const logOut = () => dispatch => {

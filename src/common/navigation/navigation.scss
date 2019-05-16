@@ -108,3 +108,11 @@
     color: $white;
   }
 }
+
+.navigation__links--link {
+  &.active {
+    border-bottom: 2px solid black;
+    font-weight: bold;
+    width: fit-content;
+  }
+}

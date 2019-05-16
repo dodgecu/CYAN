@@ -24,7 +24,6 @@ store.subscribe(() => {
   saveState({
     authReducer: {
       isAuthenticated: store.getState().authReducer.isAuthenticated,
-      isLoading: store.getState().authReducer.isLoading,
       isRegistered: store.getState().authReducer.isRegistered,
       token: store.getState().authReducer.token,
       user: store.getState().authReducer.user
