@@ -70,7 +70,8 @@ class FlowerDetails extends Component {
           soilHumidity,
           created_at,
           delta,
-          img_path
+          img_path,
+          package_id
         }
       } = liveData;
 
@@ -98,6 +99,7 @@ class FlowerDetails extends Component {
           light={sensorLight}
           created_at={created_at}
           connected={connected ? true : false}
+          package_id={package_id}
           issues={connected ? issues : []}
         />
       );

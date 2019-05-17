@@ -76,6 +76,7 @@ class Chart extends Component {
 }
 
 const mapStateToProps = state => ({
+  sensors: state,
   water: state.chartReducer.water,
   air: state.chartReducer.air,
   temperature: state.chartReducer.temperature
