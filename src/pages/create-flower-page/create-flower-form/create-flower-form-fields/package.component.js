@@ -14,9 +14,7 @@ class Package extends Component {
   }
 
   validate = sensors => {
-    return sensors.dh22Err || sensors.soilErr || sensors.socketErr
-      ? false
-      : true;
+    return sensors.sensorErr || sensors.socketErr ? false : true;
   };
 
   validateSensors = sensors => {

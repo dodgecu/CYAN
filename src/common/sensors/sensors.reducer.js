@@ -7,12 +7,11 @@ const dataReducer = (state = initialState, action) => {
       let newState = initialState;
       return {
         ...state,
-        sensors:
-          action.payload.dh22Err || action.payload.soilErr
-            ? action.payload
-            : newState.sensors.map((pack, i) =>
-                i === 0 ? { ...pack, pack: action.payload } : pack
-              )
+        sensors: action.payload.sensorErr
+          ? action.payload
+          : newState.sensors.map((pack, i) =>
+              i === 0 ? { ...pack, pack: action.payload } : pack
+            )
       };
     case "GET_SOUTH":
       return {

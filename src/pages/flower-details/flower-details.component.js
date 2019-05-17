@@ -76,16 +76,22 @@ class FlowerDetails extends Component {
       } = liveData;
 
       if (sensorSoilmoisture + delta < soilHumidity) {
-        issues.push("The flower is thirsty");
+        issues.push(
+          "The flower seems to be thirsty. Consider watering your plant"
+        );
       }
       if (sensorHumidity + delta < airHumidity) {
-        issues.push("Low level of humidity");
+        issues.push(
+          "Low level of humidity. The room does not seem to be humid enough for your plant"
+        );
       }
       if (sensorLight + delta < light) {
-        issues.push("The flower needs more light");
+        issues.push(
+          "The flower needs more light. Are you sure there is enough light in the room?"
+        );
       }
       if (sensorTemperature + delta < airTemperature) {
-        issues.push("The flower is cold");
+        issues.push("The flower is cold. Consider raising room temperature");
       }
 
       flowerInfo = (
