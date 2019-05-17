@@ -7,7 +7,6 @@ import routes from "../../constants/routes";
 import page404 from "../../assets/page404.png";
 
 //COMPONENTS
-import Header from "../../common/header/header.component";
 import PageTitle from "../../common/page-title/page-title.component";
 import CustomLink from "./../../common/components/custom-link/custom-link.component";
 
