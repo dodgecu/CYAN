@@ -5,7 +5,7 @@ const validateFlower = flower =>
   isNaN(parseInt(flower.package_id)) ? false : validIncomingObj(flower);
 
 const validateSensors = sensors => {
-  return sensors.dh22Err || sensors.soilErr || sensors.socketErr ? false : true;
+  return sensors.sensorErr || sensors.socketErr ? false : true;
 };
 
 let current = {};

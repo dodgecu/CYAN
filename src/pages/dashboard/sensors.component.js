@@ -15,7 +15,7 @@ class Sensors extends Component {
   componentDidMount() {
     this.props.fetchSensors();
   }
-
+  sensorErr;
   validateSensors = sensors => {
     return sensors.every(
       sensor =>
@@ -26,7 +26,7 @@ class Sensors extends Component {
   shouldComponentUpdate() {
     this.activeSensors.length = 0;
     const { sensors } = this.props;
-    if (sensors.dh22Err || sensors.soilErr || sensors.socketErr) {
+    if (sensors.sensorErr || sensors.socketErr) {
       this.connected = false;
       return true;
     }
