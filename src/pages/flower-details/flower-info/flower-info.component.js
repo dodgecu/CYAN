@@ -23,9 +23,17 @@ const flowerInfo = props => {
         amblight={props.light}
       />
       <Problems isNeedy={props.issues} isConnected={props.connected} />
-      <Chart selector="water" title="Water chart" />
-      <Chart selector="temperature" title="Temperature chart" />
-      <Chart selector="air" title="Air chart" />
+      <Chart
+        selector="water"
+        title="Water chart"
+        package_id={props.package_id}
+      />
+      <Chart
+        selector="temperature"
+        title="Temperature chart"
+        package_id={props.package_id}
+      />
+      <Chart selector="air" title="Air chart" package_id={props.package_id} />
     </section>
   );
 };
