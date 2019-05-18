@@ -10,6 +10,7 @@ import UpdateName from "./user-profile-name.component";
 import UpdateEmail from "./user-profile-email.component";
 import UpdatePassword from "./user-profile-password.component";
 import DeleteProfile from "./user-profile-delete.component";
+import PageTitle from "../../../common/page-title/page-title.component";
 
 class UserProfile extends Component {
   onSubmit(inputValue) {
@@ -21,7 +22,8 @@ class UserProfile extends Component {
       <>
         <Header />
         <div className="authorization authorization--update">
-          <h1>Account settings</h1>
+          <PageTitle title="Dashboard" />
+
           <UpdateName
             initialValues={{
               name: store.getState().authReducer.user.name || "hello"
