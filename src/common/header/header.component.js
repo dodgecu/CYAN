@@ -3,6 +3,7 @@ import Sidebar from "../navigation/navigation.component";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
+import { Link } from "react-router-dom";
 
 import LogOut from "../../pages/authorization/log-out/log-out.component";
 
@@ -51,14 +52,9 @@ class Header extends Component {
         {this.props.authReducer.user === null ? (
           <div />
         ) : (
-          <div
-            className="header__name"
-            onClick={() => {
-              this.props.push(routes.userProfile);
-            }}
-          >
+          <Link className="header__name" to={routes.userProfile}>
             @{this.props.authReducer.user.name}
-          </div>
+          </Link>
         )}
       </header>
     );
