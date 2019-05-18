@@ -189,31 +189,29 @@ class Dashboard extends React.Component {
             </div>
             <div className="dashboard--sorting">
               <span className="dashboard--sorting__title">Filter by</span>
-
-              <div className="dashboard--sorting--filter">
-                <label className="dashboard--sorting--filter--problematical">
-                  <span>Connected</span>
-
-                  <input type="checkbox" onClick={this.sortConnected} />
-                </label>
-                {this.state.isConnected ? (
-                  <label
-                    className="dashboard--sorting--filter--disconnected"
-                    htmlFor="problems"
-                  >
-                    <span>Toggle Gravity</span>
-                    <input
-                      type="checkbox"
-                      id="problems"
-                      onClick={this.sortByProblems}
-                    />
+              <div className="dashboard--sorting--problematical">
+                <div className="dashboard--sorting--problematical--connected">
+                  <input
+                    id="connected"
+                    type="checkbox"
+                    onClick={this.sortConnected}
+                    className="checkbox"
+                  />
+                  <label for="connected" className="checkbox__label">
+                    Connected
                   </label>
-                ) : null}
-                <label className="dashboard--sorting--filter--problematical">
-                  <span>Disconnected</span>
-
-                  <input type="checkbox" onClick={this.sortDisconnected} />
-                </label>
+                </div>
+                <div className="dashboard--sorting--problematical--disconnected">
+                  <input
+                    id="disconnected"
+                    type="checkbox"
+                    onClick={this.sortConnected}
+                    className="checkbox"
+                  />
+                  <label for="disconnected" className="checkbox__label">
+                    Disconnected
+                  </label>
+                </div>
               </div>
             </div>
           </section>
