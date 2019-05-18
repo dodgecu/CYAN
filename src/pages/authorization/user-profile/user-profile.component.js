@@ -11,6 +11,7 @@ import UpdateEmail from "./user-profile-email.component";
 import UpdatePassword from "./user-profile-password.component";
 import DeleteProfile from "./user-profile-delete.component";
 import PageTitle from "../../../common/page-title/page-title.component";
+import Footer from "../../../common/footer/footer.component";
 
 class UserProfile extends Component {
   onSubmit(inputValue) {
@@ -21,9 +22,8 @@ class UserProfile extends Component {
     return (
       <>
         <Header />
+        <PageTitle title="Account settings" />
         <div className="authorization authorization--update">
-          <PageTitle title="Dashboard" />
-
           <UpdateName
             initialValues={{
               name: store.getState().authReducer.user.name || "hello"
@@ -37,6 +37,7 @@ class UserProfile extends Component {
           <UpdatePassword />
           <DeleteProfile />
         </div>
+        <Footer />
       </>
     );
   }

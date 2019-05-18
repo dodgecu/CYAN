@@ -67,7 +67,7 @@
       align-items: center;
       margin: 20px 0;
 
-      &--connected {
+      &--problematical {
         margin-right: 20px;
       }
     }
@@ -109,7 +109,6 @@
 
   .checkbox + .checkbox__label {
     display: flex;
-    margin: 0.2em;
     cursor: pointer;
   }
 
@@ -120,7 +119,7 @@
   .checkbox + .checkbox__label:before {
     content: '\2714';
     border: 1px solid $silver;
-    width: 15px;
+    width: 16px;
     height: 15px;
     text-align: center;
     line-height: 15px;
@@ -132,6 +131,7 @@
   .checkbox:checked + .checkbox__label:before {
     background-color: $primary;
     color: #fff;
+    border: 1px solid $primary;
   }
 }
 

@@ -190,15 +190,15 @@ class Dashboard extends React.Component {
             <div className="dashboard--sorting">
               <span className="dashboard--sorting__title">Filter by</span>
               <div className="dashboard--sorting--problematical">
-                <div className="dashboard--sorting--problematical--connected">
+                <div className="dashboard--sorting--problematical--problematical">
                   <input
-                    id="connected"
+                    id="problematical"
                     type="checkbox"
                     onClick={this.sortConnected}
                     className="checkbox"
                   />
-                  <label for="connected" className="checkbox__label">
-                    Connected
+                  <label htmlFor="problematical" className="checkbox__label">
+                    Problematical
                   </label>
                 </div>
                 <div className="dashboard--sorting--problematical--disconnected">
@@ -208,7 +208,7 @@ class Dashboard extends React.Component {
                     onClick={this.sortConnected}
                     className="checkbox"
                   />
-                  <label for="disconnected" className="checkbox__label">
+                  <label htmlFor="disconnected" className="checkbox__label">
                     Disconnected
                   </label>
                 </div>

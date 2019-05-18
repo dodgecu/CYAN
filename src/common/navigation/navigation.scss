@@ -15,8 +15,8 @@
   height: 30px;
   display: inline-block;
   align-self: center;
-  margin: 0 15px;
-  position: absolute;
+  //margin: 0 15px;
+  //position: absolute;
   cursor: pointer;
   &__icon {
     position: relative;
@@ -111,8 +111,7 @@
 
 .navigation__links--link {
   &.active {
-    border-bottom: 2px solid black;
-    font-weight: bold;
+    color: $focus;
     width: fit-content;
   }
 }
