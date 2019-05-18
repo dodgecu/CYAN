@@ -62,15 +62,13 @@
     padding: 10px 0;
     font-size: 14px;
 
-    &--filter {
+    &--problematical {
       display: flex;
+      align-items: center;
       margin: 20px 0;
 
-      &--problematical,
-      &--disconnected {
-        display: flex;
-        align-items: center;
-        margin-right: 5px;
+      &--problematical {
+        margin-right: 20px;
       }
     }
 
@@ -107,6 +105,33 @@
         }
       }
     }
+  }
+
+  .checkbox + .checkbox__label {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .checkbox {
+    opacity: 0;
+    position: absolute;
+  }
+  .checkbox + .checkbox__label:before {
+    content: '\2714';
+    border: 1px solid $silver;
+    width: 16px;
+    height: 15px;
+    text-align: center;
+    line-height: 15px;
+    color: transparent;
+    cursor: pointer;
+    margin-right: 5px;
+    border-radius: 2px;
+  }
+  .checkbox:checked + .checkbox__label:before {
+    background-color: $primary;
+    color: #fff;
+    border: 1px solid $primary;
   }
 }
 

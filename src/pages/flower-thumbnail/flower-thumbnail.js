@@ -83,9 +83,9 @@ function FlowerThumbnail(props) {
           </div>
         </div>
       </div>
-      <a className="details" onClick={() => redirect()}>
+      <div className="details" onClick={() => redirect()}>
         View details
-      </a>
+      </div>
       <ReactTooltip />
     </div>
   );
