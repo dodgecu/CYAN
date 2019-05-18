@@ -11,7 +11,7 @@
   justify-content: flex-end;
   position: relative;
   &:after {
-    content: '';
+    // content: '0%';
     width: 100%;
     background-color: #00d85b;
     position: absolute;
@@ -102,38 +102,17 @@
       &--moisture {
         padding-bottom: 15px;
         margin: 0 10px;
+        position: relative;
       }
       &--light {
         padding-top: 15px;
         margin: 0 10px;
+        position: relative;
       }
       &--temperature {
         padding-top: 20px;
         margin: 0 10px;
-      }
-      &--light::before {
-        content: '44';
-        position: absolute;
-        top: 15px;
-        font-size: 24px;
-        color: #ffca63;
-        animation: demoNumberSecondary 10s infinite;
-      }
-      &--moisture::before {
-        content: '87';
-        position: absolute;
-        top: 0;
-        font-size: 36px;
-        color: #235ef5;
-        animation: demoNumberPrimary 10s infinite;
-      }
-      &--temperature::before {
-        content: '27';
-        position: absolute;
-        top: 25px;
-        font-size: 18px;
-        color: #13ea6e;
-        animation: demoNumberSecondary 10s infinite;
+        position: relative;
       }
     }
   }
@@ -159,65 +138,33 @@
     padding: 5px 0 10px 0;
 
     &--soil {
-      animation: demoScalesPrimary 30s infinite;
       height: 10px;
       background-color: $soil-water;
       height: 5px;
       border-radius: 10px;
       position: relative;
       transition: width 0.5s;
-      &:after {
-        content: '';
-        animation: demoNumberPrimary 30s infinite;
-        position: absolute;
-        right: -30px;
-        bottom: -5px;
-      }
     }
     &--airhumidity {
-      animation: demoScalesSecondary 30s infinite;
       background-color: $humidity;
       height: 5px;
       border-radius: 10px;
       transition: width 0.5s;
       position: relative;
-      &:after {
-        content: '';
-        animation: demoNumberSecondary 30s infinite;
-        position: absolute;
-        right: -30px;
-        bottom: -5px;
-      }
     }
     &--temperature {
-      animation: demoScalesPrimary 30s infinite;
       background-color: $temperature;
       height: 5px;
       border-radius: 10px;
       transition: width 0.5s;
       position: relative;
-      &:after {
-        content: '';
-        animation: demoNumberPrimary 30s infinite;
-        position: absolute;
-        right: -30px;
-        bottom: -5px;
-      }
     }
     &--light {
-      animation: demoScalesSecondary 30s infinite;
       background-color: $light;
       height: 5px;
       border-radius: 10px;
       transition: width 0.5s;
       position: relative;
-      &:after {
-        content: '';
-        animation: demoNumberSecondary 30s infinite;
-        position: absolute;
-        right: -30px;
-        bottom: -5px;
-      }
     }
   }
 }
@@ -297,5 +244,43 @@
   }
   .headline.statistics__headline {
     margin-bottom: 0;
+  }
+}
+
+.numbers {
+  position: absolute;
+  top: -4px;
+  right: -25px;
+  &.soil {
+    color: $soil-water;
+  }
+  &.temp {
+    color: $temperature;
+  }
+  &.humidity {
+    color: $humidity;
+  }
+  &.light {
+    color: $light;
+  }
+}
+
+.number-top {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+  &.humidity {
+    top: -20px;
+    font-size: 36px;
+    color: #235ef5;
+  }
+  &.light {
+    font-size: 24px;
+    color: #ffca63;
+  }
+  &.temp {
+    font-size: 18px;
+    color: #13ea6e;
   }
 }
