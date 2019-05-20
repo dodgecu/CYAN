@@ -168,7 +168,7 @@ class Landing extends React.Component {
             </div>
           </article>
           <article className="area statistics">
-            <h2 className="headline statistics__headline">Statics</h2>
+            <h2 className="headline statistics__headline">Statistics</h2>
             <div className="content">
               <div className="content__description">
                 Explore the details and history of flower life

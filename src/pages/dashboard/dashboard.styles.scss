@@ -35,13 +35,15 @@
     }
 
     &--field {
-      border: 1px solid $silver;
+      border: 1px solid $light-gray;
       border-radius: 3px;
-      background-color: $silver;
+      background-color: $light-gray;
       opacity: 0.5;
       height: 30px;
-      padding: 5px;
+      padding: 15px;
       margin: 5px 0;
+      color: $font-black;
+      font-size: 14px;
     }
   }
 
@@ -74,6 +76,10 @@
 
     &__title {
       font-weight: 600;
+    }
+
+    &__label {
+      cursor: pointer;
     }
 
     &__button {

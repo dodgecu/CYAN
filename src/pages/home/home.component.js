@@ -12,10 +12,10 @@ class Home extends Component {
     return (
       <div className="home">
         <h2 className="home__title">
-          <span className="title-span">Your home.</span>
+          <span className="title-span">Your home. </span>
           <span className="title-span title-span--green">Planty</span>
         </h2>
-        <h3 className="home__subtitle">Enjoy the experiance</h3>
+        <h3 className="home__subtitle">Enjoy the experience</h3>
         <div className="home__img">
           <img className="img" src={homeImg} alt="home" />
         </div>

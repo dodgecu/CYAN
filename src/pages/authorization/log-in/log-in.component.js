@@ -38,7 +38,7 @@ class LogIn extends Component {
       <>
         {this.props.isLoading ? <Spinner /> : null}
         <Header />
-        <PageTitle title="Login to Cyander" />
+        <PageTitle title="Login to Flove.it" />
         <div className="authorization authorization--log-in">
           <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
             <Field
@@ -59,7 +59,7 @@ class LogIn extends Component {
             />
             {error && <div className="error-message">{error}</div>}
             <Button
-              title="SIGN IN"
+              title="LOG IN"
               type="submit"
               buttonType={TYPES.PRIMARY}
               disabled={!valid || submitting}
