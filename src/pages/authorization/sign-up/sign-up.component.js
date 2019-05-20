@@ -54,7 +54,7 @@ class SignUp extends Component {
       <>
         {this.props.isLoading ? <Spinner /> : null}
         <Header />
-        <PageTitle title="Register to Cyander" />
+        <PageTitle title="Register to Flove.it" />
         <div className="authorization authorization--sign-up">
           <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
             <Field

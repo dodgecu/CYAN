@@ -173,9 +173,17 @@ class Dashboard extends React.Component {
               <span className="dashboard--sorting__title">Sort by</span>
 
               <div className="dashboard--sorting--alphabetical">
-                <label onClick={this.onSort} data-tip="Sort flowers by name">
+                <label
+                  data-tip="Sort flowers by name"
+                  htmlFor="alphabetical-sorting"
+                  className="dashboard--sorting__label"
+                >
                   Alphabetical
-                  <button className="dashboard--sorting__button">
+                  <button
+                    className="dashboard--sorting__button"
+                    id="alphabetical-sorting"
+                    onClick={this.onSort}
+                  >
                     <img
                       className={
                         isAscendingSort ? "icon icon--up" : "icon icon--down"

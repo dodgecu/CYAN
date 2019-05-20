@@ -28,7 +28,7 @@ class SignUpSuccess extends Component {
           <div className="sign-up-success__description">
             <div>
               Your account has been successfully created. Now you are able to
-              login in the app.
+              log in to the app.
             </div>
             <CustomLink
               title="Go to login"
